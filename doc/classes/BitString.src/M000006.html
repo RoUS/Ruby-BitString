@@ -1,0 +1,44 @@
+<?xml version="1.0" encoding="iso-8859-1"?>
+<!DOCTYPE html 
+     PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+     "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+<html>
+<head>
+  <title>grow (BitString)</title>
+  <meta http-equiv="Content-Type" content="text/html; charset=iso-8859-1" />
+  <link rel="stylesheet" href="../.././rdoc-style.css" type="text/css" media="screen" />
+</head>
+<body class="standalone-code">
+  <pre><span class="ruby-comment cmt"># File lib/bitstring.rb, line 528</span>
+  <span class="ruby-keyword kw">def</span> <span class="ruby-identifier">grow</span>(<span class="ruby-identifier">bits</span>=<span class="ruby-value">1</span>, <span class="ruby-identifier">defval</span>=<span class="ruby-value">0</span>, <span class="ruby-identifier">direction</span>=<span class="ruby-constant">HIGH_END</span>)
+    <span class="ruby-keyword kw">unless</span> (<span class="ruby-identifier">bits</span>.<span class="ruby-identifier">kind_of?</span>(<span class="ruby-constant">Integer</span>))
+      <span class="ruby-identifier">_raise</span>(<span class="ruby-constant">BitsRInts</span>)
+    <span class="ruby-keyword kw">end</span>
+    <span class="ruby-keyword kw">unless</span> (<span class="ruby-identifier">defval</span>.<span class="ruby-identifier">respond_to?</span>(<span class="ruby-identifier">:to_i</span>))
+      <span class="ruby-identifier">what</span> = <span class="ruby-identifier">defval</span>.<span class="ruby-identifier">respond_to?</span>(<span class="ruby-identifier">:to_s</span>) <span class="ruby-operator">?</span> <span class="ruby-identifier">defval</span>.<span class="ruby-identifier">to_s</span> <span class="ruby-operator">:</span> <span class="ruby-identifier">defval</span>.<span class="ruby-identifier">inspect</span>
+      <span class="ruby-identifier">_raise</span>(<span class="ruby-constant">UnInterable</span>, <span class="ruby-identifier">defval</span>)
+    <span class="ruby-keyword kw">end</span>
+    <span class="ruby-keyword kw">unless</span> ([<span class="ruby-constant">HIGH_END</span>, <span class="ruby-constant">LOW_END</span>].<span class="ruby-identifier">include?</span>(<span class="ruby-identifier">direction</span>))
+      <span class="ruby-identifier">_raise</span>(<span class="ruby-constant">NeedGPS</span>)
+    <span class="ruby-keyword kw">end</span>
+    <span class="ruby-keyword kw">unless</span> (<span class="ruby-identifier">bits</span> <span class="ruby-operator">&gt;=</span> <span class="ruby-value">0</span>)
+      <span class="ruby-identifier">_raise</span>(<span class="ruby-constant">NoDeficitBits</span>)
+    <span class="ruby-keyword kw">end</span>
+    <span class="ruby-keyword kw">unless</span> ((<span class="ruby-identifier">direction</span> <span class="ruby-operator">==</span> <span class="ruby-constant">LOW_END</span>) <span class="ruby-operator">||</span> <span class="ruby-identifier">bounded?</span>)
+      <span class="ruby-identifier">_raise</span>(<span class="ruby-constant">UnboundedNonsense</span>)
+    <span class="ruby-keyword kw">end</span>
+    <span class="ruby-keyword kw">return</span> <span class="ruby-identifier">dup</span> <span class="ruby-keyword kw">if</span> (<span class="ruby-identifier">bits</span> <span class="ruby-operator">==</span> <span class="ruby-value">0</span>)
+
+    <span class="ruby-identifier">value</span> = <span class="ruby-ivar">@value</span>
+    <span class="ruby-identifier">mask</span> = <span class="ruby-value">2</span><span class="ruby-operator">**</span><span class="ruby-identifier">bits</span> <span class="ruby-operator">-</span> <span class="ruby-value">1</span>
+    <span class="ruby-keyword kw">if</span> (<span class="ruby-identifier">direction</span> <span class="ruby-operator">==</span> <span class="ruby-constant">HIGH_END</span>)
+      <span class="ruby-identifier">mask</span> <span class="ruby-operator">*=</span> <span class="ruby-value">2</span><span class="ruby-operator">**</span><span class="ruby-ivar">@length</span> <span class="ruby-keyword kw">if</span> (<span class="ruby-identifier">bounded?</span>)
+    <span class="ruby-keyword kw">elsif</span> (<span class="ruby-identifier">direction</span> <span class="ruby-operator">==</span> <span class="ruby-constant">LOW_END</span>)
+      <span class="ruby-identifier">value</span> <span class="ruby-operator">*=</span> (<span class="ruby-value">2</span><span class="ruby-operator">**</span><span class="ruby-identifier">bits</span>)
+    <span class="ruby-keyword kw">end</span>
+    <span class="ruby-identifier">value</span> <span class="ruby-operator">|=</span> <span class="ruby-identifier">mask</span> <span class="ruby-keyword kw">if</span> (<span class="ruby-identifier">defval</span> <span class="ruby-operator">==</span> <span class="ruby-value">1</span>)
+    <span class="ruby-identifier">bounded?</span> <span class="ruby-value">? </span><span class="ruby-keyword kw">self</span>.<span class="ruby-identifier">class</span>.<span class="ruby-identifier">new</span>(<span class="ruby-identifier">value</span>, <span class="ruby-ivar">@length</span> <span class="ruby-operator">+</span> <span class="ruby-identifier">bits</span>) <span class="ruby-operator">:</span> <span class="ruby-keyword kw">self</span>.<span class="ruby-identifier">class</span>.<span class="ruby-identifier">new</span>(<span class="ruby-identifier">value</span>)
+  <span class="ruby-keyword kw">end</span></pre>
+</body>
+</html>

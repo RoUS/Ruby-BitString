@@ -1,0 +1,42 @@
+<?xml version="1.0" encoding="iso-8859-1"?>
+<!DOCTYPE html 
+     PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+     "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+<html>
+<head>
+  <title>[] (BitString)</title>
+  <meta http-equiv="Content-Type" content="text/html; charset=iso-8859-1" />
+  <link rel="stylesheet" href="../.././rdoc-style.css" type="text/css" media="screen" />
+</head>
+<body class="standalone-code">
+  <pre><span class="ruby-comment cmt"># File lib/bitstring/operators.rb, line 196</span>
+  <span class="ruby-keyword kw">def</span> <span class="ruby-operator">[]</span>(<span class="ruby-identifier">pos_p</span>, <span class="ruby-identifier">length_p</span>=<span class="ruby-keyword kw">nil</span>)
+    <span class="ruby-comment cmt">#</span>
+    <span class="ruby-comment cmt"># Turn a position/length into a range.</span>
+    <span class="ruby-comment cmt">#</span>
+    <span class="ruby-keyword kw">if</span> (<span class="ruby-identifier">pos_p</span>.<span class="ruby-identifier">kind_of?</span>(<span class="ruby-constant">Integer</span>) <span class="ruby-operator">&amp;&amp;</span> <span class="ruby-identifier">length_p</span>.<span class="ruby-identifier">kind_of?</span>(<span class="ruby-constant">Integer</span>))
+      <span class="ruby-identifier">pos_p</span> = <span class="ruby-constant">Range</span>.<span class="ruby-identifier">new</span>(<span class="ruby-identifier">pos_p</span>, <span class="ruby-identifier">pos_p</span> <span class="ruby-operator">+</span> <span class="ruby-identifier">length_p</span> <span class="ruby-operator">-</span> <span class="ruby-value">1</span>)
+      <span class="ruby-identifier">length_p</span> = <span class="ruby-keyword kw">nil</span>
+    <span class="ruby-keyword kw">end</span>
+    <span class="ruby-keyword kw">if</span> (<span class="ruby-identifier">pos_p</span>.<span class="ruby-identifier">kind_of?</span>(<span class="ruby-constant">Range</span>))
+      <span class="ruby-keyword kw">unless</span> (<span class="ruby-identifier">length_p</span>.<span class="ruby-identifier">nil?</span>)
+        <span class="ruby-identifier">raise</span> <span class="ruby-constant">ArgumentError</span>.<span class="ruby-identifier">new</span>(<span class="ruby-value str">'length not allowed with range'</span>)
+      <span class="ruby-keyword kw">end</span>
+      <span class="ruby-identifier">pos_a</span> = <span class="ruby-identifier">pos_p</span>.<span class="ruby-identifier">to_a</span>
+      <span class="ruby-identifier">pos_a</span>.<span class="ruby-identifier">reverse!</span> <span class="ruby-keyword kw">if</span> (<span class="ruby-identifier">pos_a</span>.<span class="ruby-identifier">first</span> <span class="ruby-operator">&lt;</span> <span class="ruby-identifier">pos_a</span>.<span class="ruby-identifier">last</span>)
+      <span class="ruby-identifier">r</span> = <span class="ruby-identifier">pos_a</span>.<span class="ruby-identifier">collect</span> { <span class="ruby-operator">|</span><span class="ruby-identifier">pos</span><span class="ruby-operator">|</span> <span class="ruby-keyword kw">self</span>[<span class="ruby-identifier">pos</span>].<span class="ruby-identifier">to_s</span> }
+      <span class="ruby-keyword kw">return</span> <span class="ruby-keyword kw">self</span>.<span class="ruby-identifier">class</span>.<span class="ruby-identifier">new</span>(<span class="ruby-identifier">r</span>.<span class="ruby-identifier">join</span>(<span class="ruby-value str">''</span>))
+    <span class="ruby-keyword kw">end</span>
+    <span class="ruby-identifier">pos</span> = <span class="ruby-identifier">pos_p</span>.<span class="ruby-identifier">to_i</span>
+    <span class="ruby-comment cmt">#</span>
+    <span class="ruby-comment cmt"># Blow an error if we were given an index out of range.</span>
+    <span class="ruby-comment cmt">#</span>
+    <span class="ruby-keyword kw">unless</span> ((<span class="ruby-identifier">pos</span> <span class="ruby-operator">&gt;=</span> <span class="ruby-value">0</span>) <span class="ruby-operator">&amp;&amp;</span>
+            ((<span class="ruby-operator">!</span> <span class="ruby-ivar">@bounded</span>) <span class="ruby-operator">||</span> <span class="ruby-identifier">pos</span>.<span class="ruby-identifier">between?</span>(<span class="ruby-value">0</span>, <span class="ruby-ivar">@length</span> <span class="ruby-operator">-</span> <span class="ruby-value">1</span>)))
+      <span class="ruby-identifier">_raise</span>(<span class="ruby-constant">OuttasightIndex</span>, <span class="ruby-identifier">pos</span>)
+    <span class="ruby-keyword kw">end</span>
+    (<span class="ruby-ivar">@value</span> <span class="ruby-operator">&amp;</span> (<span class="ruby-value">2</span><span class="ruby-operator">**</span><span class="ruby-identifier">pos</span>)) <span class="ruby-operator">/</span> (<span class="ruby-value">2</span><span class="ruby-operator">**</span><span class="ruby-identifier">pos</span>)
+  <span class="ruby-keyword kw">end</span></pre>
+</body>
+</html>

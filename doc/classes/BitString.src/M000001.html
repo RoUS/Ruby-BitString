@@ -1,0 +1,99 @@
+<?xml version="1.0" encoding="iso-8859-1"?>
+<!DOCTYPE html 
+     PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+     "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+<html>
+<head>
+  <title>new (BitString)</title>
+  <meta http-equiv="Content-Type" content="text/html; charset=iso-8859-1" />
+  <link rel="stylesheet" href="../.././rdoc-style.css" type="text/css" media="screen" />
+</head>
+<body class="standalone-code">
+  <pre><span class="ruby-comment cmt"># File lib/bitstring.rb, line 237</span>
+  <span class="ruby-keyword kw">def</span> <span class="ruby-identifier">initialize</span>(<span class="ruby-operator">*</span><span class="ruby-identifier">args_p</span>, <span class="ruby-operator">&amp;</span><span class="ruby-identifier">block</span>)
+    <span class="ruby-comment cmt">#</span>
+    <span class="ruby-comment cmt"># Two constructor scenarios:</span>
+    <span class="ruby-comment cmt">#</span>
+    <span class="ruby-comment cmt"># 1. With a block and an optional length (defaults to 1)</span>
+    <span class="ruby-comment cmt"># 2. No block, and with value and length both optional.</span>
+    <span class="ruby-comment cmt">#</span>
+    <span class="ruby-comment cmt"># We don't do any type-checking on the arguments until later.</span>
+    <span class="ruby-comment cmt">#</span>
+    <span class="ruby-keyword kw">unless</span> (<span class="ruby-identifier">block</span>.<span class="ruby-identifier">nil?</span>)
+      <span class="ruby-comment cmt">#</span>
+      <span class="ruby-comment cmt"># We got a block; set up the constraints.  Bitstrings constructed</span>
+      <span class="ruby-comment cmt"># this way are bounded.</span>
+      <span class="ruby-comment cmt">#</span>
+      <span class="ruby-keyword kw">unless</span> (<span class="ruby-identifier">args_p</span>.<span class="ruby-identifier">length</span> <span class="ruby-operator">&lt;</span> <span class="ruby-value">2</span>)
+        <span class="ruby-identifier">raise</span> <span class="ruby-constant">ArgumentError</span>.<span class="ruby-identifier">new</span>(<span class="ruby-value str">'only bitstring length '</span> <span class="ruby-operator">+</span>
+                                <span class="ruby-value str">'may be specified with a block'</span>)
+      <span class="ruby-keyword kw">end</span>
+      <span class="ruby-ivar">@bounded</span> = <span class="ruby-keyword kw">true</span>
+      <span class="ruby-ivar">@length</span> = <span class="ruby-identifier">args_p</span>.<span class="ruby-identifier">length</span> <span class="ruby-operator">&gt;</span> <span class="ruby-value">0</span> <span class="ruby-operator">?</span> <span class="ruby-identifier">args_p</span>[<span class="ruby-value">0</span>] <span class="ruby-operator">:</span> <span class="ruby-value">1</span>
+    <span class="ruby-keyword kw">else</span>
+      <span class="ruby-comment cmt">#</span>
+      <span class="ruby-comment cmt"># Get value and possibly length from the argument list.</span>
+      <span class="ruby-comment cmt">#</span>
+      <span class="ruby-keyword kw">unless</span> (<span class="ruby-identifier">args_p</span>.<span class="ruby-identifier">length</span> <span class="ruby-operator">&lt;</span> <span class="ruby-value">3</span>)
+        <span class="ruby-identifier">raise</span> <span class="ruby-constant">ArgumentError</span>.<span class="ruby-identifier">new</span>(<span class="ruby-value str">'wrong number of arguments '</span> <span class="ruby-operator">+</span>
+                                <span class="ruby-value str">'(must be 2 or fewer)'</span>)
+      <span class="ruby-keyword kw">end</span>
+      <span class="ruby-identifier">val</span> = <span class="ruby-identifier">args_p</span>[<span class="ruby-value">0</span>] <span class="ruby-operator">||</span> <span class="ruby-value">0</span>
+      <span class="ruby-ivar">@length</span> = <span class="ruby-identifier">args_p</span>[<span class="ruby-value">1</span>] <span class="ruby-keyword kw">if</span> (<span class="ruby-ivar">@bounded</span> = <span class="ruby-operator">!</span> <span class="ruby-identifier">args_p</span>[<span class="ruby-value">1</span>].<span class="ruby-identifier">nil?</span>)
+    <span class="ruby-keyword kw">end</span>
+    <span class="ruby-comment cmt">#</span>
+    <span class="ruby-comment cmt"># Now do some validation on the arguments.</span>
+    <span class="ruby-comment cmt">#</span>
+    <span class="ruby-keyword kw">if</span> (<span class="ruby-ivar">@bounded</span>)
+      <span class="ruby-keyword kw">unless</span> ((<span class="ruby-ivar">@length</span> = <span class="ruby-ivar">@length</span>.<span class="ruby-identifier">to_i</span>) <span class="ruby-operator">&gt;</span> <span class="ruby-value">0</span>)
+        <span class="ruby-identifier">raise</span> <span class="ruby-constant">ArgumentError</span>.<span class="ruby-identifier">new</span>(<span class="ruby-value str">'bitstring length must be greater than 0'</span>)
+      <span class="ruby-keyword kw">end</span>
+    <span class="ruby-keyword kw">end</span>
+    <span class="ruby-keyword kw">if</span> (<span class="ruby-identifier">block</span>.<span class="ruby-identifier">nil?</span>)
+      <span class="ruby-comment cmt">#</span>
+      <span class="ruby-comment cmt"># We weren't passed a block, so get the info directly from the argument</span>
+      <span class="ruby-comment cmt"># list.</span>
+      <span class="ruby-comment cmt">#</span>
+      <span class="ruby-keyword kw">if</span> (<span class="ruby-identifier">val</span>.<span class="ruby-identifier">kind_of?</span>(<span class="ruby-constant">BitString</span>))
+        <span class="ruby-comment cmt">#</span>
+        <span class="ruby-comment cmt"># If we were passed a bitstring, convert it.</span>
+        <span class="ruby-comment cmt">#</span>
+        <span class="ruby-ivar">@value</span> = <span class="ruby-identifier">val</span>.<span class="ruby-identifier">to_i</span>
+      <span class="ruby-keyword kw">elsif</span> (<span class="ruby-identifier">val</span>.<span class="ruby-identifier">kind_of?</span>(<span class="ruby-constant">String</span>))
+        <span class="ruby-comment cmt">#</span>
+        <span class="ruby-comment cmt"># If we were given a String for the value, it must consist of valid</span>
+        <span class="ruby-comment cmt"># binary digits.</span>
+        <span class="ruby-comment cmt">#</span>
+        <span class="ruby-identifier">_raise</span>(<span class="ruby-constant">BadDigit</span>, <span class="ruby-keyword kw">nil</span>, <span class="ruby-identifier">val</span>) <span class="ruby-keyword kw">unless</span> (<span class="ruby-identifier">val</span>.<span class="ruby-identifier">gsub</span>(<span class="ruby-regexp re">/[01]/</span>, <span class="ruby-value str">''</span>).<span class="ruby-identifier">empty?</span>)
+        <span class="ruby-ivar">@value</span> = <span class="ruby-identifier">val</span>.<span class="ruby-identifier">to_i</span>(<span class="ruby-value">2</span>)
+      <span class="ruby-keyword kw">elsif</span> (<span class="ruby-identifier">val</span>.<span class="ruby-identifier">kind_of?</span>(<span class="ruby-constant">Array</span>))
+        <span class="ruby-comment cmt">#</span>
+        <span class="ruby-comment cmt"># If we were given an array, make sure that all the values are</span>
+        <span class="ruby-comment cmt"># integers and either 1 or 0.</span>
+        <span class="ruby-comment cmt">#</span>
+        <span class="ruby-identifier">_raise</span>(<span class="ruby-constant">BadDigit</span>, <span class="ruby-keyword kw">nil</span>, <span class="ruby-identifier">val</span>) <span class="ruby-keyword kw">unless</span> ((<span class="ruby-identifier">val</span> <span class="ruby-operator">-</span> [<span class="ruby-value">0</span>, <span class="ruby-value">1</span>]).<span class="ruby-identifier">empty?</span>)
+        <span class="ruby-ivar">@value</span> = <span class="ruby-identifier">val</span>.<span class="ruby-identifier">join</span>(<span class="ruby-value str">''</span>).<span class="ruby-identifier">to_i</span>(<span class="ruby-value">2</span>)
+      <span class="ruby-keyword kw">else</span>
+        <span class="ruby-comment cmt">#</span>
+        <span class="ruby-comment cmt"># Let's try to convert it to an integer from whatever class we</span>
+        <span class="ruby-comment cmt"># were passed.</span>
+        <span class="ruby-comment cmt">#</span>
+        <span class="ruby-keyword kw">unless</span> (<span class="ruby-identifier">val</span>.<span class="ruby-identifier">respond_to?</span>(<span class="ruby-identifier">:to_i</span>))
+          <span class="ruby-identifier">raise</span> <span class="ruby-constant">ArgumentError</span>.<span class="ruby-identifier">new</span>(<span class="ruby-value str">'unable to determine bitstring '</span> <span class="ruby-operator">+</span>
+                                  <span class="ruby-value str">'value from '</span> <span class="ruby-operator">+</span>
+                                  <span class="ruby-node">&quot;\&quot;#{val.to_s}\&quot;:#{val.class.name}&quot;</span>)
+        <span class="ruby-keyword kw">end</span>
+        <span class="ruby-ivar">@value</span> = <span class="ruby-identifier">val</span>.<span class="ruby-identifier">to_i</span>
+      <span class="ruby-keyword kw">end</span>
+    <span class="ruby-keyword kw">else</span>      
+      <span class="ruby-comment cmt">#</span>
+      <span class="ruby-comment cmt"># We were passed a block, so invoke it for each bit position to</span>
+      <span class="ruby-comment cmt"># determine that bit's value from the LSB of the result.</span>
+      <span class="ruby-comment cmt">#</span>
+      <span class="ruby-ivar">@value</span> = <span class="ruby-value">0</span>
+      <span class="ruby-ivar">@length</span>.<span class="ruby-identifier">times</span> { <span class="ruby-operator">|</span><span class="ruby-identifier">i</span><span class="ruby-operator">|</span> <span class="ruby-keyword kw">self</span>[<span class="ruby-identifier">i</span>] = <span class="ruby-identifier">block</span>.<span class="ruby-identifier">call</span>(<span class="ruby-identifier">i</span>).<span class="ruby-identifier">to_i</span> <span class="ruby-operator">&amp;</span> <span class="ruby-value">1</span> }
+    <span class="ruby-keyword kw">end</span>
+  <span class="ruby-keyword kw">end</span></pre>
+</body>
+</html>

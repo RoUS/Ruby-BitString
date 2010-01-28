@@ -1,0 +1,5 @@
+CONTRIBUTORS:
+-------------
+
+* Rodent of Unusual Size <The.Rodent.of.Unusual.Size@GMail.Com> (Ken Coar)
+  Initial creator and maintainer.

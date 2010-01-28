@@ -1,0 +1,5 @@
+
+For more information on BitString, see http://bitstring.rubyforge.org/
+
+If you use this package, please let the developers know what you
+think!

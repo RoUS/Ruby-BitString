@@ -1,0 +1,5 @@
+BitString Ruby package
+Copyright © 2010 Ken Coar
+
+This file MUST contain attributions for any third-party
+inclusions or contributions.

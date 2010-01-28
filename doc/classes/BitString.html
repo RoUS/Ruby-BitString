@@ -1,0 +1,1218 @@
+<?xml version="1.0" encoding="iso-8859-1"?>
+<!DOCTYPE html 
+     PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+     "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang="en">
+<head>
+  <title>Class: BitString</title>
+  <meta http-equiv="Content-Type" content="text/html; charset=iso-8859-1" />
+  <meta http-equiv="Content-Script-Type" content="text/javascript" />
+  <link rel="stylesheet" href=".././rdoc-style.css" type="text/css" media="screen" />
+  <script type="text/javascript">
+  // <![CDATA[
+
+  function popupCode( url ) {
+    window.open(url, "Code", "resizable=yes,scrollbars=yes,toolbar=no,status=no,height=150,width=400")
+  }
+
+  function toggleCode( id ) {
+    if ( document.getElementById )
+      elem = document.getElementById( id );
+    else if ( document.all )
+      elem = eval( "document.all." + id );
+    else
+      return false;
+
+    elemStyle = elem.style;
+    
+    if ( elemStyle.display != "block" ) {
+      elemStyle.display = "block"
+    } else {
+      elemStyle.display = "none"
+    }
+
+    return true;
+  }
+  
+  // Make codeblocks hidden by default
+  document.writeln( "<style type=\"text/css\">div.method-source-code { display: none }</style>" )
+  
+  // ]]>
+  </script>
+
+</head>
+<body>
+
+
+
+    <div id="classHeader">
+        <table class="header-table">
+        <tr class="top-aligned-row">
+          <td><strong>Class</strong></td>
+          <td class="class-name-in-header">BitString</td>
+        </tr>
+        <tr class="top-aligned-row">
+            <td><strong>In:</strong></td>
+            <td>
+                <a href="../files/lib/bitstring_rb.html">
+                lib/bitstring.rb
+                </a>
+        <br />
+                <a href="../files/lib/bitstring/operators_rb.html">
+                lib/bitstring/operators.rb
+                </a>
+        <br />
+            </td>
+        </tr>
+
+        <tr class="top-aligned-row">
+            <td><strong>Parent:</strong></td>
+            <td>
+                Object
+            </td>
+        </tr>
+        </table>
+    </div>
+  <!-- banner header -->
+
+  <div id="bodyContent">
+
+
+
+  <div id="contextContent">
+
+    <div id="description">
+      <p>
+Re-open the class to add the operator methods
+</p>
+
+    </div>
+
+
+   </div>
+
+    <div id="method-list">
+      <h3 class="section-bar">Methods</h3>
+
+      <div class="name-list">
+      <a href="#M000020">&amp;</a>&nbsp;&nbsp;
+      <a href="#M000021">&lt;</a>&nbsp;&nbsp;
+      <a href="#M000022">&lt;&lt;</a>&nbsp;&nbsp;
+      <a href="#M000023">&lt;=</a>&nbsp;&nbsp;
+      <a href="#M000032">==</a>&nbsp;&nbsp;
+      <a href="#M000024">&gt;</a>&nbsp;&nbsp;
+      <a href="#M000025">&gt;=</a>&nbsp;&nbsp;
+      <a href="#M000026">&gt;&gt;</a>&nbsp;&nbsp;
+      <a href="#M000027">[]</a>&nbsp;&nbsp;
+      <a href="#M000028">[]=</a>&nbsp;&nbsp;
+      <a href="#M000029">^</a>&nbsp;&nbsp;
+      <a href="#M000002">bounded?</a>&nbsp;&nbsp;
+      <a href="#M000003">clear</a>&nbsp;&nbsp;
+      <a href="#M000004">clear!</a>&nbsp;&nbsp;
+      <a href="#M000005">from_i</a>&nbsp;&nbsp;
+      <a href="#M000006">grow</a>&nbsp;&nbsp;
+      <a href="#M000007">grow!</a>&nbsp;&nbsp;
+      <a href="#M000008">length</a>&nbsp;&nbsp;
+      <a href="#M000009">lsb</a>&nbsp;&nbsp;
+      <a href="#M000010">msb</a>&nbsp;&nbsp;
+      <a href="#M000001">new</a>&nbsp;&nbsp;
+      <a href="#M000011">resize</a>&nbsp;&nbsp;
+      <a href="#M000012">resize!</a>&nbsp;&nbsp;
+      <a href="#M000013">rotate</a>&nbsp;&nbsp;
+      <a href="#M000014">rotate!</a>&nbsp;&nbsp;
+      <a href="#M000015">shrink</a>&nbsp;&nbsp;
+      <a href="#M000016">shrink!</a>&nbsp;&nbsp;
+      <a href="#M000017">slice</a>&nbsp;&nbsp;
+      <a href="#M000018">to_i</a>&nbsp;&nbsp;
+      <a href="#M000019">to_s</a>&nbsp;&nbsp;
+      <a href="#M000030">|</a>&nbsp;&nbsp;
+      <a href="#M000031">~</a>&nbsp;&nbsp;
+      </div>
+    </div>
+
+  </div>
+
+
+    <!-- if includes -->
+    <div id="includes">
+      <h3 class="section-bar">Included Modules</h3>
+
+      <div id="includes-list">
+        <span class="include-name">Enumerable</span>
+      </div>
+    </div>
+
+    <div id="section">
+
+
+    <div id="constants-list">
+      <h3 class="section-bar">Constants</h3>
+
+      <div class="name-list">
+        <table summary="Constants">
+        <tr class="top-aligned-row context-row">
+          <td class="context-item-name">Version</td>
+          <td>=</td>
+          <td class="context-item-value">Versionomy.parse('0.1.0')</td>
+        </tr>
+        <tr class="top-aligned-row context-row">
+          <td class="context-item-name">VERSION</td>
+          <td>=</td>
+          <td class="context-item-value">Version.to_s</td>
+        </tr>
+        <tr class="top-aligned-row context-row">
+          <td class="context-item-name">LOW_END</td>
+          <td>=</td>
+          <td class="context-item-value">:low</td>
+          <td width="3em">&nbsp;</td>
+          <td class="context-item-desc">
+Values for <em><a href="BitString.html#M000006">grow</a></em> and <em><a
+href="BitString.html#M000015">shrink</a></em> methods.
+
+</td>
+        </tr>
+        <tr class="top-aligned-row context-row">
+          <td class="context-item-name">HIGH_END</td>
+          <td>=</td>
+          <td class="context-item-value">:high</td>
+        </tr>
+        </table>
+      </div>
+    </div>
+
+
+
+    <div id="attribute-list">
+      <h3 class="section-bar">Attributes</h3>
+
+      <div class="name-list">
+        <table>
+        <tr class="top-aligned-row context-row">
+          <td class="context-item-name">bounded</td>
+          <td class="context-item-value">&nbsp;[R]&nbsp;</td>
+          <td class="context-item-desc">
+<em>Boolean</em>. Whether or not the bitstring is bounded and limited to a
+specific <a href="BitString.html#M000008">length</a>. Read-only; set at
+object creation.
+
+</td>
+        </tr>
+        </table>
+      </div>
+    </div>
+      
+
+
+    <!-- if method_list -->
+    <div id="methods">
+      <h3 class="section-bar">Public Class methods</h3>
+
+      <div id="method-M000001" class="method-detail">
+        <a name="M000001"></a>
+
+        <div class="method-heading">
+          <a href="BitString.src/M000001.html" target="Code" class="method-signature"
+            onclick="popupCode('BitString.src/M000001.html');return false;">
+          <span class="method-name">new<i>([val], [length])</i> => <i>BitString</i><br />
+new<i>(length) {|index| block }</i> => <i>BitString</i><br />
+</span>
+          </a>
+        </div>
+      
+        <div class="method-description">
+          <h3>Description</h3>
+<p>
+Create a <a href="BitString.html#M000001">new</a> <em><a
+href="BitString.html">BitString</a></em> object. By default, it will be
+unbounded and all bits <a href="BitString.html#M000003">clear</a>.
+</p>
+<h3>Arguments</h3>
+<dl>
+<dt><em>val</em></dt><dd><em>Array</em>, <em>Integer</em>, <em>String</em>, or <em><a
+href="BitString.html">BitString</a></em>. Initial value for the bitstring.
+If a <em>String</em>, the value must contain only &#8216;0&#8217; and
+&#8216;1&#8217; characters; if an <em>Array</em>, all elements must be 0 or
+1. Default 0.
+
+</dd>
+<dt><em><a href="BitString.html#M000008">length</a></em></dt><dd><em>Integer</em>. Length (number of bits) for a bounded bitstring. Default
+1.
+
+</dd>
+</dl>
+<h3>Exceptions</h3>
+<dl>
+<dt><tt>ArgumentError</tt></dt><dd>Length specified but bitstring is unbounded.
+
+</dd>
+<dt><tt>RangeError</tt></dt><dd>Value is a string, but contains non-binary digits.
+
+</dd>
+</dl>
+        </div>
+      </div>
+
+      <h3 class="section-bar">Public Instance methods</h3>
+
+      <div id="method-M000020" class="method-detail">
+        <a name="M000020"></a>
+
+        <div class="method-heading">
+          <a href="BitString.src/M000020.html" target="Code" class="method-signature"
+            onclick="popupCode('BitString.src/M000020.html');return false;">
+          <span class="method-name">new<i>([value], [length], [bounded])</i> => _BitString_<br />
+</span>
+          </a>
+        </div>
+      
+        <div class="method-description">
+          <h3>Description</h3>
+<h3>Arguments</h3>
+<p>
+[<em>val_p</em>]
+</p>
+<h3>Exceptions</h3>
+<p>
+<em>None</em>.
+</p>
+        </div>
+      </div>
+
+      <div id="method-M000021" class="method-detail">
+        <a name="M000021"></a>
+
+        <div class="method-heading">
+          <a href="BitString.src/M000021.html" target="Code" class="method-signature"
+            onclick="popupCode('BitString.src/M000021.html');return false;">
+          <span class="method-name">new<i>([value], [length], [bounded])</i> => _BitString_<br />
+</span>
+          </a>
+        </div>
+      
+        <div class="method-description">
+          <h3>Description</h3>
+<h3>Arguments</h3>
+<p>
+[<em>val_p</em>]
+</p>
+<h3>Exceptions</h3>
+<p>
+<em>None</em>.
+</p>
+        </div>
+      </div>
+
+      <div id="method-M000022" class="method-detail">
+        <a name="M000022"></a>
+
+        <div class="method-heading">
+          <a href="BitString.src/M000022.html" target="Code" class="method-signature"
+            onclick="popupCode('BitString.src/M000022.html');return false;">
+          <span class="method-name">new<i>([value], [length], [bounded])</i> => _BitString_<br />
+</span>
+          </a>
+        </div>
+      
+        <div class="method-description">
+          <h3>Description</h3>
+<h3>Arguments</h3>
+<p>
+[<em>val_p</em>]
+</p>
+<h3>Exceptions</h3>
+<p>
+<em>None</em>.
+</p>
+        </div>
+      </div>
+
+      <div id="method-M000023" class="method-detail">
+        <a name="M000023"></a>
+
+        <div class="method-heading">
+          <a href="BitString.src/M000023.html" target="Code" class="method-signature"
+            onclick="popupCode('BitString.src/M000023.html');return false;">
+          <span class="method-name">new<i>([value], [length], [bounded])</i> => _BitString_<br />
+</span>
+          </a>
+        </div>
+      
+        <div class="method-description">
+          <h3>Description</h3>
+<h3>Arguments</h3>
+<p>
+[<em>val_p</em>]
+</p>
+<h3>Exceptions</h3>
+<p>
+<em>None</em>.
+</p>
+        </div>
+      </div>
+
+      <div id="method-M000032" class="method-detail">
+        <a name="M000032"></a>
+
+        <div class="method-heading">
+          <a href="BitString.src/M000032.html" target="Code" class="method-signature"
+            onclick="popupCode('BitString.src/M000032.html');return false;">
+          <span class="method-name">new<i>([value], [length], [bounded])</i> => _BitString_<br />
+</span>
+          </a>
+        </div>
+      
+        <div class="method-description">
+          <h3>Description</h3>
+<h3>Arguments</h3>
+<p>
+[<em>val_p</em>]
+</p>
+<h3>Exceptions</h3>
+<p>
+<em>None</em>.
+</p>
+        </div>
+      </div>
+
+      <div id="method-M000024" class="method-detail">
+        <a name="M000024"></a>
+
+        <div class="method-heading">
+          <a href="BitString.src/M000024.html" target="Code" class="method-signature"
+            onclick="popupCode('BitString.src/M000024.html');return false;">
+          <span class="method-name">new<i>([value], [length], [bounded])</i> => _BitString_<br />
+</span>
+          </a>
+        </div>
+      
+        <div class="method-description">
+          <h3>Description</h3>
+<h3>Arguments</h3>
+<p>
+[<em>val_p</em>]
+</p>
+<h3>Exceptions</h3>
+<p>
+<em>None</em>.
+</p>
+        </div>
+      </div>
+
+      <div id="method-M000025" class="method-detail">
+        <a name="M000025"></a>
+
+        <div class="method-heading">
+          <a href="BitString.src/M000025.html" target="Code" class="method-signature"
+            onclick="popupCode('BitString.src/M000025.html');return false;">
+          <span class="method-name">new<i>([value], [length], [bounded])</i> => _BitString_<br />
+</span>
+          </a>
+        </div>
+      
+        <div class="method-description">
+          <h3>Description</h3>
+<h3>Arguments</h3>
+<p>
+[<em>val_p</em>]
+</p>
+<h3>Exceptions</h3>
+<p>
+<em>None</em>.
+</p>
+        </div>
+      </div>
+
+      <div id="method-M000026" class="method-detail">
+        <a name="M000026"></a>
+
+        <div class="method-heading">
+          <a href="BitString.src/M000026.html" target="Code" class="method-signature"
+            onclick="popupCode('BitString.src/M000026.html');return false;">
+          <span class="method-name">new<i>([value], [length], [bounded])</i> => _BitString_<br />
+</span>
+          </a>
+        </div>
+      
+        <div class="method-description">
+          <h3>Description</h3>
+<h3>Arguments</h3>
+<p>
+[<em>val_p</em>]
+</p>
+<h3>Exceptions</h3>
+<p>
+<em>None</em>.
+</p>
+        </div>
+      </div>
+
+      <div id="method-M000027" class="method-detail">
+        <a name="M000027"></a>
+
+        <div class="method-heading">
+          <a href="BitString.src/M000027.html" target="Code" class="method-signature"
+            onclick="popupCode('BitString.src/M000027.html');return false;">
+          <span class="method-name">bitstring<i>[index]</i> => <i>Integer</i><br />
+bitstring<i>[start, length]</i> => <i>BitString</i><br />
+bitstring<i>[range]</i> => <i>BitString</i><br />
+</span>
+          </a>
+        </div>
+      
+        <div class="method-description">
+          <h3>Description</h3>
+<p>
+Extract a particular substring from the bitstring. If we&#8216;re given a
+single index, we return an integer; if a range, we return a <a
+href="BitString.html#M000001">new</a> <a
+href="BitString.html">BitString</a>.
+</p>
+<h3>Arguments</h3>
+<dl>
+<dt><em>index</em></dt><dd><em>Integer</em>. Single bit position.
+
+</dd>
+<dt><em>start</em></dt><dd><em>Integer</em>. Start position of subset.
+
+</dd>
+<dt><em><a href="BitString.html#M000008">length</a></em></dt><dd><em>Integer</em>. Length of subset.
+
+</dd>
+<dt><em>range</em></dt><dd><em>Range</em>. Subset specified as a range.
+
+</dd>
+</dl>
+<h3>Exceptions</h3>
+<dl>
+<dt><tt>ArgumentError</tt></dt><dd>If <a href="BitString.html#M000008">length</a> specified with a range.
+
+</dd>
+<dt><tt>IndexError</tt></dt><dd>If bounded bitstring and substring is illegal.
+
+</dd>
+</dl>
+        </div>
+      </div>
+
+      <div id="method-M000028" class="method-detail">
+        <a name="M000028"></a>
+
+        <div class="method-heading">
+          <a href="BitString.src/M000028.html" target="Code" class="method-signature"
+            onclick="popupCode('BitString.src/M000028.html');return false;">
+          <span class="method-name">new<i>([value], [length], [bounded])</i> => _BitString_<br />
+</span>
+          </a>
+        </div>
+      
+        <div class="method-description">
+          <h3>Description</h3>
+<h3>Arguments</h3>
+<p>
+[<em>pos_p</em>] [<em>val_p</em>]
+</p>
+<h3>Exceptions</h3>
+<p>
+[<tt>IndexError</tt>] [<tt>RangeError</tt>]
+</p>
+        </div>
+      </div>
+
+      <div id="method-M000029" class="method-detail">
+        <a name="M000029"></a>
+
+        <div class="method-heading">
+          <a href="BitString.src/M000029.html" target="Code" class="method-signature"
+            onclick="popupCode('BitString.src/M000029.html');return false;">
+          <span class="method-name">new<i>([value], [length], [bounded])</i> => _BitString_<br />
+</span>
+          </a>
+        </div>
+      
+        <div class="method-description">
+          <h3>Description</h3>
+<h3>Arguments</h3>
+<p>
+[<em>val_p</em>]
+</p>
+<h3>Exceptions</h3>
+<p>
+<em>None</em>.
+</p>
+        </div>
+      </div>
+
+      <div id="method-M000002" class="method-detail">
+        <a name="M000002"></a>
+
+        <div class="method-heading">
+          <a href="BitString.src/M000002.html" target="Code" class="method-signature"
+            onclick="popupCode('BitString.src/M000002.html');return false;">
+          <span class="method-name">bitstring.bounded?()<br />
+</span>
+          </a>
+        </div>
+      
+        <div class="method-description">
+          <h3>Description</h3>
+<p>
+Return a Boolean indicating whether the bitstring has a fixed <a
+href="BitString.html#M000008">length</a> (is bounded) or not.
+</p>
+<h3>Arguments</h3>
+<p>
+<em>None</em>.
+</p>
+<h3>Exceptions</h3>
+<p>
+<em>None</em>.
+</p>
+        </div>
+      </div>
+
+      <div id="method-M000003" class="method-detail">
+        <a name="M000003"></a>
+
+        <div class="method-heading">
+          <a href="BitString.src/M000003.html" target="Code" class="method-signature"
+            onclick="popupCode('BitString.src/M000003.html');return false;">
+          <span class="method-name">bitstring.clear<i>()</i> => <i>BitString</i><br />
+</span>
+          </a>
+        </div>
+      
+        <div class="method-description">
+          <h3>Description</h3>
+<p>
+Return a duplicate of the current bitstring &#8212; with all bits cleared.
+</p>
+<h3>Arguments</h3>
+<p>
+<em>None</em>.
+</p>
+<h3>Exceptions</h3>
+<p>
+<em>None</em>.
+</p>
+        </div>
+      </div>
+
+      <div id="method-M000004" class="method-detail">
+        <a name="M000004"></a>
+
+        <div class="method-heading">
+          <a href="BitString.src/M000004.html" target="Code" class="method-signature"
+            onclick="popupCode('BitString.src/M000004.html');return false;">
+          <span class="method-name">bitstring.clear!<i>()</i> => <i>BitString</i><br />
+</span>
+          </a>
+        </div>
+      
+        <div class="method-description">
+          <h3>Description</h3>
+<p>
+Clear all the bits in the bitstring.
+</p>
+<h3>Arguments</h3>
+<p>
+<em>None</em>.
+</p>
+<h3>Exceptions</h3>
+<p>
+<em>None</em>.
+</p>
+        </div>
+      </div>
+
+      <div id="method-M000005" class="method-detail">
+        <a name="M000005"></a>
+
+        <div class="method-heading">
+          <a href="BitString.src/M000005.html" target="Code" class="method-signature"
+            onclick="popupCode('BitString.src/M000005.html');return false;">
+          <span class="method-name">bitstring.from_i<i>(newval)</i><br />
+</span>
+          </a>
+        </div>
+      
+        <div class="method-description">
+          <h3>Description</h3>
+<p>
+Treat the bitstring as an Integer and store its entire value at once.
+</p>
+<h3>Arguments</h3>
+<dl>
+<dt><em>newval</em></dt><dd><em>Integer</em>. Value from whose bits those in the bitstring will be
+copied.
+
+</dd>
+</dl>
+<h3>Exceptions</h3>
+<p>
+<em>None</em>.
+</p>
+        </div>
+      </div>
+
+      <div id="method-M000006" class="method-detail">
+        <a name="M000006"></a>
+
+        <div class="method-heading">
+          <a href="BitString.src/M000006.html" target="Code" class="method-signature"
+            onclick="popupCode('BitString.src/M000006.html');return false;">
+          <span class="method-name">bitstring.grow<i>(bits, [defval], [direction])</i> => <i>BitString</i><br />
+</span>
+          </a>
+        </div>
+      
+        <div class="method-description">
+          <h3>Description</h3>
+<p>
+Return a <a href="BitString.html#M000001">new</a> bitstring based on the
+current one, grown (made longer) in one direction (toward the least
+significant bits) or the other. Growing an unbounded string toward the high
+end is a no-op.
+</p>
+<p>
+Bits added are set to <em>defval</em> (default 0).
+</p>
+<h3>Arguments</h3>
+<dl>
+<dt><em>bits</em></dt><dd><em>Integer</em> Number of bits to add.
+
+</dd>
+<dt><em>defval</em></dt><dd><em>Integer</em> Value to which added bits should be set.
+
+</dd>
+<dt><em>direction</em></dt><dd>Either <em>BitString::HIGH_END</em> (the default) or
+<em>BitString::LOW_END</em>. Indicates whether bits are added at the least
+or most significant end. Growing with <em>BitString::LOW_END</em> results
+in the bitstring being shifted left.
+
+</dd>
+</dl>
+<h3>Exceptions</h3>
+<dl>
+<dt><tt>ArgumentError</tt></dt><dd><em>bits</em> isn&#8216;t an integer, <em>defval</em> can&#8216;t be
+reduced to a binary value, or <em>direction</em> isn&#8216;t one of the
+defined values.
+
+</dd>
+<dt><tt>IndexError</tt></dt><dd><em>bits</em> is negative or meaningless.
+
+</dd>
+<dt><tt>RuntimeError</tt></dt><dd>Can&#8216;t <a href="BitString.html#M000006">grow</a> an unbounded string
+at the high end.
+
+</dd>
+</dl>
+        </div>
+      </div>
+
+      <div id="method-M000007" class="method-detail">
+        <a name="M000007"></a>
+
+        <div class="method-heading">
+          <a href="BitString.src/M000007.html" target="Code" class="method-signature"
+            onclick="popupCode('BitString.src/M000007.html');return false;">
+          <span class="method-name">bitstring.grow!<i>(bits, [defval], [direction])</i> => <i>BitString</i><br />
+</span>
+          </a>
+        </div>
+      
+        <div class="method-description">
+          <h3>Description</h3>
+<p>
+As <a href="BitString.html#M000006">grow</a>, except that the current
+bitstring is changed rather than a <a href="BitString.html#M000001">new</a>
+one returned.
+</p>
+<p>
+Bits added are set to <em>defval</em> (default 0).
+</p>
+<h3>Arguments</h3>
+<dl>
+<dt><em>bits</em></dt><dd><em>Integer</em> Number of bits to add.
+
+</dd>
+<dt><em>defval</em></dt><dd><em>Integer</em> Value to which added bits should be set.
+
+</dd>
+<dt><em>direction</em></dt><dd>Either <em>BitString::HIGH_END</em> (the default) or
+<em>BitString::LOW_END</em>. Indicates whether bits are added at the least
+or most significant end. Growing with <em>BitString::LOW_END</em> results
+in the bitstring being shifted left.
+
+</dd>
+</dl>
+<h3>Exceptions</h3>
+<dl>
+<dt><tt>ArgumentError</tt></dt><dd><em>bits</em> isn&#8216;t an integer, <em>defval</em> can&#8216;t be
+reduced to a binary value, or <em>direction</em> isn&#8216;t one of the
+defined values.
+
+</dd>
+<dt><tt>IndexError</tt></dt><dd><em>bits</em> is negative or meaningless.
+
+</dd>
+<dt><tt>RuntimeError</tt></dt><dd>Can&#8216;t <a href="BitString.html#M000006">grow</a> an unbounded string
+at the high end.
+
+</dd>
+</dl>
+        </div>
+      </div>
+
+      <div id="method-M000008" class="method-detail">
+        <a name="M000008"></a>
+
+        <div class="method-heading">
+          <a href="BitString.src/M000008.html" target="Code" class="method-signature"
+            onclick="popupCode('BitString.src/M000008.html');return false;">
+          <span class="method-name">bitstring.length()<br />
+</span>
+          </a>
+        </div>
+      
+        <div class="method-description">
+          <h3>Description</h3>
+<p>
+Return the <a href="BitString.html#M000008">length</a> of the bitstring. If
+it&#8216;s bounded, the fixed size is returned, otherwise the number of
+significant binary digits.
+</p>
+<h3>Arguments</h3>
+<p>
+<em>None</em>.
+</p>
+<h3>Exceptions</h3>
+<p>
+<em>None</em>.
+</p>
+        </div>
+      </div>
+
+      <div id="method-M000009" class="method-detail">
+        <a name="M000009"></a>
+
+        <div class="method-heading">
+          <a href="BitString.src/M000009.html" target="Code" class="method-signature"
+            onclick="popupCode('BitString.src/M000009.html');return false;">
+          <span class="method-name">bitstring.lsb()<br />
+</span>
+          </a>
+        </div>
+      
+        <div class="method-description">
+          <h3>Description</h3>
+<p>
+Return the value of the least significant (low) bit.
+</p>
+<h3>Arguments</h3>
+<p>
+<em>None</em>.
+</p>
+<h3>Exceptions</h3>
+<p>
+<em>None</em>.
+</p>
+        </div>
+      </div>
+
+      <div id="method-M000010" class="method-detail">
+        <a name="M000010"></a>
+
+        <div class="method-heading">
+          <a href="BitString.src/M000010.html" target="Code" class="method-signature"
+            onclick="popupCode('BitString.src/M000010.html');return false;">
+          <span class="method-name">bitstring.msb()<br />
+</span>
+          </a>
+        </div>
+      
+        <div class="method-description">
+          <h3>Description</h3>
+<p>
+Return the value of the most significant (high) bit. Only meaningful for
+bounded bitstrings.
+</p>
+<h3>Arguments</h3>
+<p>
+<em>None</em>.
+</p>
+<h3>Exceptions</h3>
+<dl>
+<dt><tt>RuntimeError</tt></dt><dd>There is no &#8216;MSB&#8217; for an unbounded bitstring.
+
+</dd>
+</dl>
+        </div>
+      </div>
+
+      <div id="method-M000011" class="method-detail">
+        <a name="M000011"></a>
+
+        <div class="method-heading">
+          <a href="BitString.src/M000011.html" target="Code" class="method-signature"
+            onclick="popupCode('BitString.src/M000011.html');return false;">
+          <span class="method-name">bitstring.resize<i>(bits)</i> => <i>BitString</i><br />
+</span>
+          </a>
+        </div>
+      
+        <div class="method-description">
+          <h3>Description</h3>
+<p>
+Return a copy of the bitstring resized to the specified number of bits,
+resulting in truncation or growth. Bits are added to, or removed from, the
+high (more significant) end. Resizing an unbounded bitstring makes it
+bounded.
+</p>
+<h3>Arguments</h3>
+<dl>
+<dt><em>bits</em></dt><dd>Width of the resulting bitstring.
+
+</dd>
+</dl>
+<h3>Exceptions</h3>
+<dl>
+<dt><tt>IndexError</tt></dt><dd><em>bits</em> is negative or meaningless.
+
+</dd>
+</dl>
+        </div>
+      </div>
+
+      <div id="method-M000012" class="method-detail">
+        <a name="M000012"></a>
+
+        <div class="method-heading">
+          <a href="BitString.src/M000012.html" target="Code" class="method-signature"
+            onclick="popupCode('BitString.src/M000012.html');return false;">
+          <span class="method-name">bitstring.resize!<i>(bits)</i> => <i>BitString</i><br />
+</span>
+          </a>
+        </div>
+      
+        <div class="method-description">
+          <h3>Description</h3>
+<p>
+As <a href="BitString.html#M000011">resize</a> except it&#8216;s the
+current bitstring that gets resized.
+</p>
+<h3>Arguments</h3>
+<dl>
+<dt><em>bits</em></dt><dd>Width of the resulting bitstring.
+
+</dd>
+</dl>
+<h3>Exceptions</h3>
+<dl>
+<dt><tt>IndexError</tt></dt><dd><em>bits</em> is negative or meaningless.
+
+</dd>
+</dl>
+        </div>
+      </div>
+
+      <div id="method-M000013" class="method-detail">
+        <a name="M000013"></a>
+
+        <div class="method-heading">
+          <a href="BitString.src/M000013.html" target="Code" class="method-signature"
+            onclick="popupCode('BitString.src/M000013.html');return false;">
+          <span class="method-name">bistring.rotate<i>(bits)</i> => <i>BitString</i><br />
+</span>
+          </a>
+        </div>
+      
+        <div class="method-description">
+          <h3>Description</h3>
+<p>
+Rotate the bitstring, taking bits from one end and shifting them in at the
+other. Only makes sense with bounded strings.
+</p>
+<p>
+A negative value rotates left; a positive one rotates to the right.
+</p>
+<h3>Arguments</h3>
+<dl>
+<dt><em>bits</em></dt><dd><em>Integer</em>. Number of positions to <a
+href="BitString.html#M000013">rotate</a> left (negative) or right
+(positive). Bits rotated off one end are rotated in on the other.
+
+</dd>
+</dl>
+<h3>Exceptions</h3>
+<dl>
+<dt><em>RuntimeError</em></dt><dd>Can&#8216;t <a href="BitString.html#M000013">rotate</a> an unbounded
+bitstring.
+
+</dd>
+</dl>
+        </div>
+      </div>
+
+      <div id="method-M000014" class="method-detail">
+        <a name="M000014"></a>
+
+        <div class="method-heading">
+          <a href="BitString.src/M000014.html" target="Code" class="method-signature"
+            onclick="popupCode('BitString.src/M000014.html');return false;">
+          <span class="method-name">bitstring.rotate!<i>(bits)</i> => <i>BitString</i><br />
+</span>
+          </a>
+        </div>
+      
+        <div class="method-description">
+          <h3>Description</h3>
+<p>
+Same as <a href="BitString.html#M000013">rotate</a> except that the result
+is stored back into the current object.
+</p>
+<h3>Arguments</h3>
+<dl>
+<dt><em>bits</em></dt><dd><em>Integer</em>. Number of positions to <a
+href="BitString.html#M000013">rotate</a> left (negative) or right
+(positive). Bits rotated off one end are rotated in on the other.
+
+</dd>
+</dl>
+<h3>Exceptions</h3>
+<p>
+<em>None</em>.
+</p>
+        </div>
+      </div>
+
+      <div id="method-M000015" class="method-detail">
+        <a name="M000015"></a>
+
+        <div class="method-heading">
+          <a href="BitString.src/M000015.html" target="Code" class="method-signature"
+            onclick="popupCode('BitString.src/M000015.html');return false;">
+          <span class="method-name">bitstring.shrink<i>(bits, [direction])</i><br />
+</span>
+          </a>
+        </div>
+      
+        <div class="method-description">
+          <h3>Description</h3>
+<p>
+Shrink the bitstring (make it shorter) by truncating bits from one end or
+the other. Shrinking to fewer than 1 bits raises an exception.
+</p>
+<h3>Arguments</h3>
+<p>
+[<em>bits</em>] [<em>direction</em>]
+</p>
+<h3>Exceptions</h3>
+<dl>
+<dt><tt>ArgumentError</tt></dt><dd><em>bitcount</em> isn&#8216;t an integer or <em>direction</em> isn&#8216;t
+one of the defined values.
+
+</dd>
+<dt><tt>IndexError</tt></dt><dd><em>bits</em> is negative or meaningless.
+
+</dd>
+</dl>
+        </div>
+      </div>
+
+      <div id="method-M000016" class="method-detail">
+        <a name="M000016"></a>
+
+        <div class="method-heading">
+          <a href="BitString.src/M000016.html" target="Code" class="method-signature"
+            onclick="popupCode('BitString.src/M000016.html');return false;">
+          <span class="method-name">bitstring.shrink!<i>(bits, [direction])</i><br />
+</span>
+          </a>
+        </div>
+      
+        <div class="method-description">
+          <h3>Description</h3>
+<p>
+As <a href="BitString.html#M000015">shrink</a> except that the current
+bitstring is modified rather than a copy being made and altered.
+</p>
+<h3>Arguments</h3>
+<p>
+[<em>bits</em>] [<em>direction</em>]
+</p>
+<h3>Exceptions</h3>
+<dl>
+<dt><tt>ArgumentError</tt></dt><dd><em>bitcount</em> isn&#8216;t an integer or <em>direction</em> isn&#8216;t
+one of the defined values.
+
+</dd>
+<dt><tt>IndexError</tt></dt><dd><em>bits</em> is negative or meaningless.
+
+</dd>
+</dl>
+        </div>
+      </div>
+
+      <div id="method-M000017" class="method-detail">
+        <a name="M000017"></a>
+
+        <div class="method-heading">
+          <a href="BitString.src/M000017.html" target="Code" class="method-signature"
+            onclick="popupCode('BitString.src/M000017.html');return false;">
+          <span class="method-name">bitstring.slice<i>(index)</i> => <i>Integer</i><br />
+bitstring.slice<i>(start, length)</i> => <i>BitString</i><br />
+bitstring.slice<i>(range)</i> => <i>BitString</i><br />
+</span>
+          </a>
+        </div>
+      
+        <div class="method-description">
+          <h3>Description</h3>
+<p>
+Extract a subset from the bitstring.
+</p>
+<h3>Arguments</h3>
+<dl>
+<dt><em>index</em></dt><dd><em>Integer</em>. Single bit position.
+
+</dd>
+<dt><em>start</em></dt><dd><em>Integer</em>. Start position of subset.
+
+</dd>
+<dt><em><a href="BitString.html#M000008">length</a></em></dt><dd><em>Integer</em>. Length of subset.
+
+</dd>
+<dt><em>range</em></dt><dd><em>Range</em>. Subset specified as a range.
+
+</dd>
+</dl>
+<h3>Exceptions</h3>
+<dl>
+<dt><tt>ArgumentError</tt></dt><dd>If <a href="BitString.html#M000008">length</a> specified with a range.
+
+</dd>
+<dt><tt>IndexError</tt></dt><dd>If bounded bitstring and substring is illegal.
+
+</dd>
+</dl>
+        </div>
+      </div>
+
+      <div id="method-M000018" class="method-detail">
+        <a name="M000018"></a>
+
+        <div class="method-heading">
+          <a href="BitString.src/M000018.html" target="Code" class="method-signature"
+            onclick="popupCode('BitString.src/M000018.html');return false;">
+          <span class="method-name">bitstring.to_i<i>()</i> => <i>Integer</i><br />
+</span>
+          </a>
+        </div>
+      
+        <div class="method-description">
+          <h3>Description</h3>
+<p>
+Return the full value of the bitstring represented as an integer.
+</p>
+<h3>Arguments</h3>
+<p>
+<em>None</em>.
+</p>
+<h3>Exceptions</h3>
+<p>
+<em>None</em>.
+</p>
+        </div>
+      </div>
+
+      <div id="method-M000019" class="method-detail">
+        <a name="M000019"></a>
+
+        <div class="method-heading">
+          <a href="BitString.src/M000019.html" target="Code" class="method-signature"
+            onclick="popupCode('BitString.src/M000019.html');return false;">
+          <span class="method-name">bitstring.to_s<i>()</i> => <i>String</i><br />
+</span>
+          </a>
+        </div>
+      
+        <div class="method-description">
+          <h3>Description</h3>
+<p>
+Return the bitlist as a <em>String</em> object consisting of
+&#8216;0&#8217; and &#8216;1&#8217; characters. If the bitstring is
+bounded, the <em>String</em> will be zero-filled on the left (high end).
+</p>
+<h3>Arguments</h3>
+<p>
+<em>None</em>.
+</p>
+<h3>Exceptions</h3>
+<p>
+<em>None</em>.
+</p>
+        </div>
+      </div>
+
+      <div id="method-M000030" class="method-detail">
+        <a name="M000030"></a>
+
+        <div class="method-heading">
+          <a href="BitString.src/M000030.html" target="Code" class="method-signature"
+            onclick="popupCode('BitString.src/M000030.html');return false;">
+          <span class="method-name">new<i>([value], [length], [bounded])</i> => _BitString_<br />
+</span>
+          </a>
+        </div>
+      
+        <div class="method-description">
+          <h3>Description</h3>
+<h3>Arguments</h3>
+<p>
+[<em>val_p</em>]
+</p>
+<h3>Exceptions</h3>
+<p>
+<em>None</em>.
+</p>
+        </div>
+      </div>
+
+      <div id="method-M000031" class="method-detail">
+        <a name="M000031"></a>
+
+        <div class="method-heading">
+          <a href="BitString.src/M000031.html" target="Code" class="method-signature"
+            onclick="popupCode('BitString.src/M000031.html');return false;">
+          <span class="method-name">new<i>([value], [length], [bounded])</i> => _BitString_<br />
+</span>
+          </a>
+        </div>
+      
+        <div class="method-description">
+          <h3>Description</h3>
+<h3>Arguments</h3>
+<p>
+[<em>val_p</em>]
+</p>
+<h3>Exceptions</h3>
+<p>
+<em>None</em>.
+</p>
+        </div>
+      </div>
+
+
+    </div>
+
+
+  </div>
+
+
+<div id="validator-badges">
+  <p><small><a href="http://validator.w3.org/check/referer">[Validate]</a></small></p>
+</div>
+
+</body>
+</html>

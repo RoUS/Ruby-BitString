@@ -1,0 +1,21 @@
+here = File.dirname(__FILE__) + '/'
+libdir = File.expand_path(here + '../lib/')
+$LOAD_PATH.unshift(libdir)
+
+task  :default => [ :test_basic, :test_operators, :test_enum ] 
+
+desc 'Test basic methods (construction, etc.)'
+task :test_basic do
+     ruby "-I#{libdir} #{here}test_basic.rb"
+end
+
+desc 'Test operators (special characters, like & and |)'
+task :test_operators do
+     ruby "-I#{libdir} #{here}test_operators.rb"
+end
+
+desc 'Test methods inherited from Enumerable mixin'
+task :test_enum do
+     ruby "-I#{libdir} #{here}test_enum.rb"
+end
+

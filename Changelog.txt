@@ -1,0 +1,6 @@
+-*- mode: change-log; mode: auto-fill; -*-
+
+0.1.0 2010-01-27 Initial import
+-------------------------------
+	Still lots to do, but at least we're in a state suitable
+	to check in to the repository..
