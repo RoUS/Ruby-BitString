@@ -29,7 +29,7 @@
 #--
 # @TODO items (or at least look at)
 #
-#  Add 'foo[start,count] = val'
+#  Add 'foo[start,count] = val' (FREQ #27742)
 #
 # Methods (unique to bitstrings):
 #    &                # Bitwise AND
@@ -61,114 +61,73 @@ class BitString
   #
   # === Description
   #
+  # Perform a bitwise AND on the entire bitstring, returning a new
+  # <i>BitString</i> object.
+  #
   # call-seq:
-  # new<i>([value], [length], [bounded])</i> => _BitString_
+  # <i>bitstring & value</i> => <i>BitString</i>
   #
   # === Arguments
-  # [<i>val_p</i>]
+  # [<i>val</i>] <i>Integer</i>.  Value to AND with the bitstring.
   #
   # === Exceptions
   # _None_.
   #
-  def &(val_p)
-    @value < val_p
+  def &(val)
+    mask = 2**self.length - 1
+    newval = (@value & val.to_i) & mask
+    bounded? ? self.class.new(newval, @length) : self.class.new(newval)
   end                           # def &
 
   #
   # === Description
   #
-  # call-seq:
-  # new<i>([value], [length], [bounded])</i> => _BitString_
-  #
-  # === Arguments
-  # [<i>val_p</i>]
-  #
-  # === Exceptions
-  # _None_.
-  #
-  def <(val_p)
-    @value < val_p
-  end                           # def <
-
-  #
-  # === Description
+  # Perform a left-shift on the bitstring, returning a <i>BitString</i>
+  # containing the shifted value.  If the bitstring is bounded, bits
+  # shifted off the high end are lost.
   #
   # call-seq:
-  # new<i>([value], [length], [bounded])</i> => _BitString_
+  # <i>bitstring << bitcount</i> => <i>BitString</i>
   #
   # === Arguments
-  # [<i>val_p</i>]
+  # [<i>bitcount</i>] <i>Integer</i>.  Number of positions to left-shift by.
   #
   # === Exceptions
-  # _None_.
+  # <i>None</i>.
   #
-  def <<(val_p)
-    @value = @value * (2**val_p)
+  def <<(bits)
+    value = @value * (2**bits.to_i)
+    if (bounded?)
+      mask = 2**@length - 1
+      self.class.new(value & mask, @length)
+    else
+      self.class.new(value)
+    end
   end                           # def <<
 
   #
   # === Description
   #
-  # call-seq:
-  # new<i>([value], [length], [bounded])</i> => _BitString_
-  #
-  # === Arguments
-  # [<i>val_p</i>]
-  #
-  # === Exceptions
-  # _None_.
-  #
-  def <=(val_p)
-    @value <= val_p
-  end                           # def <=
-
-  #
-  # === Description
+  # Right-shift the bitstring (toward the low end) by the specified number
+  # of bits.  Bits shifted off the end are lost; new bits shifted in at
+  # the high end are 0.
   #
   # call-seq:
-  # new<i>([value], [length], [bounded])</i> => _BitString_
+  # <i>bitstring >> bitcount</i> => _BitString_
   #
   # === Arguments
-  # [<i>val_p</i>]
+  # [<i>bitcount</i>] <i>Integer</i>.  Number of positions to right-shift by.
   #
   # === Exceptions
-  # _None_.
+  # <i>None</i>.
   #
-  def >(val_p)
-    @value > val_p
-  end                           # def >
-
-  #
-  # === Description
-  #
-  # call-seq:
-  # new<i>([value], [length], [bounded])</i> => _BitString_
-  #
-  # === Arguments
-  # [<i>val_p</i>]
-  #
-  # === Exceptions
-  # _None_.
-  #
-  def >=(val_p)
-    @value >= val_p
-  end                           # def >=
-
-  #
-  # === Description
-  #
-  # call-seq:
-  # new<i>([value], [length], [bounded])</i> => _BitString_
-  #
-  # === Arguments
-  # [<i>val_p</i>]
-  #
-  # === Exceptions
-  # _None_.
-  #
-  def >>(val_p)
-    @value = @value / (2**val_p)
-    @value = @value.to_int if (@value.respond_to?('to_int'))
+  def >>(bits)
+    value = @value / 2**bits.to_i
+    if (bounded?)
+      self.class.new(value, @length)
+    else
+      self.class.new(value)
+    end
   end                           # def >>
 
   #
@@ -208,14 +167,14 @@ class BitString
       pos_a = pos_p.to_a
       pos_a.reverse! if (pos_a.first < pos_a.last)
       r = pos_a.collect { |pos| self[pos].to_s }
-      return self.class.new(r.join(''))
+      return self.class.new(r.join(''), r.length)
     end
     pos = pos_p.to_i
     #
     # Blow an error if we were given an index out of range.
     #
     unless ((pos >= 0) &&
-            ((! @bounded) || pos.between?(0, @length - 1)))
+            ((! bounded?) || pos.between?(0, @length - 1)))
       _raise(OuttasightIndex, pos)
     end
     (@value & (2**pos)) / (2**pos)
@@ -224,32 +183,69 @@ class BitString
   #
   # === Description
   #
+  # Set a bit or range of bits with a single operation.
+  #
   # call-seq:
-  # new<i>([value], [length], [bounded])</i> => _BitString_
+  # bitstring[<i>pos</i>] = <i>value</i>   => <i>value</i>
+  # bitstring[<i>start, length</i>] = <i>value</i>   => <i>value</i>
+  # bitstring[<i>range</i> = <i>value</i>   => <i>value</i>
   #
   # === Arguments
-  # [<i>pos_p</i>]
-  # [<i>val_p</i>]
+  # [<i>value</i>] <i>Integer</i>.
+  # [<i>pos</i>] <i>Integer</i>.
+  # [<i>start</i>] <i>Integer</i>.
+  # [<i>length</i>] <i>Integer</i>.
+  # [<i>range</i>] <i>Range</i>.
   #
   # === Exceptions
   # [<tt>IndexError</tt>]
   # [<tt>RangeError</tt>]
   #
-  def []=(pos_p, val_p)
-    if (pos_p.class.eql?(Range))
-      vals = _zfill(val_p, pos_p.last - pos_p.first + 1).split(//)
-      pos_p.to_a.each { |i| self[i] = vals.shift }
-      return val_p
+  def []=(*args_p)
+    low = high = width = nil
+    args = args_p
+    if (args.length == 2)
+      #
+      # [pos]= or [range]=
+      #
+      if ((r = args[0]).class.eql?(Range))
+        #
+        # Convert into a [start,length] format to reuse that stream.
+        #
+        (start, stop) = [r.first, r.last].sort
+        width = stop - start + 1
+        args = [start, width, args[1]]
+      else
+        args = [args[0], 1, args[1]]
+      end
+    elsif (args_p.length != 3)
+      _raise(WrongNargs, args_p.length, 3)
     end
-    pos = pos_p.to_i
-    val = val_p.to_i
-    unless ((! @bounded) || pos.between?(0, @length - 1))
-      _raise(OuttasightIndex, pos)
-    end
-    unless ([0, 1].include?(val.to_i))
-      _raise(BadDigit)
-    end
-    @value = (@value & ((~ (2**pos))) | ((val.to_i & 1) * (2**pos)))
+    #
+    # Special cases of args have now been normalised to [start,length,value].
+    # Make sure the values are acceptable.
+    #
+    (start, nBits, value) = args
+    _raise(BogoIndex, start) unless (start.respond_to?(:to_i))
+    start = start.to_i unless (start.kind_of?(Integer))
+    _raise(BogoIndex, nBits) unless (nBits.respond_to?(:to_i))
+    nBits = length.to_i unless (nBits.kind_of?(Integer))
+    highpos = start + nBits - 1
+    _raise(OuttasightIndex, highpos) if (bounded? && (highpos > @length - 1))
+    _raise(BitsRInts, value) unless (value.respond_to?(:to_i))
+    value = value.to_i unless (value.kind_of?(Integer))
+    #
+    # All the checking is done, let's do this thing.
+    #
+    mask = 2**nBits - 1
+    value &= mask
+    mask *= 2**start
+    value *= 2**start
+
+    highpos = self.length
+    bValue = @value & ((2**highpos - 1) & ~mask)
+    @value = bValue | value
+    value / 2**start
   end                           # def []=
 
   #
@@ -288,16 +284,18 @@ class BitString
   # === Description
   #
   # call-seq:
-  # new<i>([value], [length], [bounded])</i> => _BitString_
+  # ~ <i>bitstring</i> => _BitString_
   #
   # === Arguments
-  # [<i>val_p</i>]
+  # <i>None</i>.
   #
   # === Exceptions
-  # _None_.
+  # <i>None</i>.
   #
-  def ~(val_p)
-    @value < val_p
+  def ~()
+    mask = 2**self.length - 1
+    newval = (~ @value) & mask
+    bounded? ? self.class.new(newval, @length) : self.class.new(newval)
   end                           # def ~
 
   #

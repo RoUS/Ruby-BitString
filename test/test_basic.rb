@@ -3,11 +3,9 @@ require File.dirname(__FILE__) + '/test_helper.rb'
 require File.dirname(__FILE__) + '/test_data.rb'
 
 #
-# @TODO:
-#
-# o Test grow!()
-# o Test shrink()
-# o Test shrink!()
+# Test basic functionality, and non-operator methods we provide.
+# (Other tests handle operators and the methods inherited from
+# the Enumerable mixin.)
 #
 
 module Tests
@@ -231,6 +229,11 @@ module Tests
     end                         # def test_006_clear()
 
     #
+    # Indexed access is critically important, so we test its permutations
+    # here rather in the 'operators' test set.
+    #
+
+    #
     # Try simple single-bit accesses through the [] method.
     #
     def test_007_indexing()
@@ -250,6 +253,7 @@ module Tests
         #
         # Try setting each bit to its value.
         #
+        bs = BitString.new(sVal)
         lVal.times do |i|
           bs[i] = iVal_a_r[i]
           assert_equal(iVal_a_r[i],
@@ -261,12 +265,16 @@ module Tests
         #
         # Try setting each bit to its complement.
         #
+        bs = BitString.new(sVal)
         lVal.times do |i|
-          bs[i] = ~ bs[i] & 1
+          pre = bs.to_s
+          bs[i] = ~ bs[i]
+          post = bs.to_s
           assert_not_equal(iVal_a_r[i],
                            bs[i],
                            "Test setting bit to its complement " +
-                           "[#{i}] = ~[#{i}] != #{iVal_a_r[i]}")
+                           "[#{i}] = ~[#{i}] != #{iVal_a_r[i]}\n" +
+                           "pre=[#{pre}] post=[#{post}] sVal=[#{sVal}]")
         end
 
         #
@@ -297,19 +305,66 @@ module Tests
     #
     def test_008_ranges()
       TestVals.each do |sVal|
-        bs = BitString.new(sVal)
         length = sVal.length
         (length - 2).times do |width|
           width += 2
+          bs = BitString.new(sVal)
           #
-          # Test subranging n bits at a time
+          # Test subranging n bits at a time in a fetch
           #
           (length - width + 1).times do |i|
             excerpt = sVal[length-width-i,width].to_i(2)
+            rng = i..i+width-1
             assert_equal(excerpt,
-                         bs[i..i+width-1].to_i,
-                         'Test bitstring subrange ' +
-                         "'#{bs.to_s}'[#{i}..#{i+width-1}] => '#{excerpt}'")
+                         bs[rng].to_i,
+                         'Test fetching bitstring subrange ' +
+                         "'#{bs.to_s}'[#{rng}] => '#{excerpt}'\n" +
+                         "(sVal='#{sVal}', length=#{length}, " +
+                         "width=#{width}, i=#{i})")
+          end
+          #
+          # Now try setting that range to its complement
+          #
+          (length - width + 1).times do |i|
+            bs = BitString.new(sVal)
+            excerpt = (~ sVal[length-width-i,width].to_i(2)) & (2**width - 1)
+            rng = i..i+width-1
+            bs[rng] = excerpt
+            assert_equal(excerpt,
+                         bs[rng].to_i,
+                         'Test bitstring subrange after set' +
+                         "'#{bs.to_s}'[#{rng}] => '#{excerpt}'")
+          end
+
+          #
+          # Now do the same with a bounded bitstring.
+          #
+          bs = BitString.new(sVal, length)
+          #
+          # Test subranging n bits at a time in a fetch
+          #
+          (length - width + 1).times do |i|
+            excerpt = sVal[length-width-i,width].to_i(2)
+            rng = i..i+width-1
+            assert_equal(excerpt,
+                         bs[rng].to_i,
+                         'Test fetching bitstring subrange ' +
+                         "'#{bs.to_s}'[#{rng}] => '#{excerpt}'\n" +
+                         "(sVal='#{sVal}', length=#{length}, " +
+                         "width=#{width}, i=#{i})")
+          end
+          #
+          # Now try setting that range to its complement
+          #
+          (length - width + 1).times do |i|
+            bs = BitString.new(sVal, length)
+            excerpt = (~ sVal[length-width-i,width].to_i(2)) & (2**width - 1)
+            rng = i..i+width-1
+            bs[rng] = excerpt
+            assert_equal(excerpt,
+                         bs[rng].to_i,
+                         'Test bitstring subrange after set' +
+                         "'#{bs.to_s}'[#{rng}] => '#{excerpt}'")
           end
         end
       end

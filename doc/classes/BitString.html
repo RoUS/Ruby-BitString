@@ -97,16 +97,12 @@ Re-open the class to add the operator methods
 
       <div class="name-list">
       <a href="#M000020">&amp;</a>&nbsp;&nbsp;
-      <a href="#M000021">&lt;</a>&nbsp;&nbsp;
-      <a href="#M000022">&lt;&lt;</a>&nbsp;&nbsp;
-      <a href="#M000023">&lt;=</a>&nbsp;&nbsp;
-      <a href="#M000032">==</a>&nbsp;&nbsp;
-      <a href="#M000024">&gt;</a>&nbsp;&nbsp;
-      <a href="#M000025">&gt;=</a>&nbsp;&nbsp;
-      <a href="#M000026">&gt;&gt;</a>&nbsp;&nbsp;
-      <a href="#M000027">[]</a>&nbsp;&nbsp;
-      <a href="#M000028">[]=</a>&nbsp;&nbsp;
-      <a href="#M000029">^</a>&nbsp;&nbsp;
+      <a href="#M000021">&lt;&lt;</a>&nbsp;&nbsp;
+      <a href="#M000028">==</a>&nbsp;&nbsp;
+      <a href="#M000022">&gt;&gt;</a>&nbsp;&nbsp;
+      <a href="#M000023">[]</a>&nbsp;&nbsp;
+      <a href="#M000024">[]=</a>&nbsp;&nbsp;
+      <a href="#M000025">^</a>&nbsp;&nbsp;
       <a href="#M000002">bounded?</a>&nbsp;&nbsp;
       <a href="#M000003">clear</a>&nbsp;&nbsp;
       <a href="#M000004">clear!</a>&nbsp;&nbsp;
@@ -126,8 +122,8 @@ Re-open the class to add the operator methods
       <a href="#M000017">slice</a>&nbsp;&nbsp;
       <a href="#M000018">to_i</a>&nbsp;&nbsp;
       <a href="#M000019">to_s</a>&nbsp;&nbsp;
-      <a href="#M000030">|</a>&nbsp;&nbsp;
-      <a href="#M000031">~</a>&nbsp;&nbsp;
+      <a href="#M000026">|</a>&nbsp;&nbsp;
+      <a href="#M000027">~</a>&nbsp;&nbsp;
       </div>
     </div>
 
@@ -261,17 +257,24 @@ If a <em>String</em>, the value must contain only &#8216;0&#8217; and
         <div class="method-heading">
           <a href="BitString.src/M000020.html" target="Code" class="method-signature"
             onclick="popupCode('BitString.src/M000020.html');return false;">
-          <span class="method-name">new<i>([value], [length], [bounded])</i> => _BitString_<br />
+          <span class="method-name"><i>bitstring & value</i> => <i>BitString</i><br />
 </span>
           </a>
         </div>
       
         <div class="method-description">
           <h3>Description</h3>
-<h3>Arguments</h3>
 <p>
-[<em>val_p</em>]
+Perform a bitwise AND on the entire bitstring, returning a <a
+href="BitString.html#M000001">new</a> <em><a
+href="BitString.html">BitString</a></em> object.
 </p>
+<h3>Arguments</h3>
+<dl>
+<dt><em>val</em></dt><dd><em>Integer</em>. Value to AND with the bitstring.
+
+</dd>
+</dl>
 <h3>Exceptions</h3>
 <p>
 <em>None</em>.
@@ -285,6 +288,37 @@ If a <em>String</em>, the value must contain only &#8216;0&#8217; and
         <div class="method-heading">
           <a href="BitString.src/M000021.html" target="Code" class="method-signature"
             onclick="popupCode('BitString.src/M000021.html');return false;">
+          <span class="method-name"><i>bitstring << bitcount</i> => <i>BitString</i><br />
+</span>
+          </a>
+        </div>
+      
+        <div class="method-description">
+          <h3>Description</h3>
+<p>
+Perform a left-shift on the bitstring, returning a <em><a
+href="BitString.html">BitString</a></em> containing the shifted value. If
+the bitstring is bounded, bits shifted off the high end are lost.
+</p>
+<h3>Arguments</h3>
+<dl>
+<dt><em>bitcount</em></dt><dd><em>Integer</em>. Number of positions to left-shift by.
+
+</dd>
+</dl>
+<h3>Exceptions</h3>
+<p>
+<em>None</em>.
+</p>
+        </div>
+      </div>
+
+      <div id="method-M000028" class="method-detail">
+        <a name="M000028"></a>
+
+        <div class="method-heading">
+          <a href="BitString.src/M000028.html" target="Code" class="method-signature"
+            onclick="popupCode('BitString.src/M000028.html');return false;">
           <span class="method-name">new<i>([value], [length], [bounded])</i> => _BitString_<br />
 </span>
           </a>
@@ -309,17 +343,25 @@ If a <em>String</em>, the value must contain only &#8216;0&#8217; and
         <div class="method-heading">
           <a href="BitString.src/M000022.html" target="Code" class="method-signature"
             onclick="popupCode('BitString.src/M000022.html');return false;">
-          <span class="method-name">new<i>([value], [length], [bounded])</i> => _BitString_<br />
+          <span class="method-name"><i>bitstring >> bitcount</i> => _BitString_<br />
 </span>
           </a>
         </div>
       
         <div class="method-description">
           <h3>Description</h3>
-<h3>Arguments</h3>
 <p>
-[<em>val_p</em>]
+Right-shift the bitstring (toward the low end) by the specified number of
+bits. Bits shifted off the end are lost; <a
+href="BitString.html#M000001">new</a> bits shifted in at the high end are
+0.
 </p>
+<h3>Arguments</h3>
+<dl>
+<dt><em>bitcount</em></dt><dd><em>Integer</em>. Number of positions to right-shift by.
+
+</dd>
+</dl>
 <h3>Exceptions</h3>
 <p>
 <em>None</em>.
@@ -333,126 +375,6 @@ If a <em>String</em>, the value must contain only &#8216;0&#8217; and
         <div class="method-heading">
           <a href="BitString.src/M000023.html" target="Code" class="method-signature"
             onclick="popupCode('BitString.src/M000023.html');return false;">
-          <span class="method-name">new<i>([value], [length], [bounded])</i> => _BitString_<br />
-</span>
-          </a>
-        </div>
-      
-        <div class="method-description">
-          <h3>Description</h3>
-<h3>Arguments</h3>
-<p>
-[<em>val_p</em>]
-</p>
-<h3>Exceptions</h3>
-<p>
-<em>None</em>.
-</p>
-        </div>
-      </div>
-
-      <div id="method-M000032" class="method-detail">
-        <a name="M000032"></a>
-
-        <div class="method-heading">
-          <a href="BitString.src/M000032.html" target="Code" class="method-signature"
-            onclick="popupCode('BitString.src/M000032.html');return false;">
-          <span class="method-name">new<i>([value], [length], [bounded])</i> => _BitString_<br />
-</span>
-          </a>
-        </div>
-      
-        <div class="method-description">
-          <h3>Description</h3>
-<h3>Arguments</h3>
-<p>
-[<em>val_p</em>]
-</p>
-<h3>Exceptions</h3>
-<p>
-<em>None</em>.
-</p>
-        </div>
-      </div>
-
-      <div id="method-M000024" class="method-detail">
-        <a name="M000024"></a>
-
-        <div class="method-heading">
-          <a href="BitString.src/M000024.html" target="Code" class="method-signature"
-            onclick="popupCode('BitString.src/M000024.html');return false;">
-          <span class="method-name">new<i>([value], [length], [bounded])</i> => _BitString_<br />
-</span>
-          </a>
-        </div>
-      
-        <div class="method-description">
-          <h3>Description</h3>
-<h3>Arguments</h3>
-<p>
-[<em>val_p</em>]
-</p>
-<h3>Exceptions</h3>
-<p>
-<em>None</em>.
-</p>
-        </div>
-      </div>
-
-      <div id="method-M000025" class="method-detail">
-        <a name="M000025"></a>
-
-        <div class="method-heading">
-          <a href="BitString.src/M000025.html" target="Code" class="method-signature"
-            onclick="popupCode('BitString.src/M000025.html');return false;">
-          <span class="method-name">new<i>([value], [length], [bounded])</i> => _BitString_<br />
-</span>
-          </a>
-        </div>
-      
-        <div class="method-description">
-          <h3>Description</h3>
-<h3>Arguments</h3>
-<p>
-[<em>val_p</em>]
-</p>
-<h3>Exceptions</h3>
-<p>
-<em>None</em>.
-</p>
-        </div>
-      </div>
-
-      <div id="method-M000026" class="method-detail">
-        <a name="M000026"></a>
-
-        <div class="method-heading">
-          <a href="BitString.src/M000026.html" target="Code" class="method-signature"
-            onclick="popupCode('BitString.src/M000026.html');return false;">
-          <span class="method-name">new<i>([value], [length], [bounded])</i> => _BitString_<br />
-</span>
-          </a>
-        </div>
-      
-        <div class="method-description">
-          <h3>Description</h3>
-<h3>Arguments</h3>
-<p>
-[<em>val_p</em>]
-</p>
-<h3>Exceptions</h3>
-<p>
-<em>None</em>.
-</p>
-        </div>
-      </div>
-
-      <div id="method-M000027" class="method-detail">
-        <a name="M000027"></a>
-
-        <div class="method-heading">
-          <a href="BitString.src/M000027.html" target="Code" class="method-signature"
-            onclick="popupCode('BitString.src/M000027.html');return false;">
           <span class="method-name">bitstring<i>[index]</i> => <i>Integer</i><br />
 bitstring<i>[start, length]</i> => <i>BitString</i><br />
 bitstring<i>[range]</i> => <i>BitString</i><br />
@@ -495,23 +417,42 @@ href="BitString.html">BitString</a>.
         </div>
       </div>
 
-      <div id="method-M000028" class="method-detail">
-        <a name="M000028"></a>
+      <div id="method-M000024" class="method-detail">
+        <a name="M000024"></a>
 
         <div class="method-heading">
-          <a href="BitString.src/M000028.html" target="Code" class="method-signature"
-            onclick="popupCode('BitString.src/M000028.html');return false;">
-          <span class="method-name">new<i>([value], [length], [bounded])</i> => _BitString_<br />
+          <a href="BitString.src/M000024.html" target="Code" class="method-signature"
+            onclick="popupCode('BitString.src/M000024.html');return false;">
+          <span class="method-name">bitstring[<i>pos</i>] = <i>value</i>   => <i>value</i><br />
+bitstring[<i>start, length</i>] = <i>value</i>   => <i>value</i><br />
+bitstring[<i>range</i> = <i>value</i>   => <i>value</i><br />
 </span>
           </a>
         </div>
       
         <div class="method-description">
           <h3>Description</h3>
-<h3>Arguments</h3>
 <p>
-[<em>pos_p</em>] [<em>val_p</em>]
+Set a bit or range of bits with a single operation.
 </p>
+<h3>Arguments</h3>
+<dl>
+<dt><em>value</em></dt><dd><em>Integer</em>.
+
+</dd>
+<dt><em>pos</em></dt><dd><em>Integer</em>.
+
+</dd>
+<dt><em>start</em></dt><dd><em>Integer</em>.
+
+</dd>
+<dt><em><a href="BitString.html#M000008">length</a></em></dt><dd><em>Integer</em>.
+
+</dd>
+<dt><em>range</em></dt><dd><em>Range</em>.
+
+</dd>
+</dl>
 <h3>Exceptions</h3>
 <p>
 [<tt>IndexError</tt>] [<tt>RangeError</tt>]
@@ -519,12 +460,12 @@ href="BitString.html">BitString</a>.
         </div>
       </div>
 
-      <div id="method-M000029" class="method-detail">
-        <a name="M000029"></a>
+      <div id="method-M000025" class="method-detail">
+        <a name="M000025"></a>
 
         <div class="method-heading">
-          <a href="BitString.src/M000029.html" target="Code" class="method-signature"
-            onclick="popupCode('BitString.src/M000029.html');return false;">
+          <a href="BitString.src/M000025.html" target="Code" class="method-signature"
+            onclick="popupCode('BitString.src/M000025.html');return false;">
           <span class="method-name">new<i>([value], [length], [bounded])</i> => _BitString_<br />
 </span>
           </a>
@@ -1155,12 +1096,12 @@ bounded, the <em>String</em> will be zero-filled on the left (high end).
         </div>
       </div>
 
-      <div id="method-M000030" class="method-detail">
-        <a name="M000030"></a>
+      <div id="method-M000026" class="method-detail">
+        <a name="M000026"></a>
 
         <div class="method-heading">
-          <a href="BitString.src/M000030.html" target="Code" class="method-signature"
-            onclick="popupCode('BitString.src/M000030.html');return false;">
+          <a href="BitString.src/M000026.html" target="Code" class="method-signature"
+            onclick="popupCode('BitString.src/M000026.html');return false;">
           <span class="method-name">new<i>([value], [length], [bounded])</i> => _BitString_<br />
 </span>
           </a>
@@ -1179,13 +1120,13 @@ bounded, the <em>String</em> will be zero-filled on the left (high end).
         </div>
       </div>
 
-      <div id="method-M000031" class="method-detail">
-        <a name="M000031"></a>
+      <div id="method-M000027" class="method-detail">
+        <a name="M000027"></a>
 
         <div class="method-heading">
-          <a href="BitString.src/M000031.html" target="Code" class="method-signature"
-            onclick="popupCode('BitString.src/M000031.html');return false;">
-          <span class="method-name">new<i>([value], [length], [bounded])</i> => _BitString_<br />
+          <a href="BitString.src/M000027.html" target="Code" class="method-signature"
+            onclick="popupCode('BitString.src/M000027.html');return false;">
+          <span class="method-name">~ <i>bitstring</i> => _BitString_<br />
 </span>
           </a>
         </div>
@@ -1194,7 +1135,7 @@ bounded, the <em>String</em> will be zero-filled on the left (high end).
           <h3>Description</h3>
 <h3>Arguments</h3>
 <p>
-[<em>val_p</em>]
+<em>None</em>.
 </p>
 <h3>Exceptions</h3>
 <p>

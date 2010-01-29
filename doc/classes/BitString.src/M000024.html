@@ -5,14 +5,57 @@
 
 <html>
 <head>
-  <title>&gt; (BitString)</title>
+  <title>[]= (BitString)</title>
   <meta http-equiv="Content-Type" content="text/html; charset=iso-8859-1" />
   <link rel="stylesheet" href="../.././rdoc-style.css" type="text/css" media="screen" />
 </head>
 <body class="standalone-code">
-  <pre><span class="ruby-comment cmt"># File lib/bitstring/operators.rb, line 137</span>
-  <span class="ruby-keyword kw">def</span> <span class="ruby-operator">&gt;</span>(<span class="ruby-identifier">val_p</span>)
-    <span class="ruby-ivar">@value</span> <span class="ruby-operator">&gt;</span> <span class="ruby-identifier">val_p</span>
+  <pre><span class="ruby-comment cmt"># File lib/bitstring/operators.rb, line 204</span>
+  <span class="ruby-keyword kw">def</span> <span class="ruby-operator">[]=</span>(<span class="ruby-operator">*</span><span class="ruby-identifier">args_p</span>)
+    <span class="ruby-identifier">low</span> = <span class="ruby-identifier">high</span> = <span class="ruby-identifier">width</span> = <span class="ruby-keyword kw">nil</span>
+    <span class="ruby-identifier">args</span> = <span class="ruby-identifier">args_p</span>
+    <span class="ruby-keyword kw">if</span> (<span class="ruby-identifier">args</span>.<span class="ruby-identifier">length</span> <span class="ruby-operator">==</span> <span class="ruby-value">2</span>)
+      <span class="ruby-comment cmt">#</span>
+      <span class="ruby-comment cmt"># [pos]= or [range]=</span>
+      <span class="ruby-comment cmt">#</span>
+      <span class="ruby-keyword kw">if</span> ((<span class="ruby-identifier">r</span> = <span class="ruby-identifier">args</span>[<span class="ruby-value">0</span>]).<span class="ruby-identifier">class</span>.<span class="ruby-identifier">eql?</span>(<span class="ruby-constant">Range</span>))
+        <span class="ruby-comment cmt">#</span>
+        <span class="ruby-comment cmt"># Convert into a [start,length] format to reuse that stream.</span>
+        <span class="ruby-comment cmt">#</span>
+        (<span class="ruby-identifier">start</span>, <span class="ruby-identifier">stop</span>) = [<span class="ruby-identifier">r</span>.<span class="ruby-identifier">first</span>, <span class="ruby-identifier">r</span>.<span class="ruby-identifier">last</span>].<span class="ruby-identifier">sort</span>
+        <span class="ruby-identifier">width</span> = <span class="ruby-identifier">stop</span> <span class="ruby-operator">-</span> <span class="ruby-identifier">start</span> <span class="ruby-operator">+</span> <span class="ruby-value">1</span>
+        <span class="ruby-identifier">args</span> = [<span class="ruby-identifier">start</span>, <span class="ruby-identifier">width</span>, <span class="ruby-identifier">args</span>[<span class="ruby-value">1</span>]]
+      <span class="ruby-keyword kw">else</span>
+        <span class="ruby-identifier">args</span> = [<span class="ruby-identifier">args</span>[<span class="ruby-value">0</span>], <span class="ruby-value">1</span>, <span class="ruby-identifier">args</span>[<span class="ruby-value">1</span>]]
+      <span class="ruby-keyword kw">end</span>
+    <span class="ruby-keyword kw">elsif</span> (<span class="ruby-identifier">args_p</span>.<span class="ruby-identifier">length</span> <span class="ruby-operator">!=</span> <span class="ruby-value">3</span>)
+      <span class="ruby-identifier">_raise</span>(<span class="ruby-constant">WrongNargs</span>, <span class="ruby-identifier">args_p</span>.<span class="ruby-identifier">length</span>, <span class="ruby-value">3</span>)
+    <span class="ruby-keyword kw">end</span>
+    <span class="ruby-comment cmt">#</span>
+    <span class="ruby-comment cmt"># Special cases of args have now been normalised to [start,length,value].</span>
+    <span class="ruby-comment cmt"># Make sure the values are acceptable.</span>
+    <span class="ruby-comment cmt">#</span>
+    (<span class="ruby-identifier">start</span>, <span class="ruby-identifier">nBits</span>, <span class="ruby-identifier">value</span>) = <span class="ruby-identifier">args</span>
+    <span class="ruby-identifier">_raise</span>(<span class="ruby-constant">BogoIndex</span>, <span class="ruby-identifier">start</span>) <span class="ruby-keyword kw">unless</span> (<span class="ruby-identifier">start</span>.<span class="ruby-identifier">respond_to?</span>(<span class="ruby-identifier">:to_i</span>))
+    <span class="ruby-identifier">start</span> = <span class="ruby-identifier">start</span>.<span class="ruby-identifier">to_i</span> <span class="ruby-keyword kw">unless</span> (<span class="ruby-identifier">start</span>.<span class="ruby-identifier">kind_of?</span>(<span class="ruby-constant">Integer</span>))
+    <span class="ruby-identifier">_raise</span>(<span class="ruby-constant">BogoIndex</span>, <span class="ruby-identifier">nBits</span>) <span class="ruby-keyword kw">unless</span> (<span class="ruby-identifier">nBits</span>.<span class="ruby-identifier">respond_to?</span>(<span class="ruby-identifier">:to_i</span>))
+    <span class="ruby-identifier">nBits</span> = <span class="ruby-identifier">length</span>.<span class="ruby-identifier">to_i</span> <span class="ruby-keyword kw">unless</span> (<span class="ruby-identifier">nBits</span>.<span class="ruby-identifier">kind_of?</span>(<span class="ruby-constant">Integer</span>))
+    <span class="ruby-identifier">highpos</span> = <span class="ruby-identifier">start</span> <span class="ruby-operator">+</span> <span class="ruby-identifier">nBits</span> <span class="ruby-operator">-</span> <span class="ruby-value">1</span>
+    <span class="ruby-identifier">_raise</span>(<span class="ruby-constant">OuttasightIndex</span>, <span class="ruby-identifier">highpos</span>) <span class="ruby-keyword kw">if</span> (<span class="ruby-identifier">bounded?</span> <span class="ruby-operator">&amp;&amp;</span> (<span class="ruby-identifier">highpos</span> <span class="ruby-operator">&gt;</span> <span class="ruby-ivar">@length</span> <span class="ruby-operator">-</span> <span class="ruby-value">1</span>))
+    <span class="ruby-identifier">_raise</span>(<span class="ruby-constant">BitsRInts</span>, <span class="ruby-identifier">value</span>) <span class="ruby-keyword kw">unless</span> (<span class="ruby-identifier">value</span>.<span class="ruby-identifier">respond_to?</span>(<span class="ruby-identifier">:to_i</span>))
+    <span class="ruby-identifier">value</span> = <span class="ruby-identifier">value</span>.<span class="ruby-identifier">to_i</span> <span class="ruby-keyword kw">unless</span> (<span class="ruby-identifier">value</span>.<span class="ruby-identifier">kind_of?</span>(<span class="ruby-constant">Integer</span>))
+    <span class="ruby-comment cmt">#</span>
+    <span class="ruby-comment cmt"># All the checking is done, let's do this thing.</span>
+    <span class="ruby-comment cmt">#</span>
+    <span class="ruby-identifier">mask</span> = <span class="ruby-value">2</span><span class="ruby-operator">**</span><span class="ruby-identifier">nBits</span> <span class="ruby-operator">-</span> <span class="ruby-value">1</span>
+    <span class="ruby-identifier">value</span> <span class="ruby-operator">&amp;=</span> <span class="ruby-identifier">mask</span>
+    <span class="ruby-identifier">mask</span> <span class="ruby-operator">*=</span> <span class="ruby-value">2</span><span class="ruby-operator">**</span><span class="ruby-identifier">start</span>
+    <span class="ruby-identifier">value</span> <span class="ruby-operator">*=</span> <span class="ruby-value">2</span><span class="ruby-operator">**</span><span class="ruby-identifier">start</span>
+
+    <span class="ruby-identifier">highpos</span> = <span class="ruby-keyword kw">self</span>.<span class="ruby-identifier">length</span>
+    <span class="ruby-identifier">bValue</span> = <span class="ruby-ivar">@value</span> <span class="ruby-operator">&amp;</span> ((<span class="ruby-value">2</span><span class="ruby-operator">**</span><span class="ruby-identifier">highpos</span> <span class="ruby-operator">-</span> <span class="ruby-value">1</span>) <span class="ruby-operator">&amp;</span> <span class="ruby-operator">~</span><span class="ruby-identifier">mask</span>)
+    <span class="ruby-ivar">@value</span> = <span class="ruby-identifier">bValue</span> <span class="ruby-operator">|</span> <span class="ruby-identifier">value</span>
+    <span class="ruby-identifier">value</span> <span class="ruby-operator">/</span> <span class="ruby-value">2</span><span class="ruby-operator">**</span><span class="ruby-identifier">start</span>
   <span class="ruby-keyword kw">end</span></pre>
 </body>
 </html>

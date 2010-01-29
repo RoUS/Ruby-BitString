@@ -163,6 +163,12 @@ class BitString
     #
   end                           # class BitsRInts
 
+  class BogoIndex < InternalError
+    #
+    # Turned into an IndexError.
+    #
+  end                           # class BogoIndex
+
   class NeedGPS < InternalError
     #
     # Turned into an ArgumentError.
@@ -192,6 +198,12 @@ class BitString
     # Turned into a RuntimeError.
     #
   end                           # class UnInterable
+
+  class WrongNargs < InternalError
+    #
+    # Turned into an ArgumentError.
+    #
+  end                           # class WrongNargs
 
   # :startdoc:
   #
@@ -361,6 +373,12 @@ class BitString
         raise ArgumentError.new(msg)
       when 'BitsRInts'
         raise ArgumentError.new(msg || 'bitcount must be an integer')
+      when 'BogoIndex'
+        if (msg.nil?)
+          val = args[0]
+          msg = "illegal index value #{val.inspect}"
+        end
+        raise IndexError.new(msg)
       when 'NeedGPS'
         raise ArgumentError.new(msg ||
                                 'invalid direction for operation')
@@ -384,6 +402,13 @@ class BitString
           val = args[0].respond_to?(to_s) ? args[0].to_s : args[0].inspect
           msg = "unable to reduce '#{val}':#{args[0].class.name} " +
             "to a binary value"
+        end
+        raise ArgumentError.new(msg)
+      when 'WrongNargs'
+        if (msg.nil?)
+          val = args[0].respond_to?(:to_i) ? args[0].to_i : args[0].inspect
+          req = args[1].respond_to?(:to_i) ? args[1].to_i : args[1].inspect
+          msg = "wrong number of arguments (#{val} for #{req})"
         end
         raise ArgumentError.new(msg)
       else

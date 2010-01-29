@@ -10,9 +10,11 @@
   <link rel="stylesheet" href="../.././rdoc-style.css" type="text/css" media="screen" />
 </head>
 <body class="standalone-code">
-  <pre><span class="ruby-comment cmt"># File lib/bitstring/operators.rb, line 73</span>
-  <span class="ruby-keyword kw">def</span> <span class="ruby-operator">&amp;</span>(<span class="ruby-identifier">val_p</span>)
-    <span class="ruby-ivar">@value</span> <span class="ruby-operator">&lt;</span> <span class="ruby-identifier">val_p</span>
+  <pre><span class="ruby-comment cmt"># File lib/bitstring/operators.rb, line 76</span>
+  <span class="ruby-keyword kw">def</span> <span class="ruby-operator">&amp;</span>(<span class="ruby-identifier">val</span>)
+    <span class="ruby-identifier">mask</span> = <span class="ruby-value">2</span><span class="ruby-operator">**</span><span class="ruby-keyword kw">self</span>.<span class="ruby-identifier">length</span> <span class="ruby-operator">-</span> <span class="ruby-value">1</span>
+    <span class="ruby-identifier">newval</span> = (<span class="ruby-ivar">@value</span> <span class="ruby-operator">&amp;</span> <span class="ruby-identifier">val</span>.<span class="ruby-identifier">to_i</span>) <span class="ruby-operator">&amp;</span> <span class="ruby-identifier">mask</span>
+    <span class="ruby-identifier">bounded?</span> <span class="ruby-value">? </span><span class="ruby-keyword kw">self</span>.<span class="ruby-identifier">class</span>.<span class="ruby-identifier">new</span>(<span class="ruby-identifier">newval</span>, <span class="ruby-ivar">@length</span>) <span class="ruby-operator">:</span> <span class="ruby-keyword kw">self</span>.<span class="ruby-identifier">class</span>.<span class="ruby-identifier">new</span>(<span class="ruby-identifier">newval</span>)
   <span class="ruby-keyword kw">end</span></pre>
 </body>
 </html>
