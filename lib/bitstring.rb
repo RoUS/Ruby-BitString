@@ -18,6 +18,11 @@
 # of bits as an array-like structure.  Bits are addressable individually
 # or as subranges.
 #
+# BitString objects can be either bounded or unbounded.  Bounded bitstrings
+# have a specific number of bits, and operations that would affect bits
+# outside those limits will raise exceptions.  Unbounded bitstrings can
+# grow to arbitrary lengths, but some operations (like rotation) cannot
+# be performed on them.
 #--
 # Copyright © 2010 Ken Coar
 #
@@ -127,7 +132,14 @@ require 'bitstring/operators'
 #
 class BitString
 
-  Version = Versionomy.parse('0.1.0')
+  #
+  # Versionomy object for the class, recording the current version.
+  #
+  Version = Versionomy.parse('0.1.0a2')
+
+  #
+  # Version number as a simple readable string.
+  #
   VERSION = Version.to_s
 
   #
@@ -135,10 +147,15 @@ class BitString
   #
 
   #
-  # Values for <i>grow</i> and <i>shrink</i> methods.
+  # Identifer specifying the least significant (low) end of the bitstring
+  # (used by <i>grow</i>, <i>shrink</i>, and <i>mask</i>).
   #
-  LOW_END = :low                # Grow/shrink at least significant end
-  HIGH_END = :high              # Grow/shrink at mose significant end
+  LOW_END = :low
+  #
+  # Identifer specifying the most significant (high) end of the bitstring
+  # (used by <i>grow</i>, <i>shrink</i>, and <i>mask</i>).
+  #
+  HIGH_END = :high
 
   # :stopdoc:
   #
@@ -235,16 +252,18 @@ class BitString
   # all bits clear.
   #
   # :call-seq:
-  # new<i>([val], [length])</i> => <i>BitString</i>
+  # new<i>([val], [bitcount])</i> => <i>BitString</i>
   # new<i>(length) {|index| block }</i> => <i>BitString</i>
   #
   # === Arguments
   # [<i>val</i>] <i>Array</i>, <i>Integer</i>, <i>String</i>, or <i>BitString</i>. Initial value for the bitstring.  If a <i>String</i>, the value must contain only '0' and '1' characters; if an <i>Array</i>, all elements must be 0 or 1.  Default 0.
-  # [<i>length</i>] <i>Integer</i>.  Length (number of bits) for a bounded bitstring.  Default 1.
+  # [<i>bitcount</i>] <i>Integer</i>.  Optional length (number of bits) for a bounded bitstring.
+  #
+  # === Examples
   #
   # === Exceptions
   # [<tt>ArgumentError</tt>] Length specified but bitstring is unbounded.
-  # [<tt>RangeError</tt>] Value is a string, but contains non-binary digits.
+  # [<tt>RangeError</tt>] <i>val</i> is a string, but contains non-binary digits.
   #
   def initialize(*args_p, &block)
     #
@@ -290,37 +309,7 @@ class BitString
       # We weren't passed a block, so get the info directly from the argument
       # list.
       #
-      if (val.kind_of?(BitString))
-        #
-        # If we were passed a bitstring, convert it.
-        #
-        @value = val.to_i
-      elsif (val.kind_of?(String))
-        #
-        # If we were given a String for the value, it must consist of valid
-        # binary digits.
-        #
-        _raise(BadDigit, nil, val) unless (val.gsub(/[01]/, '').empty?)
-        @value = val.to_i(2)
-      elsif (val.kind_of?(Array))
-        #
-        # If we were given an array, make sure that all the values are
-        # integers and either 1 or 0.
-        #
-        _raise(BadDigit, nil, val) unless ((val - [0, 1]).empty?)
-        @value = val.join('').to_i(2)
-      else
-        #
-        # Let's try to convert it to an integer from whatever class we
-        # were passed.
-        #
-        unless (val.respond_to?(:to_i))
-          raise ArgumentError.new('unable to determine bitstring ' +
-                                  'value from ' +
-                                  "\"#{val.to_s}\":#{val.class.name}")
-        end
-        @value = val.to_i
-      end
+      @value = _arg2int(val)
     else      
       #
       # We were passed a block, so invoke it for each bit position to
@@ -343,6 +332,61 @@ class BitString
   # [<i>exc</i>] <i>Exception</i>.  One of our 'known' repeated exceptions.
   # [<i>msg</i>] <i>String</i>.  Message to use if we don't have a canned one.
   #
+  # === Examples
+  #
+  # === Exceptions
+  # [<tt>InternalError</tt>] Called with something other than an exception.
+  # As indicated.
+  #
+  def _arg2int(val_p)
+    if (val_p.class.eql?(BitString))
+      #
+      # If we were passed a bitstring, convert it.
+      #
+      val = val_p.to_i
+    elsif (val_p.class.eql?(String))
+      #
+      # If we were given a String for the value, it must consist of valid
+      # binary digits.
+      #
+      _raise(BadDigit, nil, val_p) unless (val_p.gsub(/[01]/, '').empty?)
+      val = val_p.to_i(2)
+    elsif (val_p.class.eql?(Array))
+      #
+      # If we were given an array, make sure that all the values are
+      # integers and either 1 or 0.
+      #
+      _raise(BadDigit, nil, val_p) unless ((val_p - [0, 1]).empty?)
+      val = val_p.collect { |bit| bit.to_s(2) }.join('').to_i(2)
+    elsif (val_p.kind_of?(Integer))
+      val = val_p
+    else
+      #
+      # Let's try to convert it to an integer from whatever class we
+      # were passed.
+      #
+      unless (val_p.respond_to?(:to_i))
+        raise ArgumentError.new('unable to determine bitstring value from ' +
+                                "\"#{val_p.to_s}\":#{val_p.class.name}")
+      end
+    end
+    val
+  end                           # def _arg2int
+
+  #
+  # === Description
+  #
+  # Raise a standard exception.
+  #
+  # :call-seq:
+  # _raise<i>(exc, [msg])</i> => Exception raised
+  #
+  # === Arguments
+  # [<i>exc</i>] <i>Exception</i>.  One of our 'known' repeated exceptions.
+  # [<i>msg</i>] <i>String</i>.  Message to use if we don't have a canned one.
+  #
+  # === Examples
+  #
   # === Exceptions
   # [<tt>InternalError</tt>] Called with something other than an exception.
   # As indicated.
@@ -357,6 +401,7 @@ class BitString
     rescue InternalError => e
       if (args[0].kind_of?(String) && args[0].match(/%/))
         msg = sprintf(*args)
+        args = []
       elsif (args[0].kind_of?(String))
         msg = args.shift
       else
@@ -367,8 +412,8 @@ class BitString
       case exc.name.sub(/^.*::/, '')
       when 'BadDigit'
         if (msg.nil?)
-          val = args[0].respond_to?(:to_s) ? args[0].to_s : args[0].inspect
-          msg = "value ('#{val}':#{args[0].class.name}) contains invalid digits"
+          val = args[1].respond_to?(:to_s) ? args[1].to_s : args[1].inspect
+          msg = "value ('#{val}':#{args[1].class.name}) contains invalid digits"
         end
         raise ArgumentError.new(msg)
       when 'BitsRInts'
@@ -430,6 +475,8 @@ class BitString
   # [<i>val</i>] <i>Integer</i> or <i>String</i>.  Value to be represented as a string of binary digits.
   # [<i>length</i>] <i>Integer</i>. Length of output string to return.
   #
+  # === Examples
+  #
   # === Exceptions
   # <i>None</i>.
   #
@@ -457,6 +504,8 @@ class BitString
   # === Arguments
   # <i>None</i>.
   #
+  # === Examples
+  #
   # === Exceptions
   # <i>None</i>.
   #
@@ -473,10 +522,12 @@ class BitString
   # bitstring.clear<i>()</i> => <i>BitString</i>
   #
   # === Arguments
-  # _None_.
+  # <i>None</i>.
+  #
+  # === Examples
   #
   # === Exceptions
-  # _None_.
+  # <i>None</i>.
   #
   def clear()
     bs = dup
@@ -493,10 +544,12 @@ class BitString
   # bitstring.clear!<i>()</i> => <i>BitString</i>
   #
   # === Arguments
-  # _None_.
+  # <i>None</i>.
+  #
+  # === Examples
   #
   # === Exceptions
-  # _None_.
+  # <i>None</i>.
   #
   def clear!()
     @value = 0
@@ -506,14 +559,37 @@ class BitString
   #
   # === Description
   #
+  # Execute a block for each bit in the bitstring.
+  #
+  # :call-seq:
+  # bitstring.<i>each</i> { |<i>bitpos,bitval</i>| <i>block</i> } => <i>BitString</i>
+  #
+  # === Arguments
+  # [<i>block</i>] <i>Proc</i>. Block to be called for each bit in the string.  The block is passed the bit position and the bit value.
+  #
+  # === Examples
+  #
+  # === Exceptions
+  # <i>None</i>.
+  #
+  def each(&block)
+    self.length.times { |bit| block.call(bit, self[bit]) }
+    self
+  end                           # def each
+
+  #
+  # === Description
+  #
   # Treat the bitstring as an Integer and store its entire value at
   # once.
   #
   # :call-seq:
-  # bitstring.from_i<i>(newval)</i>
+  # bitstring.from_i<i>(newval)</i> => <i>BitString</i>
   #
   # === Arguments
-  # [<i>newval</i>] <i>Integer</i>. Value from whose bits those in the bitstring will be copied.
+  # [<i>newval</i>] <i>Integer</i>. Value from which bits will be copied to the bitstring.
+  #
+  # === Examples
   #
   # === Exceptions
   # <i>None</i>.
@@ -526,6 +602,7 @@ class BitString
     newval = newval.to_i
     newval &= 2**@length - 1 if (bounded?)
     @value = newval
+    self
   end                           # def from_i()
 
   #
@@ -541,9 +618,11 @@ class BitString
   # bitstring.grow<i>(bits, [defval], [direction])</i> => <i>BitString</i>
   #
   # === Arguments
-  # [<i>bits</i>] <i>Integer</i> Number of bits to add.
-  # [<i>defval</i>] <i>Integer</i> Value to which added bits should be set.
-  # [<i>direction</i>] Either <i>BitString::HIGH_END</i> (the default) or <i>BitString::LOW_END</i>.  Indicates whether bits are added at the least or most significant end.  Growing with <i>BitString::LOW_END</i> results in the bitstring being shifted left.
+  # [<i>bits</i>] <i>Integer</i>. Number of bits to add.
+  # [<i>defval</i>] <i>Integer</i>. Value to which added bits should be set.
+  # [<i>direction</i>] <i>Constant</i>. Either <tt>BitString::HIGH_END</tt> (the default) or <tt>BitString::LOW_END</t>.  Indicates whether bits are added at the least or most significant end.  Growing with <tt>BitString::LOW_END</tt> results in the bitstring being shifted left.
+  #
+  # === Examples
   #
   # === Exceptions
   # [<tt>ArgumentError</tt>] <i>bits</i> isn't an integer, <i>defval</i> can't be reduced to a binary value, or <i>direction</i> isn't one of the defined values.
@@ -570,13 +649,13 @@ class BitString
     return dup if (bits == 0)
 
     value = @value
-    mask = 2**bits - 1
+    vMask = 2**bits - 1
     if (direction == HIGH_END)
-      mask *= 2**@length if (bounded?)
+      vMask *= 2**@length if (bounded?)
     elsif (direction == LOW_END)
       value *= (2**bits)
     end
-    value |= mask if (defval == 1)
+    value |= vMask if (defval == 1)
     bounded? ? self.class.new(value, @length + bits) : self.class.new(value)
   end                           # def grow
 
@@ -594,7 +673,9 @@ class BitString
   # === Arguments
   # [<i>bits</i>] <i>Integer</i> Number of bits to add.
   # [<i>defval</i>] <i>Integer</i> Value to which added bits should be set.
-  # [<i>direction</i>] Either <i>BitString::HIGH_END</i> (the default) or <i>BitString::LOW_END</i>.  Indicates whether bits are added at the least or most significant end.  Growing with <i>BitString::LOW_END</i> results in the bitstring being shifted left.
+  # [<i>direction</i>] <i>Constant</i>. Either <tt>BitString::HIGH_END</tt> (the default) or <tt>BitString::LOW_END</tt>.  Indicates whether bits are added at the least or most significant end.  Growing with <tt>BitString::LOW_END</tt> results in the bitstring being shifted left.
+  #
+  # === Examples
   #
   # === Exceptions
   # [<tt>ArgumentError</tt>] <i>bits</i> isn't an integer, <i>defval</i> can't be reduced to a binary value, or <i>direction</i> isn't one of the defined values.
@@ -620,11 +701,13 @@ class BitString
   # === Arguments
   # <i>None</i>.
   #
+  # === Examples
+  #
   # === Exceptions
   # <i>None</i>.
   #
   def length()
-    @bounded ? @length : @value.to_s(2).length
+    bounded? ? @length : @value.to_s(2).length
   end                           # def length()
 
   #
@@ -638,12 +721,39 @@ class BitString
   # === Arguments
   # <i>None</i>.
   #
+  # === Examples
+  #
   # === Exceptions
   # <i>None</i>.
   #
   def lsb()
     self[0]
   end                           # def lsb()
+
+  #
+  # === Description
+  #
+  # Return an integer with bits set to mask the specified portion of the
+  # bitstring.
+  #
+  # :call-seq:
+  # bitstring.mask<i>([bitcount], [direction])</i> => <i>Integer</i>
+  #
+  # === Arguments
+  # [<i>bitcount</i>] <i>Integer</i>.  Number of bits to set in the mask.
+  # [<i>direction</i>] <i>Constant</i>. <tt>BitString::HIGH_END</tt> (the default) or <tt>BitString::LOW_END</tt>.  Specifies the end of the bitstring from which the mask starts.
+  #
+  # === Examples
+  #
+  # === Exceptions
+  # <i>None</i>.
+  #
+  def mask(bits=self.length, direction=HIGH_END)
+    _raise(OuttasightIndex, bits) if (bounded? && (bits > @length))
+    vMask = 2**bits - 1
+    vMask *= 2**(self.length - bits) if (direction == HIGH_END)
+    vMask
+  end                           # def mask()
 
   #
   # === Description
@@ -657,11 +767,13 @@ class BitString
   # === Arguments
   # <i>None</i>.
   #
+  # === Examples
+  #
   # === Exceptions
   # [<tt>RuntimeError</tt>] There is no 'MSB' for an unbounded bitstring.
   #
   def msb()
-    unless (@bounded)
+    unless (bounded?)
       _raise(UnboundedNonsense,
              'most significant bit only applies to bounded bitstrings')
     end
@@ -681,6 +793,8 @@ class BitString
   #
   # === Arguments
   # [<i>bits</i>] Width of the resulting bitstring.
+  #
+  # === Examples
   #
   # === Exceptions
   # [<tt>IndexError</tt>] <i>bits</i> is negative or meaningless.
@@ -711,6 +825,8 @@ class BitString
   # === Arguments
   # [<i>bits</i>] Width of the resulting bitstring.
   #
+  # === Examples
+  #
   # === Exceptions
   # [<tt>IndexError</tt>] <i>bits</i> is negative or meaningless.
   #
@@ -736,8 +852,10 @@ class BitString
   # === Arguments
   # [<i>bits</i>] <i>Integer</i>.  Number of positions to rotate left (negative) or right (positive).  Bits rotated off one end are rotated in on the other.
   #
+  # === Examples
+  #
   # === Exceptions
-  # [<i>RuntimeError</i>] Can't rotate an unbounded bitstring.
+  # [<tt>RuntimeError</tt>] Can't rotate an unbounded bitstring.
   #
   def rotate(bits_p)
     unless (bounded?)
@@ -748,22 +866,22 @@ class BitString
     value = @value
     length = @length
     bits = bits_p.to_i.abs % length
-    mask = (mult = 2**bits) - 1
+    vMask = (mult = 2**bits) - 1
     ldiff = length - bits
     if (bits_p > 0)
       #
       # Rotate right (toward the LSB)
       #
-      residue = value & mask
+      residue = value & vMask
       value /= mult
       value |= residue * 2**ldiff
     elsif (bits_p < 0)
       #
       # Rotate left (toward the MSB)
       #
-      mask *= 2**ldiff
-      residue = value & mask
-      value = ((value & ~mask) * mult) | (residue / 2**ldiff)
+      vMask *= 2**ldiff
+      residue = value & vMask
+      value = ((value & ~vMask) * mult) | (residue / 2**ldiff)
     end
     self.class.new(value, @length)
   end                           # def rotate
@@ -779,6 +897,8 @@ class BitString
   #
   # === Arguments
   # [<i>bits</i>] <i>Integer</i>.  Number of positions to rotate left (negative) or right (positive).  Bits rotated off one end are rotated in on the other.
+  #
+  # === Examples
   #
   # === Exceptions
   # <i>None</i>.
@@ -801,6 +921,8 @@ class BitString
   # === Arguments
   # [<i>bits</i>]
   # [<i>direction</i>]
+  #
+  # === Examples
   #
   # === Exceptions
   # [<tt>ArgumentError</tt>] <i>bitcount</i> isn't an integer or <i>direction</i> isn't one of the defined values.
@@ -845,6 +967,8 @@ class BitString
   # [<i>bits</i>]
   # [<i>direction</i>]
   #
+  # === Examples
+  #
   # === Exceptions
   # [<tt>ArgumentError</tt>] <i>bitcount</i> isn't an integer or <i>direction</i> isn't one of the defined values.
   # [<tt>IndexError</tt>] <i>bits</i> is negative or meaningless.
@@ -872,6 +996,8 @@ class BitString
   # [<i>length</i>] <i>Integer</i>. Length of subset.
   # [<i>range</i>] <i>Range</i>. Subset specified as a range.
   #
+  # === Examples
+  #
   # === Exceptions
   # [<tt>ArgumentError</tt>] If length specified with a range.
   # [<tt>IndexError</tt>] If bounded bitstring and substring is illegal.
@@ -888,7 +1014,10 @@ class BitString
   # === Arguments
   # [<i>*args_p</i>]
   #
+  # === Examples
+  #
   # === Exceptions
+  # [<b>TBD</b>]
   #
   def slice!(*args_p)           # :nodoc:
     _raise(NotImplementError)
@@ -904,6 +1033,8 @@ class BitString
   #
   # === Arguments
   # <i>None</i>.
+  #
+  # === Examples
   #
   # === Exceptions
   # <i>None</i>.
@@ -924,6 +1055,8 @@ class BitString
   #
   # === Arguments
   # <i>None</i>.
+  #
+  # === Examples
   #
   # === Exceptions
   # <i>None</i>.

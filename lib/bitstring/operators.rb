@@ -1,5 +1,5 @@
 #
-# = bitstring.rb - Bounded and unbounded bit strings
+# = operators.rb - Operators for the BitString class
 #
 # Author::    Ken Coar
 # Copyright:: Copyright © 2010 Ken Coar
@@ -11,7 +11,7 @@
 # of special characters).
 #
 #--
-# Copyright © 2009 Ken Coar
+# Copyright © 2010 Ken Coar
 #
 # Licensed under the Apache License, Version 2.0 (the "License"); you
 # may not use this file except in compliance with the License. You may
@@ -28,8 +28,6 @@
 
 #--
 # @TODO items (or at least look at)
-#
-#  Add 'foo[start,count] = val' (FREQ #27742)
 #
 # Methods (unique to bitstrings):
 #    &                # Bitwise AND
@@ -53,29 +51,39 @@
 #
 #++
 
-#
+#--
 # Re-open the class to add the operator methods
-#
+#++
+
 class BitString
 
   #
   # === Description
   #
   # Perform a bitwise AND on the entire bitstring, returning a new
-  # <i>BitString</i> object.
+  # <i>BitString</i> object.  The new bitstring will have the
+  # same boundedness as the original.
   #
   # call-seq:
-  # <i>bitstring & value</i> => <i>BitString</i>
+  # bitstring <i>& value</i> => <i>BitString</i>
+  # bitstring.&<i>(value)</i> => <i>BitString</i>
   #
   # === Arguments
-  # [<i>val</i>] <i>Integer</i>.  Value to AND with the bitstring.
+  # [<i>value</i>] <i>BitString</i>, <i>Integer</i>, or <i>String</i>.  Value to AND with the bitstring.
+  #
+  # === Examples
+  #   bs = BitString.new('111111111')
+  #   nbs = bs & '111100011'
+  #   puts nbs.to_s.inspect
+  #   "111100011"
   #
   # === Exceptions
-  # _None_.
+  # <i>None</i>.
   #
   def &(val)
-    mask = 2**self.length - 1
-    newval = (@value & val.to_i) & mask
+    val = _arg2int(val)
+    vMask = self.mask
+    newval = (@value & val) & vMask
     bounded? ? self.class.new(newval, @length) : self.class.new(newval)
   end                           # def &
 
@@ -87,10 +95,13 @@ class BitString
   # shifted off the high end are lost.
   #
   # call-seq:
-  # <i>bitstring << bitcount</i> => <i>BitString</i>
+  # bitstring <i>&lt;&lt; bitcount</i> => <i>BitString</i>
+  # bitstring.&lt;&lt;<i>(bitcount)</i> => <i>BitString</i>
   #
   # === Arguments
-  # [<i>bitcount</i>] <i>Integer</i>.  Number of positions to left-shift by.
+  # [<i>bitcount</i>] <i>Integer</i>.  Number of positions by which to left-shift.
+  #
+  # === Examples
   #
   # === Exceptions
   # <i>None</i>.
@@ -98,8 +109,7 @@ class BitString
   def <<(bits)
     value = @value * (2**bits.to_i)
     if (bounded?)
-      mask = 2**@length - 1
-      self.class.new(value & mask, @length)
+      self.class.new(value & self.mask, @length)
     else
       self.class.new(value)
     end
@@ -113,10 +123,13 @@ class BitString
   # the high end are 0.
   #
   # call-seq:
-  # <i>bitstring >> bitcount</i> => _BitString_
+  # bitstring &gt;&gt; <i>bitcount</i> => <i>BitString</i>
+  # bitstring.&gt;&gt;<i>(bitcount)</i> => <i>BitString</i>
   #
   # === Arguments
   # [<i>bitcount</i>] <i>Integer</i>.  Number of positions to right-shift by.
+  #
+  # === Examples
   #
   # === Exceptions
   # <i>None</i>.
@@ -148,9 +161,11 @@ class BitString
   # [<i>length</i>] <i>Integer</i>. Length of subset.
   # [<i>range</i>] <i>Range</i>. Subset specified as a range.
   #
+  # === Examples
+  #
   # === Exceptions
   # [<tt>ArgumentError</tt>] If length specified with a range.
-  # [<tt>IndexError</tt>] If bounded bitstring and substring is illegal.
+  # [<tt>IndexError</tt>] If bitstring is bounded and the substring is illegal.
   #
   def [](pos_p, length_p=nil)
     #
@@ -188,18 +203,20 @@ class BitString
   # call-seq:
   # bitstring[<i>pos</i>] = <i>value</i>   => <i>value</i>
   # bitstring[<i>start, length</i>] = <i>value</i>   => <i>value</i>
-  # bitstring[<i>range</i> = <i>value</i>   => <i>value</i>
+  # bitstring[<i>range</i>] = <i>value</i>   => <i>value</i>
   #
   # === Arguments
-  # [<i>value</i>] <i>Integer</i>.
-  # [<i>pos</i>] <i>Integer</i>.
-  # [<i>start</i>] <i>Integer</i>.
-  # [<i>length</i>] <i>Integer</i>.
-  # [<i>range</i>] <i>Range</i>.
+  # [<i>value</i>] <i>Array</i>, <i>BitString</i>, <i>Integer</i>, or <i>String</i>. Value (treated as a stream of bits) used to set the bitstring.
+  # [<i>pos</i>] <i>Integer</i>.  Single bit position to alter.
+  # [<i>start</i>] <i>Integer</i>.  First bit position in substring.
+  # [<i>length</i>] <i>Integer</i>.  Number of bits in substring.
+  # [<i>range</i>] <i>Range</i>.  Range of bits (<i>e.g.</i>, 5..10) to affect.
+  #
+  # === Examples
   #
   # === Exceptions
-  # [<tt>IndexError</tt>]
-  # [<tt>RangeError</tt>]
+  # [<tt>ArgumentError</tt>] Both range and length specified, or value cannot be interpreted as an integer.
+  # [<tt>IndexError</tt>] Non-integer or negative index, or beyond the end of the bitstring.
   #
   def []=(*args_p)
     low = high = width = nil
@@ -233,17 +250,17 @@ class BitString
     highpos = start + nBits - 1
     _raise(OuttasightIndex, highpos) if (bounded? && (highpos > @length - 1))
     _raise(BitsRInts, value) unless (value.respond_to?(:to_i))
-    value = value.to_i unless (value.kind_of?(Integer))
+    value = _arg2int(value)
     #
     # All the checking is done, let's do this thing.
     #
-    mask = 2**nBits - 1
-    value &= mask
-    mask *= 2**start
+    vMask = 2**nBits - 1
+    value &= vMask
+    vMask *= 2**start
     value *= 2**start
 
     highpos = self.length
-    bValue = @value & ((2**highpos - 1) & ~mask)
+    bValue = @value & ((2**highpos - 1) & ~vMask)
     @value = bValue | value
     value / 2**start
   end                           # def []=
@@ -251,67 +268,99 @@ class BitString
   #
   # === Description
   #
+  # Perform a bitwise exclusive OR (XOR) and return a copy of the
+  # result.
+  #
   # call-seq:
-  # new<i>([value], [length], [bounded])</i> => _BitString_
+  # bitstring <i>^ value</i> => <i>BitString</i>
+  # bitstring.^<i>(value)</i> => <i>BitString</i>
   #
   # === Arguments
-  # [<i>val_p</i>]
+  # [<i>value</i>] <i>Array</i>, <i>BitString</i>, <i>Integer</i>, or <i>String</i>.  Value treated as a bitstream and exclusively ORed with the bitstring.
+  #
+  # === Examples
   #
   # === Exceptions
-  # _None_.
+  # <i>None</i>.
   #
-  def ^(val_p)
-    @value < val_p
+  def ^(value)
+    value = _arg2int(value)
+    value &= self.mask if (bounded?)
+    bs = dup
+    bs.from_i(value ^ bs.to_i)
+    bs
   end                           # def ^
 
   #
   # === Description
   #
+  # Perform a bitwise inclusive OR with the current bitstring and
+  # return a bitstring containing the result.
+  #
   # call-seq:
-  # new<i>([value], [length], [bounded])</i> => _BitString_
+  # bitstring <i>| value</i> => <i>BitString</i>
+  # bitstring.|<i>(value)</i> => <i>BitString</i>
   #
   # === Arguments
-  # [<i>val_p</i>]
+  # [<i>value</i>] <i>Array</i>, <i>BitString</i>, <i>Integer</i>, or <i>String</i>.  Value treated as a bitstream and inclusively ORed with the bitstring.
+  #
+  # === Examples
   #
   # === Exceptions
-  # _None_.
+  # <i>None</i>.
   #
-  def |(val_p)
-    @value < val_p
+  def |(value)
+    value = _arg2int(value)
+    value &= self.mask if (bounded?)
+    bs = dup
+    bs.from_i(value | bs.to_i)
+    bs
   end                           # def |
 
   #
   # === Description
   #
+  # Perform a one's complement on the current bitstring and return the
+  # result in a new one.
+  #
   # call-seq:
-  # ~ <i>bitstring</i> => _BitString_
+  # <i>~</i> bitstring => <i>BitString</i>
+  # bitstring.~<i>()</i> => <i>BitString</i>
   #
   # === Arguments
   # <i>None</i>.
+  #
+  # === Examples
   #
   # === Exceptions
   # <i>None</i>.
   #
   def ~()
-    mask = 2**self.length - 1
-    newval = (~ @value) & mask
+    newval = (~ @value) & self.mask
     bounded? ? self.class.new(newval, @length) : self.class.new(newval)
   end                           # def ~
 
   #
   # === Description
   #
+  # Perform an equality check against another bitstring.
+  #
   # call-seq:
-  # new<i>([value], [length], [bounded])</i> => _BitString_
+  # bitstring == <i>compstring</i> => <i>Boolean</i>
+  # bitstring.==<i>(compstring)</i> => <i>Boolean</i>
   #
   # === Arguments
-  # [<i>val_p</i>]
+  # [<i>compstring</i>] <i>BitString</i>. Bitstring to compare against.
+  #
+  # === Examples
   #
   # === Exceptions
-  # _None_.
+  # <i>None</i>.
   #
-  def ==(val_p)
-    @value == val_p
+  def ==(value)
+    (self.class == value.class) &&
+      (self.bounded? == value.bounded?) &&
+      (@value == value.to_i)
   end                           # def ==
 
 end                             # class BitString

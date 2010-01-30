@@ -1,5 +1,15 @@
 -*- mode: change-log; mode: auto-fill; -*-
 
+0.1.0 2010-01-29
+	o Added mask() and each().
+	o Added the [start,length]= handling. (FREQ #27742)
+	o Fixed a problem with the reporting of the BadDigit internal
+	  exception.
+	o Added an 'Examples' section to each method header.  (Not very
+	  many filled in yet, though.)
+	o Normalised data checking and made Array/BitString/Integer/String
+	  acceptable in more places (like the bitwise operators).
+
 0.1.0 2010-01-27 Initial import
 -------------------------------
 	Still lots to do, but at least we're in a state suitable

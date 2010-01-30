@@ -56,7 +56,7 @@
     </tr>
     <tr class="top-aligned-row">
       <td><strong>Last Update:</strong></td>
-      <td>Fri Jan 29 12:22:39 -0500 2010</td>
+      <td>Fri Jan 29 23:24:57 -0500 2010</td>
     </tr>
     </table>
   </div>
@@ -93,6 +93,13 @@
 The <em><a href="../../classes/BitString.html">BitString</a></em> package
 provides a class for handling a series of bits as an array-like structure.
 Bits are addressable individually or as subranges.
+</p>
+<p>
+<a href="../../classes/BitString.html">BitString</a> objects can be either
+bounded or unbounded. Bounded bitstrings have a specific number of bits,
+and operations that would affect bits outside those limits will raise
+exceptions. Unbounded bitstrings can grow to arbitrary lengths, but some
+operations (like rotation) cannot be performed on them.
 </p>
 
     </div>

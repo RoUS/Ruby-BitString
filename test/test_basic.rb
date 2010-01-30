@@ -764,6 +764,39 @@ module Tests
       end
     end
 
+    #
+    # Test the masking.
+    #
+    def test_017_mask()
+      TestVals.each do |sVal|
+        iVal = sVal.to_i(2)
+        bs = BitString.new(sVal)
+      end
+    end
+
+    #
+    # Test the each() method.
+    #
+    def test_018_each()
+      TestVals.each do |sVal|
+        bs = BitString.new(sVal)
+        bs.each do |pos,val|
+          assert_equal(val,
+                       bs[pos],
+                       "Test unbounded each block(#{pos}, #{val})")
+        end
+        #
+        # And again for a bounded value.
+        #
+        bs = BitString.new(sVal, sVal.length)
+        bs.each do |pos,val|
+          assert_equal(val,
+                       bs[pos],
+                       "Test bounded each block(#{pos}, #{val})")
+        end
+      end
+    end
+
   end
 
 end                             # module Tests
