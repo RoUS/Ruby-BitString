@@ -90,36 +90,37 @@
       <h3 class="section-bar">Methods</h3>
 
       <div class="name-list">
-      <a href="#M000022">&amp;</a>&nbsp;&nbsp;
-      <a href="#M000023">&lt;&lt;</a>&nbsp;&nbsp;
-      <a href="#M000030">==</a>&nbsp;&nbsp;
-      <a href="#M000024">&gt;&gt;</a>&nbsp;&nbsp;
-      <a href="#M000025">[]</a>&nbsp;&nbsp;
-      <a href="#M000026">[]=</a>&nbsp;&nbsp;
-      <a href="#M000027">^</a>&nbsp;&nbsp;
-      <a href="#M000002">bounded?</a>&nbsp;&nbsp;
-      <a href="#M000003">clear</a>&nbsp;&nbsp;
-      <a href="#M000004">clear!</a>&nbsp;&nbsp;
-      <a href="#M000005">each</a>&nbsp;&nbsp;
-      <a href="#M000006">from_i</a>&nbsp;&nbsp;
-      <a href="#M000007">grow</a>&nbsp;&nbsp;
-      <a href="#M000008">grow!</a>&nbsp;&nbsp;
-      <a href="#M000009">length</a>&nbsp;&nbsp;
-      <a href="#M000010">lsb</a>&nbsp;&nbsp;
-      <a href="#M000011">mask</a>&nbsp;&nbsp;
-      <a href="#M000012">msb</a>&nbsp;&nbsp;
+      <a href="#M000023">&amp;</a>&nbsp;&nbsp;
+      <a href="#M000024">&lt;&lt;</a>&nbsp;&nbsp;
+      <a href="#M000031">==</a>&nbsp;&nbsp;
+      <a href="#M000025">&gt;&gt;</a>&nbsp;&nbsp;
+      <a href="#M000026">[]</a>&nbsp;&nbsp;
+      <a href="#M000027">[]=</a>&nbsp;&nbsp;
+      <a href="#M000028">^</a>&nbsp;&nbsp;
+      <a href="#M000002">_arg2int</a>&nbsp;&nbsp;
+      <a href="#M000003">bounded?</a>&nbsp;&nbsp;
+      <a href="#M000004">clear</a>&nbsp;&nbsp;
+      <a href="#M000005">clear!</a>&nbsp;&nbsp;
+      <a href="#M000006">each</a>&nbsp;&nbsp;
+      <a href="#M000007">from_i</a>&nbsp;&nbsp;
+      <a href="#M000008">grow</a>&nbsp;&nbsp;
+      <a href="#M000009">grow!</a>&nbsp;&nbsp;
+      <a href="#M000010">length</a>&nbsp;&nbsp;
+      <a href="#M000011">lsb</a>&nbsp;&nbsp;
+      <a href="#M000012">mask</a>&nbsp;&nbsp;
+      <a href="#M000013">msb</a>&nbsp;&nbsp;
       <a href="#M000001">new</a>&nbsp;&nbsp;
-      <a href="#M000013">resize</a>&nbsp;&nbsp;
-      <a href="#M000014">resize!</a>&nbsp;&nbsp;
-      <a href="#M000015">rotate</a>&nbsp;&nbsp;
-      <a href="#M000016">rotate!</a>&nbsp;&nbsp;
-      <a href="#M000017">shrink</a>&nbsp;&nbsp;
-      <a href="#M000018">shrink!</a>&nbsp;&nbsp;
-      <a href="#M000019">slice</a>&nbsp;&nbsp;
-      <a href="#M000020">to_i</a>&nbsp;&nbsp;
-      <a href="#M000021">to_s</a>&nbsp;&nbsp;
-      <a href="#M000028">|</a>&nbsp;&nbsp;
-      <a href="#M000029">~</a>&nbsp;&nbsp;
+      <a href="#M000014">resize</a>&nbsp;&nbsp;
+      <a href="#M000015">resize!</a>&nbsp;&nbsp;
+      <a href="#M000016">rotate</a>&nbsp;&nbsp;
+      <a href="#M000017">rotate!</a>&nbsp;&nbsp;
+      <a href="#M000018">shrink</a>&nbsp;&nbsp;
+      <a href="#M000019">shrink!</a>&nbsp;&nbsp;
+      <a href="#M000020">slice</a>&nbsp;&nbsp;
+      <a href="#M000021">to_i</a>&nbsp;&nbsp;
+      <a href="#M000022">to_s</a>&nbsp;&nbsp;
+      <a href="#M000029">|</a>&nbsp;&nbsp;
+      <a href="#M000030">~</a>&nbsp;&nbsp;
       </div>
     </div>
 
@@ -170,9 +171,9 @@ Version number as a simple readable string.
           <td width="3em">&nbsp;</td>
           <td class="context-item-desc">
 Identifer specifying the least significant (low) end of the bitstring (used
-by <em><a href="BitString.html#M000007">grow</a></em>, <em><a
-href="BitString.html#M000017">shrink</a></em>, and <em><a
-href="BitString.html#M000011">mask</a></em>).
+by <em><a href="BitString.html#M000008">grow</a></em>, <em><a
+href="BitString.html#M000018">shrink</a></em>, and <em><a
+href="BitString.html#M000012">mask</a></em>).
 
 </td>
         </tr>
@@ -183,9 +184,9 @@ href="BitString.html#M000011">mask</a></em>).
           <td width="3em">&nbsp;</td>
           <td class="context-item-desc">
 Identifer specifying the most significant (high) end of the bitstring (used
-by <em><a href="BitString.html#M000007">grow</a></em>, <em><a
-href="BitString.html#M000017">shrink</a></em>, and <em><a
-href="BitString.html#M000011">mask</a></em>).
+by <em><a href="BitString.html#M000008">grow</a></em>, <em><a
+href="BitString.html#M000018">shrink</a></em>, and <em><a
+href="BitString.html#M000012">mask</a></em>).
 
 </td>
         </tr>
@@ -205,7 +206,7 @@ href="BitString.html#M000011">mask</a></em>).
           <td class="context-item-value">&nbsp;[R]&nbsp;</td>
           <td class="context-item-desc">
 <em>Boolean</em>. Whether or not the bitstring is bounded and limited to a
-specific <a href="BitString.html#M000009">length</a>. Read-only; set at
+specific <a href="BitString.html#M000010">length</a>. Read-only; set at
 object creation.
 
 </td>
@@ -236,7 +237,7 @@ new<i>(length) {|index| block }</i> => <i>BitString</i><br />
 <p>
 Create a <a href="BitString.html#M000001">new</a> <em><a
 href="BitString.html">BitString</a></em> object. By default, it will be
-unbounded and all bits <a href="BitString.html#M000003">clear</a>.
+unbounded and all bits <a href="BitString.html#M000004">clear</a>.
 </p>
 <h3>Arguments</h3>
 <dl>
@@ -247,7 +248,7 @@ If a <em>String</em>, the value must contain only &#8216;0&#8217; and
 1. Default 0.
 
 </dd>
-<dt><em>bitcount</em></dt><dd><em>Integer</em>. Optional <a href="BitString.html#M000009">length</a>
+<dt><em>bitcount</em></dt><dd><em>Integer</em>. Optional <a href="BitString.html#M000010">length</a>
 (number of bits) for a bounded bitstring.
 
 </dd>
@@ -311,46 +312,16 @@ If a <em>String</em>, the value must contain only &#8216;0&#8217; and
 309:       <span class="ruby-comment cmt"># We weren't passed a block, so get the info directly from the argument</span>
 310:       <span class="ruby-comment cmt"># list.</span>
 311:       <span class="ruby-comment cmt">#</span>
-312:       <span class="ruby-keyword kw">if</span> (<span class="ruby-identifier">val</span>.<span class="ruby-identifier">kind_of?</span>(<span class="ruby-constant">BitString</span>))
-313:         <span class="ruby-comment cmt">#</span>
-314:         <span class="ruby-comment cmt"># If we were passed a bitstring, convert it.</span>
-315:         <span class="ruby-comment cmt">#</span>
-316:         <span class="ruby-ivar">@value</span> = <span class="ruby-identifier">val</span>.<span class="ruby-identifier">to_i</span>
-317:       <span class="ruby-keyword kw">elsif</span> (<span class="ruby-identifier">val</span>.<span class="ruby-identifier">kind_of?</span>(<span class="ruby-constant">String</span>))
-318:         <span class="ruby-comment cmt">#</span>
-319:         <span class="ruby-comment cmt"># If we were given a String for the value, it must consist of valid</span>
-320:         <span class="ruby-comment cmt"># binary digits.</span>
-321:         <span class="ruby-comment cmt">#</span>
-322:         <span class="ruby-identifier">_raise</span>(<span class="ruby-constant">BadDigit</span>, <span class="ruby-keyword kw">nil</span>, <span class="ruby-identifier">val</span>) <span class="ruby-keyword kw">unless</span> (<span class="ruby-identifier">val</span>.<span class="ruby-identifier">gsub</span>(<span class="ruby-regexp re">/[01]/</span>, <span class="ruby-value str">''</span>).<span class="ruby-identifier">empty?</span>)
-323:         <span class="ruby-ivar">@value</span> = <span class="ruby-identifier">val</span>.<span class="ruby-identifier">to_i</span>(<span class="ruby-value">2</span>)
-324:       <span class="ruby-keyword kw">elsif</span> (<span class="ruby-identifier">val</span>.<span class="ruby-identifier">kind_of?</span>(<span class="ruby-constant">Array</span>))
-325:         <span class="ruby-comment cmt">#</span>
-326:         <span class="ruby-comment cmt"># If we were given an array, make sure that all the values are</span>
-327:         <span class="ruby-comment cmt"># integers and either 1 or 0.</span>
-328:         <span class="ruby-comment cmt">#</span>
-329:         <span class="ruby-identifier">_raise</span>(<span class="ruby-constant">BadDigit</span>, <span class="ruby-keyword kw">nil</span>, <span class="ruby-identifier">val</span>) <span class="ruby-keyword kw">unless</span> ((<span class="ruby-identifier">val</span> <span class="ruby-operator">-</span> [<span class="ruby-value">0</span>, <span class="ruby-value">1</span>]).<span class="ruby-identifier">empty?</span>)
-330:         <span class="ruby-ivar">@value</span> = <span class="ruby-identifier">val</span>.<span class="ruby-identifier">join</span>(<span class="ruby-value str">''</span>).<span class="ruby-identifier">to_i</span>(<span class="ruby-value">2</span>)
-331:       <span class="ruby-keyword kw">else</span>
-332:         <span class="ruby-comment cmt">#</span>
-333:         <span class="ruby-comment cmt"># Let's try to convert it to an integer from whatever class we</span>
-334:         <span class="ruby-comment cmt"># were passed.</span>
-335:         <span class="ruby-comment cmt">#</span>
-336:         <span class="ruby-keyword kw">unless</span> (<span class="ruby-identifier">val</span>.<span class="ruby-identifier">respond_to?</span>(<span class="ruby-identifier">:to_i</span>))
-337:           <span class="ruby-identifier">raise</span> <span class="ruby-constant">ArgumentError</span>.<span class="ruby-identifier">new</span>(<span class="ruby-value str">'unable to determine bitstring '</span> <span class="ruby-operator">+</span>
-338:                                   <span class="ruby-value str">'value from '</span> <span class="ruby-operator">+</span>
-339:                                   <span class="ruby-node">&quot;\&quot;#{val.to_s}\&quot;:#{val.class.name}&quot;</span>)
-340:         <span class="ruby-keyword kw">end</span>
-341:         <span class="ruby-ivar">@value</span> = <span class="ruby-identifier">val</span>.<span class="ruby-identifier">to_i</span>
-342:       <span class="ruby-keyword kw">end</span>
-343:     <span class="ruby-keyword kw">else</span>      
-344:       <span class="ruby-comment cmt">#</span>
-345:       <span class="ruby-comment cmt"># We were passed a block, so invoke it for each bit position to</span>
-346:       <span class="ruby-comment cmt"># determine that bit's value from the LSB of the result.</span>
-347:       <span class="ruby-comment cmt">#</span>
-348:       <span class="ruby-ivar">@value</span> = <span class="ruby-value">0</span>
-349:       <span class="ruby-ivar">@length</span>.<span class="ruby-identifier">times</span> { <span class="ruby-operator">|</span><span class="ruby-identifier">i</span><span class="ruby-operator">|</span> <span class="ruby-keyword kw">self</span>[<span class="ruby-identifier">i</span>] = <span class="ruby-identifier">block</span>.<span class="ruby-identifier">call</span>(<span class="ruby-identifier">i</span>).<span class="ruby-identifier">to_i</span> <span class="ruby-operator">&amp;</span> <span class="ruby-value">1</span> }
-350:     <span class="ruby-keyword kw">end</span>
-351:   <span class="ruby-keyword kw">end</span>
+312:       <span class="ruby-ivar">@value</span> = <span class="ruby-identifier">_arg2int</span>(<span class="ruby-identifier">val</span>)
+313:     <span class="ruby-keyword kw">else</span>      
+314:       <span class="ruby-comment cmt">#</span>
+315:       <span class="ruby-comment cmt"># We were passed a block, so invoke it for each bit position to</span>
+316:       <span class="ruby-comment cmt"># determine that bit's value from the LSB of the result.</span>
+317:       <span class="ruby-comment cmt">#</span>
+318:       <span class="ruby-ivar">@value</span> = <span class="ruby-value">0</span>
+319:       <span class="ruby-ivar">@length</span>.<span class="ruby-identifier">times</span> { <span class="ruby-operator">|</span><span class="ruby-identifier">i</span><span class="ruby-operator">|</span> <span class="ruby-keyword kw">self</span>[<span class="ruby-identifier">i</span>] = <span class="ruby-identifier">block</span>.<span class="ruby-identifier">call</span>(<span class="ruby-identifier">i</span>).<span class="ruby-identifier">to_i</span> <span class="ruby-operator">&amp;</span> <span class="ruby-value">1</span> }
+320:     <span class="ruby-keyword kw">end</span>
+321:   <span class="ruby-keyword kw">end</span>
 </pre>
           </div>
         </div>
@@ -358,11 +329,11 @@ If a <em>String</em>, the value must contain only &#8216;0&#8217; and
 
       <h3 class="section-bar">Public Instance methods</h3>
 
-      <div id="method-M000022" class="method-detail">
-        <a name="M000022"></a>
+      <div id="method-M000023" class="method-detail">
+        <a name="M000023"></a>
 
         <div class="method-heading">
-          <a href="#M000022" class="method-signature">
+          <a href="#M000023" class="method-signature">
           <span class="method-name">bitstring <i>& value</i> => <i>BitString</i><br />
 bitstring.&<i>(value)</i> => <i>BitString</i><br />
 </span>
@@ -380,14 +351,15 @@ boundedness as the original.
 </p>
 <h3>Arguments</h3>
 <dl>
-<dt><em>value</em></dt><dd><em>Integer</em>. Value to AND with the bitstring.
+<dt><em>value</em></dt><dd><em><a href="BitString.html">BitString</a></em>, <em>Integer</em>, or
+<em>String</em>. Value to AND with the bitstring.
 
 </dd>
 </dl>
 <h3>Examples</h3>
 <pre>
   bs = BitString.new('111111111')
-  nbs = bs &amp; '111100011'.to_i(2)
+  nbs = bs &amp; '111100011'
   puts nbs.to_s.inspect
   &quot;111100011&quot;
 </pre>
@@ -396,25 +368,26 @@ boundedness as the original.
 <em>None</em>.
 </p>
           <p><a class="source-toggle" href="#"
-            onclick="toggleCode('M000022-source');return false;">[Source]</a></p>
-          <div class="method-source-code" id="M000022-source">
+            onclick="toggleCode('M000023-source');return false;">[Source]</a></p>
+          <div class="method-source-code" id="M000023-source">
 <pre>
     <span class="ruby-comment cmt"># File lib/bitstring/operators.rb, line 83</span>
 83:   <span class="ruby-keyword kw">def</span> <span class="ruby-operator">&amp;</span>(<span class="ruby-identifier">val</span>)
-84:     <span class="ruby-identifier">vMask</span> = <span class="ruby-value">2</span><span class="ruby-operator">**</span><span class="ruby-keyword kw">self</span>.<span class="ruby-identifier">length</span> <span class="ruby-operator">-</span> <span class="ruby-value">1</span>
-85:     <span class="ruby-identifier">newval</span> = (<span class="ruby-ivar">@value</span> <span class="ruby-operator">&amp;</span> <span class="ruby-identifier">val</span>.<span class="ruby-identifier">to_i</span>) <span class="ruby-operator">&amp;</span> <span class="ruby-identifier">vMask</span>
-86:     <span class="ruby-identifier">bounded?</span> <span class="ruby-value">? </span><span class="ruby-keyword kw">self</span>.<span class="ruby-identifier">class</span>.<span class="ruby-identifier">new</span>(<span class="ruby-identifier">newval</span>, <span class="ruby-ivar">@length</span>) <span class="ruby-operator">:</span> <span class="ruby-keyword kw">self</span>.<span class="ruby-identifier">class</span>.<span class="ruby-identifier">new</span>(<span class="ruby-identifier">newval</span>)
-87:   <span class="ruby-keyword kw">end</span>
+84:     <span class="ruby-identifier">val</span> = <span class="ruby-identifier">_arg2int</span>(<span class="ruby-identifier">val</span>)
+85:     <span class="ruby-identifier">vMask</span> = <span class="ruby-keyword kw">self</span>.<span class="ruby-identifier">mask</span>
+86:     <span class="ruby-identifier">newval</span> = (<span class="ruby-ivar">@value</span> <span class="ruby-operator">&amp;</span> <span class="ruby-identifier">val</span>) <span class="ruby-operator">&amp;</span> <span class="ruby-identifier">vMask</span>
+87:     <span class="ruby-identifier">bounded?</span> <span class="ruby-value">? </span><span class="ruby-keyword kw">self</span>.<span class="ruby-identifier">class</span>.<span class="ruby-identifier">new</span>(<span class="ruby-identifier">newval</span>, <span class="ruby-ivar">@length</span>) <span class="ruby-operator">:</span> <span class="ruby-keyword kw">self</span>.<span class="ruby-identifier">class</span>.<span class="ruby-identifier">new</span>(<span class="ruby-identifier">newval</span>)
+88:   <span class="ruby-keyword kw">end</span>
 </pre>
           </div>
         </div>
       </div>
 
-      <div id="method-M000023" class="method-detail">
-        <a name="M000023"></a>
+      <div id="method-M000024" class="method-detail">
+        <a name="M000024"></a>
 
         <div class="method-heading">
-          <a href="#M000023" class="method-signature">
+          <a href="#M000024" class="method-signature">
           <span class="method-name">bitstring <i>&lt;&lt; bitcount</i> => <i>BitString</i><br />
 bitstring.&lt;&lt;<i>(bitcount)</i> => <i>BitString</i><br />
 </span>
@@ -440,15 +413,14 @@ the bitstring is bounded, bits shifted off the high end are lost.
 <em>None</em>.
 </p>
           <p><a class="source-toggle" href="#"
-            onclick="toggleCode('M000023-source');return false;">[Source]</a></p>
-          <div class="method-source-code" id="M000023-source">
+            onclick="toggleCode('M000024-source');return false;">[Source]</a></p>
+          <div class="method-source-code" id="M000024-source">
 <pre>
-     <span class="ruby-comment cmt"># File lib/bitstring/operators.rb, line 108</span>
-108:   <span class="ruby-keyword kw">def</span> <span class="ruby-operator">&lt;&lt;</span>(<span class="ruby-identifier">bits</span>)
-109:     <span class="ruby-identifier">value</span> = <span class="ruby-ivar">@value</span> <span class="ruby-operator">*</span> (<span class="ruby-value">2</span><span class="ruby-operator">**</span><span class="ruby-identifier">bits</span>.<span class="ruby-identifier">to_i</span>)
-110:     <span class="ruby-keyword kw">if</span> (<span class="ruby-identifier">bounded?</span>)
-111:       <span class="ruby-identifier">vMask</span> = <span class="ruby-value">2</span><span class="ruby-operator">**</span><span class="ruby-ivar">@length</span> <span class="ruby-operator">-</span> <span class="ruby-value">1</span>
-112:       <span class="ruby-keyword kw">self</span>.<span class="ruby-identifier">class</span>.<span class="ruby-identifier">new</span>(<span class="ruby-identifier">value</span> <span class="ruby-operator">&amp;</span> <span class="ruby-identifier">vMask</span>, <span class="ruby-ivar">@length</span>)
+     <span class="ruby-comment cmt"># File lib/bitstring/operators.rb, line 109</span>
+109:   <span class="ruby-keyword kw">def</span> <span class="ruby-operator">&lt;&lt;</span>(<span class="ruby-identifier">bits</span>)
+110:     <span class="ruby-identifier">value</span> = <span class="ruby-ivar">@value</span> <span class="ruby-operator">*</span> (<span class="ruby-value">2</span><span class="ruby-operator">**</span><span class="ruby-identifier">bits</span>.<span class="ruby-identifier">to_i</span>)
+111:     <span class="ruby-keyword kw">if</span> (<span class="ruby-identifier">bounded?</span>)
+112:       <span class="ruby-keyword kw">self</span>.<span class="ruby-identifier">class</span>.<span class="ruby-identifier">new</span>(<span class="ruby-identifier">value</span> <span class="ruby-operator">&amp;</span> <span class="ruby-keyword kw">self</span>.<span class="ruby-identifier">mask</span>, <span class="ruby-ivar">@length</span>)
 113:     <span class="ruby-keyword kw">else</span>
 114:       <span class="ruby-keyword kw">self</span>.<span class="ruby-identifier">class</span>.<span class="ruby-identifier">new</span>(<span class="ruby-identifier">value</span>)
 115:     <span class="ruby-keyword kw">end</span>
@@ -458,11 +430,11 @@ the bitstring is bounded, bits shifted off the high end are lost.
         </div>
       </div>
 
-      <div id="method-M000030" class="method-detail">
-        <a name="M000030"></a>
+      <div id="method-M000031" class="method-detail">
+        <a name="M000031"></a>
 
         <div class="method-heading">
-          <a href="#M000030" class="method-signature">
+          <a href="#M000031" class="method-signature">
           <span class="method-name">bitstring == <i>compstring</i> => <i>Boolean</i><br />
 bitstring.==<i>(compstring)</i> => <i>Boolean</i><br />
 </span>
@@ -487,25 +459,25 @@ against.
 <em>None</em>.
 </p>
           <p><a class="source-toggle" href="#"
-            onclick="toggleCode('M000030-source');return false;">[Source]</a></p>
-          <div class="method-source-code" id="M000030-source">
+            onclick="toggleCode('M000031-source');return false;">[Source]</a></p>
+          <div class="method-source-code" id="M000031-source">
 <pre>
-     <span class="ruby-comment cmt"># File lib/bitstring/operators.rb, line 358</span>
-358:   <span class="ruby-keyword kw">def</span> <span class="ruby-operator">==</span>(<span class="ruby-identifier">value</span>)
-359:     (<span class="ruby-keyword kw">self</span>.<span class="ruby-identifier">class</span> <span class="ruby-operator">==</span> <span class="ruby-identifier">value</span>.<span class="ruby-identifier">class</span>) <span class="ruby-operator">&amp;&amp;</span>
-360:       (<span class="ruby-keyword kw">self</span>.<span class="ruby-identifier">bounded?</span> <span class="ruby-operator">==</span> <span class="ruby-identifier">value</span>.<span class="ruby-identifier">bounded?</span>) <span class="ruby-operator">&amp;&amp;</span>
-361:       (<span class="ruby-ivar">@value</span> <span class="ruby-operator">==</span> <span class="ruby-identifier">value</span>.<span class="ruby-identifier">to_i</span>)
-362:   <span class="ruby-keyword kw">end</span>
+     <span class="ruby-comment cmt"># File lib/bitstring/operators.rb, line 360</span>
+360:   <span class="ruby-keyword kw">def</span> <span class="ruby-operator">==</span>(<span class="ruby-identifier">value</span>)
+361:     (<span class="ruby-keyword kw">self</span>.<span class="ruby-identifier">class</span> <span class="ruby-operator">==</span> <span class="ruby-identifier">value</span>.<span class="ruby-identifier">class</span>) <span class="ruby-operator">&amp;&amp;</span>
+362:       (<span class="ruby-keyword kw">self</span>.<span class="ruby-identifier">bounded?</span> <span class="ruby-operator">==</span> <span class="ruby-identifier">value</span>.<span class="ruby-identifier">bounded?</span>) <span class="ruby-operator">&amp;&amp;</span>
+363:       (<span class="ruby-ivar">@value</span> <span class="ruby-operator">==</span> <span class="ruby-identifier">value</span>.<span class="ruby-identifier">to_i</span>)
+364:   <span class="ruby-keyword kw">end</span>
 </pre>
           </div>
         </div>
       </div>
 
-      <div id="method-M000024" class="method-detail">
-        <a name="M000024"></a>
+      <div id="method-M000025" class="method-detail">
+        <a name="M000025"></a>
 
         <div class="method-heading">
-          <a href="#M000024" class="method-signature">
+          <a href="#M000025" class="method-signature">
           <span class="method-name">bitstring &gt;&gt; <i>bitcount</i> => <i>BitString</i><br />
 bitstring.&gt;&gt;<i>(bitcount)</i> => <i>BitString</i><br />
 </span>
@@ -532,8 +504,8 @@ href="BitString.html#M000001">new</a> bits shifted in at the high end are
 <em>None</em>.
 </p>
           <p><a class="source-toggle" href="#"
-            onclick="toggleCode('M000024-source');return false;">[Source]</a></p>
-          <div class="method-source-code" id="M000024-source">
+            onclick="toggleCode('M000025-source');return false;">[Source]</a></p>
+          <div class="method-source-code" id="M000025-source">
 <pre>
      <span class="ruby-comment cmt"># File lib/bitstring/operators.rb, line 137</span>
 137:   <span class="ruby-keyword kw">def</span> <span class="ruby-operator">&gt;&gt;</span>(<span class="ruby-identifier">bits</span>)
@@ -549,11 +521,11 @@ href="BitString.html#M000001">new</a> bits shifted in at the high end are
         </div>
       </div>
 
-      <div id="method-M000025" class="method-detail">
-        <a name="M000025"></a>
+      <div id="method-M000026" class="method-detail">
+        <a name="M000026"></a>
 
         <div class="method-heading">
-          <a href="#M000025" class="method-signature">
+          <a href="#M000026" class="method-signature">
           <span class="method-name">bitstring<i>[index]</i> => <i>Integer</i><br />
 bitstring<i>[start, length]</i> => <i>BitString</i><br />
 bitstring<i>[range]</i> => <i>BitString</i><br />
@@ -577,7 +549,7 @@ href="BitString.html">BitString</a>.
 <dt><em>start</em></dt><dd><em>Integer</em>. Start position of subset.
 
 </dd>
-<dt><em><a href="BitString.html#M000009">length</a></em></dt><dd><em>Integer</em>. Length of subset.
+<dt><em><a href="BitString.html#M000010">length</a></em></dt><dd><em>Integer</em>. Length of subset.
 
 </dd>
 <dt><em>range</em></dt><dd><em>Range</em>. Subset specified as a range.
@@ -587,7 +559,7 @@ href="BitString.html">BitString</a>.
 <h3>Examples</h3>
 <h3>Exceptions</h3>
 <dl>
-<dt><tt>ArgumentError</tt></dt><dd>If <a href="BitString.html#M000009">length</a> specified with a range.
+<dt><tt>ArgumentError</tt></dt><dd>If <a href="BitString.html#M000010">length</a> specified with a range.
 
 </dd>
 <dt><tt>IndexError</tt></dt><dd>If bitstring is bounded and the substring is illegal.
@@ -595,8 +567,8 @@ href="BitString.html">BitString</a>.
 </dd>
 </dl>
           <p><a class="source-toggle" href="#"
-            onclick="toggleCode('M000025-source');return false;">[Source]</a></p>
-          <div class="method-source-code" id="M000025-source">
+            onclick="toggleCode('M000026-source');return false;">[Source]</a></p>
+          <div class="method-source-code" id="M000026-source">
 <pre>
      <span class="ruby-comment cmt"># File lib/bitstring/operators.rb, line 170</span>
 170:   <span class="ruby-keyword kw">def</span> <span class="ruby-operator">[]</span>(<span class="ruby-identifier">pos_p</span>, <span class="ruby-identifier">length_p</span>=<span class="ruby-keyword kw">nil</span>)
@@ -631,11 +603,11 @@ href="BitString.html">BitString</a>.
         </div>
       </div>
 
-      <div id="method-M000026" class="method-detail">
-        <a name="M000026"></a>
+      <div id="method-M000027" class="method-detail">
+        <a name="M000027"></a>
 
         <div class="method-heading">
-          <a href="#M000026" class="method-signature">
+          <a href="#M000027" class="method-signature">
           <span class="method-name">bitstring[<i>pos</i>] = <i>value</i>   => <i>value</i><br />
 bitstring[<i>start, length</i>] = <i>value</i>   => <i>value</i><br />
 bitstring[<i>range</i>] = <i>value</i>   => <i>value</i><br />
@@ -650,8 +622,9 @@ Set a bit or range of bits with a single operation.
 </p>
 <h3>Arguments</h3>
 <dl>
-<dt><em>value</em></dt><dd><em>Integer</em>. Value (treated as a stream of bits) used to set the
-bitstring.
+<dt><em>value</em></dt><dd><em>Array</em>, <em><a href="BitString.html">BitString</a></em>,
+<em>Integer</em>, or <em>String</em>. Value (treated as a stream of bits)
+used to set the bitstring.
 
 </dd>
 <dt><em>pos</em></dt><dd><em>Integer</em>. Single bit position to alter.
@@ -660,7 +633,7 @@ bitstring.
 <dt><em>start</em></dt><dd><em>Integer</em>. First bit position in substring.
 
 </dd>
-<dt><em><a href="BitString.html#M000009">length</a></em></dt><dd><em>Integer</em>. Number of bits in substring.
+<dt><em><a href="BitString.html#M000010">length</a></em></dt><dd><em>Integer</em>. Number of bits in substring.
 
 </dd>
 <dt><em>range</em></dt><dd><em>Range</em>. Range of bits (<em>e.g.</em>, 5..10) to affect.
@@ -670,7 +643,7 @@ bitstring.
 <h3>Examples</h3>
 <h3>Exceptions</h3>
 <dl>
-<dt><tt>ArgumentError</tt></dt><dd>Both range and <a href="BitString.html#M000009">length</a> specified, or
+<dt><tt>ArgumentError</tt></dt><dd>Both range and <a href="BitString.html#M000010">length</a> specified, or
 value cannot be interpreted as an integer.
 
 </dd>
@@ -679,8 +652,8 @@ value cannot be interpreted as an integer.
 </dd>
 </dl>
           <p><a class="source-toggle" href="#"
-            onclick="toggleCode('M000026-source');return false;">[Source]</a></p>
-          <div class="method-source-code" id="M000026-source">
+            onclick="toggleCode('M000027-source');return false;">[Source]</a></p>
+          <div class="method-source-code" id="M000027-source">
 <pre>
      <span class="ruby-comment cmt"># File lib/bitstring/operators.rb, line 221</span>
 221:   <span class="ruby-keyword kw">def</span> <span class="ruby-operator">[]=</span>(<span class="ruby-operator">*</span><span class="ruby-identifier">args_p</span>)
@@ -715,7 +688,7 @@ value cannot be interpreted as an integer.
 250:     <span class="ruby-identifier">highpos</span> = <span class="ruby-identifier">start</span> <span class="ruby-operator">+</span> <span class="ruby-identifier">nBits</span> <span class="ruby-operator">-</span> <span class="ruby-value">1</span>
 251:     <span class="ruby-identifier">_raise</span>(<span class="ruby-constant">OuttasightIndex</span>, <span class="ruby-identifier">highpos</span>) <span class="ruby-keyword kw">if</span> (<span class="ruby-identifier">bounded?</span> <span class="ruby-operator">&amp;&amp;</span> (<span class="ruby-identifier">highpos</span> <span class="ruby-operator">&gt;</span> <span class="ruby-ivar">@length</span> <span class="ruby-operator">-</span> <span class="ruby-value">1</span>))
 252:     <span class="ruby-identifier">_raise</span>(<span class="ruby-constant">BitsRInts</span>, <span class="ruby-identifier">value</span>) <span class="ruby-keyword kw">unless</span> (<span class="ruby-identifier">value</span>.<span class="ruby-identifier">respond_to?</span>(<span class="ruby-identifier">:to_i</span>))
-253:     <span class="ruby-identifier">value</span> = <span class="ruby-identifier">value</span>.<span class="ruby-identifier">to_i</span> <span class="ruby-keyword kw">unless</span> (<span class="ruby-identifier">value</span>.<span class="ruby-identifier">kind_of?</span>(<span class="ruby-constant">Integer</span>))
+253:     <span class="ruby-identifier">value</span> = <span class="ruby-identifier">_arg2int</span>(<span class="ruby-identifier">value</span>)
 254:     <span class="ruby-comment cmt">#</span>
 255:     <span class="ruby-comment cmt"># All the checking is done, let's do this thing.</span>
 256:     <span class="ruby-comment cmt">#</span>
@@ -734,11 +707,11 @@ value cannot be interpreted as an integer.
         </div>
       </div>
 
-      <div id="method-M000027" class="method-detail">
-        <a name="M000027"></a>
+      <div id="method-M000028" class="method-detail">
+        <a name="M000028"></a>
 
         <div class="method-heading">
-          <a href="#M000027" class="method-signature">
+          <a href="#M000028" class="method-signature">
           <span class="method-name">bitstring <i>^ value</i> => <i>BitString</i><br />
 bitstring.^<i>(value)</i> => <i>BitString</i><br />
 </span>
@@ -752,8 +725,9 @@ Perform a bitwise exclusive OR (XOR) and return a copy of the result.
 </p>
 <h3>Arguments</h3>
 <dl>
-<dt><em>value</em></dt><dd><em>Integer</em>. Value treated as a bitstream and exclusively ORed with
-the bitstring.
+<dt><em>value</em></dt><dd><em>Array</em>, <em><a href="BitString.html">BitString</a></em>,
+<em>Integer</em>, or <em>String</em>. Value treated as a bitstream and
+exclusively ORed with the bitstring.
 
 </dd>
 </dl>
@@ -763,16 +737,17 @@ the bitstring.
 <em>None</em>.
 </p>
           <p><a class="source-toggle" href="#"
-            onclick="toggleCode('M000027-source');return false;">[Source]</a></p>
-          <div class="method-source-code" id="M000027-source">
+            onclick="toggleCode('M000028-source');return false;">[Source]</a></p>
+          <div class="method-source-code" id="M000028-source">
 <pre>
      <span class="ruby-comment cmt"># File lib/bitstring/operators.rb, line 286</span>
 286:   <span class="ruby-keyword kw">def</span> <span class="ruby-operator">^</span>(<span class="ruby-identifier">value</span>)
-287:     <span class="ruby-identifier">value</span> <span class="ruby-operator">&amp;=</span> <span class="ruby-keyword kw">self</span>.<span class="ruby-identifier">mask</span> <span class="ruby-keyword kw">if</span> (<span class="ruby-identifier">bounded?</span>)
-288:     <span class="ruby-identifier">bs</span> = <span class="ruby-identifier">dup</span>
-289:     <span class="ruby-identifier">bs</span>.<span class="ruby-identifier">from_i</span>(<span class="ruby-identifier">value</span> <span class="ruby-operator">^</span> <span class="ruby-identifier">bs</span>.<span class="ruby-identifier">to_i</span>)
-290:     <span class="ruby-identifier">bs</span>
-291:   <span class="ruby-keyword kw">end</span>
+287:     <span class="ruby-identifier">value</span> = <span class="ruby-identifier">_arg2int</span>(<span class="ruby-identifier">value</span>)
+288:     <span class="ruby-identifier">value</span> <span class="ruby-operator">&amp;=</span> <span class="ruby-keyword kw">self</span>.<span class="ruby-identifier">mask</span> <span class="ruby-keyword kw">if</span> (<span class="ruby-identifier">bounded?</span>)
+289:     <span class="ruby-identifier">bs</span> = <span class="ruby-identifier">dup</span>
+290:     <span class="ruby-identifier">bs</span>.<span class="ruby-identifier">from_i</span>(<span class="ruby-identifier">value</span> <span class="ruby-operator">^</span> <span class="ruby-identifier">bs</span>.<span class="ruby-identifier">to_i</span>)
+291:     <span class="ruby-identifier">bs</span>
+292:   <span class="ruby-keyword kw">end</span>
 </pre>
           </div>
         </div>
@@ -783,6 +758,84 @@ the bitstring.
 
         <div class="method-heading">
           <a href="#M000002" class="method-signature">
+          <span class="method-name">_raise<i>(exc, [msg])</i> => Exception raised<br />
+</span>
+          </a>
+        </div>
+      
+        <div class="method-description">
+          <h3>Description</h3>
+<p>
+Raise a standard exception.
+</p>
+<h3>Arguments</h3>
+<dl>
+<dt><em>exc</em></dt><dd><em>Exception</em>. One of our &#8216;known&#8217; repeated exceptions.
+
+</dd>
+<dt><em>msg</em></dt><dd><em>String</em>. Message to use if we don&#8216;t have a canned one.
+
+</dd>
+</dl>
+<h3>Examples</h3>
+<h3>Exceptions</h3>
+<dl>
+<dt><tt>InternalError</tt></dt><dd>Called with something other than an exception.
+
+</dd>
+</dl>
+<p>
+As indicated.
+</p>
+          <p><a class="source-toggle" href="#"
+            onclick="toggleCode('M000002-source');return false;">[Source]</a></p>
+          <div class="method-source-code" id="M000002-source">
+<pre>
+     <span class="ruby-comment cmt"># File lib/bitstring.rb, line 341</span>
+341:   <span class="ruby-keyword kw">def</span> <span class="ruby-identifier">_arg2int</span>(<span class="ruby-identifier">val_p</span>)
+342:     <span class="ruby-keyword kw">if</span> (<span class="ruby-identifier">val_p</span>.<span class="ruby-identifier">class</span>.<span class="ruby-identifier">eql?</span>(<span class="ruby-constant">BitString</span>))
+343:       <span class="ruby-comment cmt">#</span>
+344:       <span class="ruby-comment cmt"># If we were passed a bitstring, convert it.</span>
+345:       <span class="ruby-comment cmt">#</span>
+346:       <span class="ruby-identifier">val</span> = <span class="ruby-identifier">val_p</span>.<span class="ruby-identifier">to_i</span>
+347:     <span class="ruby-keyword kw">elsif</span> (<span class="ruby-identifier">val_p</span>.<span class="ruby-identifier">class</span>.<span class="ruby-identifier">eql?</span>(<span class="ruby-constant">String</span>))
+348:       <span class="ruby-comment cmt">#</span>
+349:       <span class="ruby-comment cmt"># If we were given a String for the value, it must consist of valid</span>
+350:       <span class="ruby-comment cmt"># binary digits.</span>
+351:       <span class="ruby-comment cmt">#</span>
+352:       <span class="ruby-identifier">_raise</span>(<span class="ruby-constant">BadDigit</span>, <span class="ruby-keyword kw">nil</span>, <span class="ruby-identifier">val_p</span>) <span class="ruby-keyword kw">unless</span> (<span class="ruby-identifier">val_p</span>.<span class="ruby-identifier">gsub</span>(<span class="ruby-regexp re">/[01]/</span>, <span class="ruby-value str">''</span>).<span class="ruby-identifier">empty?</span>)
+353:       <span class="ruby-identifier">val</span> = <span class="ruby-identifier">val_p</span>.<span class="ruby-identifier">to_i</span>(<span class="ruby-value">2</span>)
+354:     <span class="ruby-keyword kw">elsif</span> (<span class="ruby-identifier">val_p</span>.<span class="ruby-identifier">class</span>.<span class="ruby-identifier">eql?</span>(<span class="ruby-constant">Array</span>))
+355:       <span class="ruby-comment cmt">#</span>
+356:       <span class="ruby-comment cmt"># If we were given an array, make sure that all the values are</span>
+357:       <span class="ruby-comment cmt"># integers and either 1 or 0.</span>
+358:       <span class="ruby-comment cmt">#</span>
+359:       <span class="ruby-identifier">_raise</span>(<span class="ruby-constant">BadDigit</span>, <span class="ruby-keyword kw">nil</span>, <span class="ruby-identifier">val_p</span>) <span class="ruby-keyword kw">unless</span> ((<span class="ruby-identifier">val_p</span> <span class="ruby-operator">-</span> [<span class="ruby-value">0</span>, <span class="ruby-value">1</span>]).<span class="ruby-identifier">empty?</span>)
+360:       <span class="ruby-identifier">val</span> = <span class="ruby-identifier">val_p</span>.<span class="ruby-identifier">collect</span> { <span class="ruby-operator">|</span><span class="ruby-identifier">bit</span><span class="ruby-operator">|</span> <span class="ruby-identifier">bit</span>.<span class="ruby-identifier">to_s</span>(<span class="ruby-value">2</span>) }.<span class="ruby-identifier">join</span>(<span class="ruby-value str">''</span>).<span class="ruby-identifier">to_i</span>(<span class="ruby-value">2</span>)
+361:     <span class="ruby-keyword kw">elsif</span> (<span class="ruby-identifier">val_p</span>.<span class="ruby-identifier">kind_of?</span>(<span class="ruby-constant">Integer</span>))
+362:       <span class="ruby-identifier">val</span> = <span class="ruby-identifier">val_p</span>
+363:     <span class="ruby-keyword kw">else</span>
+364:       <span class="ruby-comment cmt">#</span>
+365:       <span class="ruby-comment cmt"># Let's try to convert it to an integer from whatever class we</span>
+366:       <span class="ruby-comment cmt"># were passed.</span>
+367:       <span class="ruby-comment cmt">#</span>
+368:       <span class="ruby-keyword kw">unless</span> (<span class="ruby-identifier">val_p</span>.<span class="ruby-identifier">respond_to?</span>(<span class="ruby-identifier">:to_i</span>))
+369:         <span class="ruby-identifier">raise</span> <span class="ruby-constant">ArgumentError</span>.<span class="ruby-identifier">new</span>(<span class="ruby-value str">'unable to determine bitstring value from '</span> <span class="ruby-operator">+</span>
+370:                                 <span class="ruby-node">&quot;\&quot;#{val_p.to_s}\&quot;:#{val_p.class.name}&quot;</span>)
+371:       <span class="ruby-keyword kw">end</span>
+372:     <span class="ruby-keyword kw">end</span>
+373:     <span class="ruby-identifier">val</span>
+374:   <span class="ruby-keyword kw">end</span>
+</pre>
+          </div>
+        </div>
+      </div>
+
+      <div id="method-M000003" class="method-detail">
+        <a name="M000003"></a>
+
+        <div class="method-heading">
+          <a href="#M000003" class="method-signature">
           <span class="method-name">bitstring.bounded?()<br />
 </span>
           </a>
@@ -792,7 +845,7 @@ the bitstring.
           <h3>Description</h3>
 <p>
 Return a Boolean indicating whether the bitstring has a fixed <a
-href="BitString.html#M000009">length</a> (is bounded) or not.
+href="BitString.html#M000010">length</a> (is bounded) or not.
 </p>
 <h3>Arguments</h3>
 <p>
@@ -804,23 +857,23 @@ href="BitString.html#M000009">length</a> (is bounded) or not.
 <em>None</em>.
 </p>
           <p><a class="source-toggle" href="#"
-            onclick="toggleCode('M000002-source');return false;">[Source]</a></p>
-          <div class="method-source-code" id="M000002-source">
+            onclick="toggleCode('M000003-source');return false;">[Source]</a></p>
+          <div class="method-source-code" id="M000003-source">
 <pre>
-     <span class="ruby-comment cmt"># File lib/bitstring.rb, line 488</span>
-488:   <span class="ruby-keyword kw">def</span> <span class="ruby-identifier">bounded?</span>()
-489:     <span class="ruby-ivar">@bounded</span>
-490:   <span class="ruby-keyword kw">end</span>
+     <span class="ruby-comment cmt"># File lib/bitstring.rb, line 512</span>
+512:   <span class="ruby-keyword kw">def</span> <span class="ruby-identifier">bounded?</span>()
+513:     <span class="ruby-ivar">@bounded</span>
+514:   <span class="ruby-keyword kw">end</span>
 </pre>
           </div>
         </div>
       </div>
 
-      <div id="method-M000003" class="method-detail">
-        <a name="M000003"></a>
+      <div id="method-M000004" class="method-detail">
+        <a name="M000004"></a>
 
         <div class="method-heading">
-          <a href="#M000003" class="method-signature">
+          <a href="#M000004" class="method-signature">
           <span class="method-name">bitstring.clear<i>()</i> => <i>BitString</i><br />
 </span>
           </a>
@@ -841,25 +894,25 @@ Return a duplicate of the current bitstring &#8212; with all bits cleared.
 <em>None</em>.
 </p>
           <p><a class="source-toggle" href="#"
-            onclick="toggleCode('M000003-source');return false;">[Source]</a></p>
-          <div class="method-source-code" id="M000003-source">
+            onclick="toggleCode('M000004-source');return false;">[Source]</a></p>
+          <div class="method-source-code" id="M000004-source">
 <pre>
-     <span class="ruby-comment cmt"># File lib/bitstring.rb, line 508</span>
-508:   <span class="ruby-keyword kw">def</span> <span class="ruby-identifier">clear</span>()
-509:     <span class="ruby-identifier">bs</span> = <span class="ruby-identifier">dup</span>
-510:     <span class="ruby-identifier">bs</span>.<span class="ruby-identifier">from_i</span>(<span class="ruby-value">0</span>)
-511:     <span class="ruby-identifier">bs</span>
-512:   <span class="ruby-keyword kw">end</span>
+     <span class="ruby-comment cmt"># File lib/bitstring.rb, line 532</span>
+532:   <span class="ruby-keyword kw">def</span> <span class="ruby-identifier">clear</span>()
+533:     <span class="ruby-identifier">bs</span> = <span class="ruby-identifier">dup</span>
+534:     <span class="ruby-identifier">bs</span>.<span class="ruby-identifier">from_i</span>(<span class="ruby-value">0</span>)
+535:     <span class="ruby-identifier">bs</span>
+536:   <span class="ruby-keyword kw">end</span>
 </pre>
           </div>
         </div>
       </div>
 
-      <div id="method-M000004" class="method-detail">
-        <a name="M000004"></a>
+      <div id="method-M000005" class="method-detail">
+        <a name="M000005"></a>
 
         <div class="method-heading">
-          <a href="#M000004" class="method-signature">
+          <a href="#M000005" class="method-signature">
           <span class="method-name">bitstring.clear!<i>()</i> => <i>BitString</i><br />
 </span>
           </a>
@@ -880,57 +933,14 @@ Clear all the bits in the bitstring.
 <em>None</em>.
 </p>
           <p><a class="source-toggle" href="#"
-            onclick="toggleCode('M000004-source');return false;">[Source]</a></p>
-          <div class="method-source-code" id="M000004-source">
-<pre>
-     <span class="ruby-comment cmt"># File lib/bitstring.rb, line 530</span>
-530:   <span class="ruby-keyword kw">def</span> <span class="ruby-identifier">clear!</span>()
-531:     <span class="ruby-ivar">@value</span> = <span class="ruby-value">0</span>
-532:     <span class="ruby-keyword kw">self</span>
-533:   <span class="ruby-keyword kw">end</span>
-</pre>
-          </div>
-        </div>
-      </div>
-
-      <div id="method-M000005" class="method-detail">
-        <a name="M000005"></a>
-
-        <div class="method-heading">
-          <a href="#M000005" class="method-signature">
-          <span class="method-name">bitstring.<i>each</i> { |<i>bitpos,bitval</i>| <i>block</i> } => <i>BitString</i><br />
-</span>
-          </a>
-        </div>
-      
-        <div class="method-description">
-          <h3>Description</h3>
-<p>
-Execute a block for <a href="BitString.html#M000005">each</a> bit in the
-bitstring.
-</p>
-<h3>Arguments</h3>
-<dl>
-<dt><em>block</em></dt><dd><em>Proc</em>. Block to be called for <a
-href="BitString.html#M000005">each</a> bit in the string. The block is
-passed the bit position and the bit value.
-
-</dd>
-</dl>
-<h3>Examples</h3>
-<h3>Exceptions</h3>
-<p>
-<em>None</em>.
-</p>
-          <p><a class="source-toggle" href="#"
             onclick="toggleCode('M000005-source');return false;">[Source]</a></p>
           <div class="method-source-code" id="M000005-source">
 <pre>
-     <span class="ruby-comment cmt"># File lib/bitstring.rb, line 551</span>
-551:   <span class="ruby-keyword kw">def</span> <span class="ruby-identifier">each</span>(<span class="ruby-operator">&amp;</span><span class="ruby-identifier">block</span>)
-552:     <span class="ruby-keyword kw">self</span>.<span class="ruby-identifier">length</span>.<span class="ruby-identifier">times</span> { <span class="ruby-operator">|</span><span class="ruby-identifier">bit</span><span class="ruby-operator">|</span> <span class="ruby-identifier">block</span>.<span class="ruby-identifier">call</span>(<span class="ruby-identifier">bit</span>, <span class="ruby-keyword kw">self</span>[<span class="ruby-identifier">bit</span>]) }
-553:     <span class="ruby-keyword kw">self</span>
-554:   <span class="ruby-keyword kw">end</span>
+     <span class="ruby-comment cmt"># File lib/bitstring.rb, line 554</span>
+554:   <span class="ruby-keyword kw">def</span> <span class="ruby-identifier">clear!</span>()
+555:     <span class="ruby-ivar">@value</span> = <span class="ruby-value">0</span>
+556:     <span class="ruby-keyword kw">self</span>
+557:   <span class="ruby-keyword kw">end</span>
 </pre>
           </div>
         </div>
@@ -941,6 +951,49 @@ passed the bit position and the bit value.
 
         <div class="method-heading">
           <a href="#M000006" class="method-signature">
+          <span class="method-name">bitstring.<i>each</i> { |<i>bitpos,bitval</i>| <i>block</i> } => <i>BitString</i><br />
+</span>
+          </a>
+        </div>
+      
+        <div class="method-description">
+          <h3>Description</h3>
+<p>
+Execute a block for <a href="BitString.html#M000006">each</a> bit in the
+bitstring.
+</p>
+<h3>Arguments</h3>
+<dl>
+<dt><em>block</em></dt><dd><em>Proc</em>. Block to be called for <a
+href="BitString.html#M000006">each</a> bit in the string. The block is
+passed the bit position and the bit value.
+
+</dd>
+</dl>
+<h3>Examples</h3>
+<h3>Exceptions</h3>
+<p>
+<em>None</em>.
+</p>
+          <p><a class="source-toggle" href="#"
+            onclick="toggleCode('M000006-source');return false;">[Source]</a></p>
+          <div class="method-source-code" id="M000006-source">
+<pre>
+     <span class="ruby-comment cmt"># File lib/bitstring.rb, line 575</span>
+575:   <span class="ruby-keyword kw">def</span> <span class="ruby-identifier">each</span>(<span class="ruby-operator">&amp;</span><span class="ruby-identifier">block</span>)
+576:     <span class="ruby-keyword kw">self</span>.<span class="ruby-identifier">length</span>.<span class="ruby-identifier">times</span> { <span class="ruby-operator">|</span><span class="ruby-identifier">bit</span><span class="ruby-operator">|</span> <span class="ruby-identifier">block</span>.<span class="ruby-identifier">call</span>(<span class="ruby-identifier">bit</span>, <span class="ruby-keyword kw">self</span>[<span class="ruby-identifier">bit</span>]) }
+577:     <span class="ruby-keyword kw">self</span>
+578:   <span class="ruby-keyword kw">end</span>
+</pre>
+          </div>
+        </div>
+      </div>
+
+      <div id="method-M000007" class="method-detail">
+        <a name="M000007"></a>
+
+        <div class="method-heading">
+          <a href="#M000007" class="method-signature">
           <span class="method-name">bitstring.from_i<i>(newval)</i> => <i>BitString</i><br />
 </span>
           </a>
@@ -963,30 +1016,30 @@ Treat the bitstring as an Integer and store its entire value at once.
 <em>None</em>.
 </p>
           <p><a class="source-toggle" href="#"
-            onclick="toggleCode('M000006-source');return false;">[Source]</a></p>
-          <div class="method-source-code" id="M000006-source">
+            onclick="toggleCode('M000007-source');return false;">[Source]</a></p>
+          <div class="method-source-code" id="M000007-source">
 <pre>
-     <span class="ruby-comment cmt"># File lib/bitstring.rb, line 573</span>
-573:   <span class="ruby-keyword kw">def</span> <span class="ruby-identifier">from_i</span>(<span class="ruby-identifier">newval</span>)
-574:     <span class="ruby-keyword kw">unless</span> (<span class="ruby-identifier">newval</span>.<span class="ruby-identifier">respond_to?</span>(<span class="ruby-identifier">:to_i</span>))
-575:       <span class="ruby-identifier">what</span> = <span class="ruby-identifier">newval</span>.<span class="ruby-identifier">respond_to?</span>(<span class="ruby-identifier">:to_s</span>) <span class="ruby-operator">?</span> <span class="ruby-identifier">newval</span>.<span class="ruby-identifier">to_s</span> <span class="ruby-operator">:</span> <span class="ruby-identifier">newval</span>.<span class="ruby-identifier">inspect</span>
-576:       <span class="ruby-identifier">_raise</span>(<span class="ruby-constant">UnInterable</span>, <span class="ruby-identifier">newval</span>)
-577:     <span class="ruby-keyword kw">end</span>
-578:     <span class="ruby-identifier">newval</span> = <span class="ruby-identifier">newval</span>.<span class="ruby-identifier">to_i</span>
-579:     <span class="ruby-identifier">newval</span> <span class="ruby-operator">&amp;=</span> <span class="ruby-value">2</span><span class="ruby-operator">**</span><span class="ruby-ivar">@length</span> <span class="ruby-operator">-</span> <span class="ruby-value">1</span> <span class="ruby-keyword kw">if</span> (<span class="ruby-identifier">bounded?</span>)
-580:     <span class="ruby-ivar">@value</span> = <span class="ruby-identifier">newval</span>
-581:     <span class="ruby-keyword kw">self</span>
-582:   <span class="ruby-keyword kw">end</span>
+     <span class="ruby-comment cmt"># File lib/bitstring.rb, line 597</span>
+597:   <span class="ruby-keyword kw">def</span> <span class="ruby-identifier">from_i</span>(<span class="ruby-identifier">newval</span>)
+598:     <span class="ruby-keyword kw">unless</span> (<span class="ruby-identifier">newval</span>.<span class="ruby-identifier">respond_to?</span>(<span class="ruby-identifier">:to_i</span>))
+599:       <span class="ruby-identifier">what</span> = <span class="ruby-identifier">newval</span>.<span class="ruby-identifier">respond_to?</span>(<span class="ruby-identifier">:to_s</span>) <span class="ruby-operator">?</span> <span class="ruby-identifier">newval</span>.<span class="ruby-identifier">to_s</span> <span class="ruby-operator">:</span> <span class="ruby-identifier">newval</span>.<span class="ruby-identifier">inspect</span>
+600:       <span class="ruby-identifier">_raise</span>(<span class="ruby-constant">UnInterable</span>, <span class="ruby-identifier">newval</span>)
+601:     <span class="ruby-keyword kw">end</span>
+602:     <span class="ruby-identifier">newval</span> = <span class="ruby-identifier">newval</span>.<span class="ruby-identifier">to_i</span>
+603:     <span class="ruby-identifier">newval</span> <span class="ruby-operator">&amp;=</span> <span class="ruby-value">2</span><span class="ruby-operator">**</span><span class="ruby-ivar">@length</span> <span class="ruby-operator">-</span> <span class="ruby-value">1</span> <span class="ruby-keyword kw">if</span> (<span class="ruby-identifier">bounded?</span>)
+604:     <span class="ruby-ivar">@value</span> = <span class="ruby-identifier">newval</span>
+605:     <span class="ruby-keyword kw">self</span>
+606:   <span class="ruby-keyword kw">end</span>
 </pre>
           </div>
         </div>
       </div>
 
-      <div id="method-M000007" class="method-detail">
-        <a name="M000007"></a>
+      <div id="method-M000008" class="method-detail">
+        <a name="M000008"></a>
 
         <div class="method-heading">
-          <a href="#M000007" class="method-signature">
+          <a href="#M000008" class="method-signature">
           <span class="method-name">bitstring.grow<i>(bits, [defval], [direction])</i> => <i>BitString</i><br />
 </span>
           </a>
@@ -1030,55 +1083,55 @@ defined values.
 <dt><tt>IndexError</tt></dt><dd><em>bits</em> is negative or meaningless.
 
 </dd>
-<dt><tt>RuntimeError</tt></dt><dd>Can&#8216;t <a href="BitString.html#M000007">grow</a> an unbounded string
+<dt><tt>RuntimeError</tt></dt><dd>Can&#8216;t <a href="BitString.html#M000008">grow</a> an unbounded string
 at the high end.
 
 </dd>
 </dl>
           <p><a class="source-toggle" href="#"
-            onclick="toggleCode('M000007-source');return false;">[Source]</a></p>
-          <div class="method-source-code" id="M000007-source">
+            onclick="toggleCode('M000008-source');return false;">[Source]</a></p>
+          <div class="method-source-code" id="M000008-source">
 <pre>
-     <span class="ruby-comment cmt"># File lib/bitstring.rb, line 608</span>
-608:   <span class="ruby-keyword kw">def</span> <span class="ruby-identifier">grow</span>(<span class="ruby-identifier">bits</span>=<span class="ruby-value">1</span>, <span class="ruby-identifier">defval</span>=<span class="ruby-value">0</span>, <span class="ruby-identifier">direction</span>=<span class="ruby-constant">HIGH_END</span>)
-609:     <span class="ruby-keyword kw">unless</span> (<span class="ruby-identifier">bits</span>.<span class="ruby-identifier">kind_of?</span>(<span class="ruby-constant">Integer</span>))
-610:       <span class="ruby-identifier">_raise</span>(<span class="ruby-constant">BitsRInts</span>)
-611:     <span class="ruby-keyword kw">end</span>
-612:     <span class="ruby-keyword kw">unless</span> (<span class="ruby-identifier">defval</span>.<span class="ruby-identifier">respond_to?</span>(<span class="ruby-identifier">:to_i</span>))
-613:       <span class="ruby-identifier">what</span> = <span class="ruby-identifier">defval</span>.<span class="ruby-identifier">respond_to?</span>(<span class="ruby-identifier">:to_s</span>) <span class="ruby-operator">?</span> <span class="ruby-identifier">defval</span>.<span class="ruby-identifier">to_s</span> <span class="ruby-operator">:</span> <span class="ruby-identifier">defval</span>.<span class="ruby-identifier">inspect</span>
-614:       <span class="ruby-identifier">_raise</span>(<span class="ruby-constant">UnInterable</span>, <span class="ruby-identifier">defval</span>)
-615:     <span class="ruby-keyword kw">end</span>
-616:     <span class="ruby-keyword kw">unless</span> ([<span class="ruby-constant">HIGH_END</span>, <span class="ruby-constant">LOW_END</span>].<span class="ruby-identifier">include?</span>(<span class="ruby-identifier">direction</span>))
-617:       <span class="ruby-identifier">_raise</span>(<span class="ruby-constant">NeedGPS</span>)
-618:     <span class="ruby-keyword kw">end</span>
-619:     <span class="ruby-keyword kw">unless</span> (<span class="ruby-identifier">bits</span> <span class="ruby-operator">&gt;=</span> <span class="ruby-value">0</span>)
-620:       <span class="ruby-identifier">_raise</span>(<span class="ruby-constant">NoDeficitBits</span>)
-621:     <span class="ruby-keyword kw">end</span>
-622:     <span class="ruby-keyword kw">unless</span> ((<span class="ruby-identifier">direction</span> <span class="ruby-operator">==</span> <span class="ruby-constant">LOW_END</span>) <span class="ruby-operator">||</span> <span class="ruby-identifier">bounded?</span>)
-623:       <span class="ruby-identifier">_raise</span>(<span class="ruby-constant">UnboundedNonsense</span>)
-624:     <span class="ruby-keyword kw">end</span>
-625:     <span class="ruby-keyword kw">return</span> <span class="ruby-identifier">dup</span> <span class="ruby-keyword kw">if</span> (<span class="ruby-identifier">bits</span> <span class="ruby-operator">==</span> <span class="ruby-value">0</span>)
-626: 
-627:     <span class="ruby-identifier">value</span> = <span class="ruby-ivar">@value</span>
-628:     <span class="ruby-identifier">vMask</span> = <span class="ruby-value">2</span><span class="ruby-operator">**</span><span class="ruby-identifier">bits</span> <span class="ruby-operator">-</span> <span class="ruby-value">1</span>
-629:     <span class="ruby-keyword kw">if</span> (<span class="ruby-identifier">direction</span> <span class="ruby-operator">==</span> <span class="ruby-constant">HIGH_END</span>)
-630:       <span class="ruby-identifier">vMask</span> <span class="ruby-operator">*=</span> <span class="ruby-value">2</span><span class="ruby-operator">**</span><span class="ruby-ivar">@length</span> <span class="ruby-keyword kw">if</span> (<span class="ruby-identifier">bounded?</span>)
-631:     <span class="ruby-keyword kw">elsif</span> (<span class="ruby-identifier">direction</span> <span class="ruby-operator">==</span> <span class="ruby-constant">LOW_END</span>)
-632:       <span class="ruby-identifier">value</span> <span class="ruby-operator">*=</span> (<span class="ruby-value">2</span><span class="ruby-operator">**</span><span class="ruby-identifier">bits</span>)
-633:     <span class="ruby-keyword kw">end</span>
-634:     <span class="ruby-identifier">value</span> <span class="ruby-operator">|=</span> <span class="ruby-identifier">vMask</span> <span class="ruby-keyword kw">if</span> (<span class="ruby-identifier">defval</span> <span class="ruby-operator">==</span> <span class="ruby-value">1</span>)
-635:     <span class="ruby-identifier">bounded?</span> <span class="ruby-value">? </span><span class="ruby-keyword kw">self</span>.<span class="ruby-identifier">class</span>.<span class="ruby-identifier">new</span>(<span class="ruby-identifier">value</span>, <span class="ruby-ivar">@length</span> <span class="ruby-operator">+</span> <span class="ruby-identifier">bits</span>) <span class="ruby-operator">:</span> <span class="ruby-keyword kw">self</span>.<span class="ruby-identifier">class</span>.<span class="ruby-identifier">new</span>(<span class="ruby-identifier">value</span>)
-636:   <span class="ruby-keyword kw">end</span>
+     <span class="ruby-comment cmt"># File lib/bitstring.rb, line 632</span>
+632:   <span class="ruby-keyword kw">def</span> <span class="ruby-identifier">grow</span>(<span class="ruby-identifier">bits</span>=<span class="ruby-value">1</span>, <span class="ruby-identifier">defval</span>=<span class="ruby-value">0</span>, <span class="ruby-identifier">direction</span>=<span class="ruby-constant">HIGH_END</span>)
+633:     <span class="ruby-keyword kw">unless</span> (<span class="ruby-identifier">bits</span>.<span class="ruby-identifier">kind_of?</span>(<span class="ruby-constant">Integer</span>))
+634:       <span class="ruby-identifier">_raise</span>(<span class="ruby-constant">BitsRInts</span>)
+635:     <span class="ruby-keyword kw">end</span>
+636:     <span class="ruby-keyword kw">unless</span> (<span class="ruby-identifier">defval</span>.<span class="ruby-identifier">respond_to?</span>(<span class="ruby-identifier">:to_i</span>))
+637:       <span class="ruby-identifier">what</span> = <span class="ruby-identifier">defval</span>.<span class="ruby-identifier">respond_to?</span>(<span class="ruby-identifier">:to_s</span>) <span class="ruby-operator">?</span> <span class="ruby-identifier">defval</span>.<span class="ruby-identifier">to_s</span> <span class="ruby-operator">:</span> <span class="ruby-identifier">defval</span>.<span class="ruby-identifier">inspect</span>
+638:       <span class="ruby-identifier">_raise</span>(<span class="ruby-constant">UnInterable</span>, <span class="ruby-identifier">defval</span>)
+639:     <span class="ruby-keyword kw">end</span>
+640:     <span class="ruby-keyword kw">unless</span> ([<span class="ruby-constant">HIGH_END</span>, <span class="ruby-constant">LOW_END</span>].<span class="ruby-identifier">include?</span>(<span class="ruby-identifier">direction</span>))
+641:       <span class="ruby-identifier">_raise</span>(<span class="ruby-constant">NeedGPS</span>)
+642:     <span class="ruby-keyword kw">end</span>
+643:     <span class="ruby-keyword kw">unless</span> (<span class="ruby-identifier">bits</span> <span class="ruby-operator">&gt;=</span> <span class="ruby-value">0</span>)
+644:       <span class="ruby-identifier">_raise</span>(<span class="ruby-constant">NoDeficitBits</span>)
+645:     <span class="ruby-keyword kw">end</span>
+646:     <span class="ruby-keyword kw">unless</span> ((<span class="ruby-identifier">direction</span> <span class="ruby-operator">==</span> <span class="ruby-constant">LOW_END</span>) <span class="ruby-operator">||</span> <span class="ruby-identifier">bounded?</span>)
+647:       <span class="ruby-identifier">_raise</span>(<span class="ruby-constant">UnboundedNonsense</span>)
+648:     <span class="ruby-keyword kw">end</span>
+649:     <span class="ruby-keyword kw">return</span> <span class="ruby-identifier">dup</span> <span class="ruby-keyword kw">if</span> (<span class="ruby-identifier">bits</span> <span class="ruby-operator">==</span> <span class="ruby-value">0</span>)
+650: 
+651:     <span class="ruby-identifier">value</span> = <span class="ruby-ivar">@value</span>
+652:     <span class="ruby-identifier">vMask</span> = <span class="ruby-value">2</span><span class="ruby-operator">**</span><span class="ruby-identifier">bits</span> <span class="ruby-operator">-</span> <span class="ruby-value">1</span>
+653:     <span class="ruby-keyword kw">if</span> (<span class="ruby-identifier">direction</span> <span class="ruby-operator">==</span> <span class="ruby-constant">HIGH_END</span>)
+654:       <span class="ruby-identifier">vMask</span> <span class="ruby-operator">*=</span> <span class="ruby-value">2</span><span class="ruby-operator">**</span><span class="ruby-ivar">@length</span> <span class="ruby-keyword kw">if</span> (<span class="ruby-identifier">bounded?</span>)
+655:     <span class="ruby-keyword kw">elsif</span> (<span class="ruby-identifier">direction</span> <span class="ruby-operator">==</span> <span class="ruby-constant">LOW_END</span>)
+656:       <span class="ruby-identifier">value</span> <span class="ruby-operator">*=</span> (<span class="ruby-value">2</span><span class="ruby-operator">**</span><span class="ruby-identifier">bits</span>)
+657:     <span class="ruby-keyword kw">end</span>
+658:     <span class="ruby-identifier">value</span> <span class="ruby-operator">|=</span> <span class="ruby-identifier">vMask</span> <span class="ruby-keyword kw">if</span> (<span class="ruby-identifier">defval</span> <span class="ruby-operator">==</span> <span class="ruby-value">1</span>)
+659:     <span class="ruby-identifier">bounded?</span> <span class="ruby-value">? </span><span class="ruby-keyword kw">self</span>.<span class="ruby-identifier">class</span>.<span class="ruby-identifier">new</span>(<span class="ruby-identifier">value</span>, <span class="ruby-ivar">@length</span> <span class="ruby-operator">+</span> <span class="ruby-identifier">bits</span>) <span class="ruby-operator">:</span> <span class="ruby-keyword kw">self</span>.<span class="ruby-identifier">class</span>.<span class="ruby-identifier">new</span>(<span class="ruby-identifier">value</span>)
+660:   <span class="ruby-keyword kw">end</span>
 </pre>
           </div>
         </div>
       </div>
 
-      <div id="method-M000008" class="method-detail">
-        <a name="M000008"></a>
+      <div id="method-M000009" class="method-detail">
+        <a name="M000009"></a>
 
         <div class="method-heading">
-          <a href="#M000008" class="method-signature">
+          <a href="#M000009" class="method-signature">
           <span class="method-name">bitstring.grow!<i>(bits, [defval], [direction])</i> => <i>BitString</i><br />
 </span>
           </a>
@@ -1087,7 +1140,7 @@ at the high end.
         <div class="method-description">
           <h3>Description</h3>
 <p>
-As <a href="BitString.html#M000007">grow</a>, except that the current
+As <a href="BitString.html#M000008">grow</a>, except that the current
 bitstring is changed rather than a <a href="BitString.html#M000001">new</a>
 one returned.
 </p>
@@ -1120,32 +1173,32 @@ defined values.
 <dt><tt>IndexError</tt></dt><dd><em>bits</em> is negative or meaningless.
 
 </dd>
-<dt><tt>RuntimeError</tt></dt><dd>Can&#8216;t <a href="BitString.html#M000007">grow</a> an unbounded string
+<dt><tt>RuntimeError</tt></dt><dd>Can&#8216;t <a href="BitString.html#M000008">grow</a> an unbounded string
 at the high end.
 
 </dd>
 </dl>
           <p><a class="source-toggle" href="#"
-            onclick="toggleCode('M000008-source');return false;">[Source]</a></p>
-          <div class="method-source-code" id="M000008-source">
+            onclick="toggleCode('M000009-source');return false;">[Source]</a></p>
+          <div class="method-source-code" id="M000009-source">
 <pre>
-     <span class="ruby-comment cmt"># File lib/bitstring.rb, line 661</span>
-661:   <span class="ruby-keyword kw">def</span> <span class="ruby-identifier">grow!</span>(<span class="ruby-identifier">bits</span>=<span class="ruby-value">1</span>, <span class="ruby-identifier">defval</span>=<span class="ruby-value">0</span>, <span class="ruby-identifier">direction</span>=<span class="ruby-constant">HIGH_END</span>)
-662:     <span class="ruby-identifier">bs</span> = <span class="ruby-identifier">grow</span>(<span class="ruby-identifier">bits</span>, <span class="ruby-identifier">defval</span>, <span class="ruby-identifier">direction</span>)
-663:     <span class="ruby-ivar">@length</span> = <span class="ruby-identifier">bs</span>.<span class="ruby-identifier">length</span> <span class="ruby-keyword kw">if</span> (<span class="ruby-identifier">bs</span>.<span class="ruby-identifier">bounded?</span>)
-664:     <span class="ruby-ivar">@value</span> = <span class="ruby-identifier">bs</span>.<span class="ruby-identifier">to_i</span>
-665:     <span class="ruby-keyword kw">self</span>
-666:   <span class="ruby-keyword kw">end</span>
+     <span class="ruby-comment cmt"># File lib/bitstring.rb, line 685</span>
+685:   <span class="ruby-keyword kw">def</span> <span class="ruby-identifier">grow!</span>(<span class="ruby-identifier">bits</span>=<span class="ruby-value">1</span>, <span class="ruby-identifier">defval</span>=<span class="ruby-value">0</span>, <span class="ruby-identifier">direction</span>=<span class="ruby-constant">HIGH_END</span>)
+686:     <span class="ruby-identifier">bs</span> = <span class="ruby-identifier">grow</span>(<span class="ruby-identifier">bits</span>, <span class="ruby-identifier">defval</span>, <span class="ruby-identifier">direction</span>)
+687:     <span class="ruby-ivar">@length</span> = <span class="ruby-identifier">bs</span>.<span class="ruby-identifier">length</span> <span class="ruby-keyword kw">if</span> (<span class="ruby-identifier">bs</span>.<span class="ruby-identifier">bounded?</span>)
+688:     <span class="ruby-ivar">@value</span> = <span class="ruby-identifier">bs</span>.<span class="ruby-identifier">to_i</span>
+689:     <span class="ruby-keyword kw">self</span>
+690:   <span class="ruby-keyword kw">end</span>
 </pre>
           </div>
         </div>
       </div>
 
-      <div id="method-M000009" class="method-detail">
-        <a name="M000009"></a>
+      <div id="method-M000010" class="method-detail">
+        <a name="M000010"></a>
 
         <div class="method-heading">
-          <a href="#M000009" class="method-signature">
+          <a href="#M000010" class="method-signature">
           <span class="method-name">bitstring.length()<br />
 </span>
           </a>
@@ -1154,7 +1207,7 @@ at the high end.
         <div class="method-description">
           <h3>Description</h3>
 <p>
-Return the <a href="BitString.html#M000009">length</a> of the bitstring. If
+Return the <a href="BitString.html#M000010">length</a> of the bitstring. If
 it&#8216;s bounded, the fixed size is returned, otherwise the number of
 significant binary digits.
 </p>
@@ -1168,23 +1221,23 @@ significant binary digits.
 <em>None</em>.
 </p>
           <p><a class="source-toggle" href="#"
-            onclick="toggleCode('M000009-source');return false;">[Source]</a></p>
-          <div class="method-source-code" id="M000009-source">
+            onclick="toggleCode('M000010-source');return false;">[Source]</a></p>
+          <div class="method-source-code" id="M000010-source">
 <pre>
-     <span class="ruby-comment cmt"># File lib/bitstring.rb, line 685</span>
-685:   <span class="ruby-keyword kw">def</span> <span class="ruby-identifier">length</span>()
-686:     <span class="ruby-identifier">bounded?</span> <span class="ruby-value">? </span><span class="ruby-ivar">@length</span> <span class="ruby-operator">:</span> <span class="ruby-ivar">@value</span>.<span class="ruby-identifier">to_s</span>(<span class="ruby-value">2</span>).<span class="ruby-identifier">length</span>
-687:   <span class="ruby-keyword kw">end</span>
+     <span class="ruby-comment cmt"># File lib/bitstring.rb, line 709</span>
+709:   <span class="ruby-keyword kw">def</span> <span class="ruby-identifier">length</span>()
+710:     <span class="ruby-identifier">bounded?</span> <span class="ruby-value">? </span><span class="ruby-ivar">@length</span> <span class="ruby-operator">:</span> <span class="ruby-ivar">@value</span>.<span class="ruby-identifier">to_s</span>(<span class="ruby-value">2</span>).<span class="ruby-identifier">length</span>
+711:   <span class="ruby-keyword kw">end</span>
 </pre>
           </div>
         </div>
       </div>
 
-      <div id="method-M000010" class="method-detail">
-        <a name="M000010"></a>
+      <div id="method-M000011" class="method-detail">
+        <a name="M000011"></a>
 
         <div class="method-heading">
-          <a href="#M000010" class="method-signature">
+          <a href="#M000011" class="method-signature">
           <span class="method-name">bitstring.lsb()<br />
 </span>
           </a>
@@ -1205,63 +1258,13 @@ Return the value of the least significant (low) bit.
 <em>None</em>.
 </p>
           <p><a class="source-toggle" href="#"
-            onclick="toggleCode('M000010-source');return false;">[Source]</a></p>
-          <div class="method-source-code" id="M000010-source">
-<pre>
-     <span class="ruby-comment cmt"># File lib/bitstring.rb, line 705</span>
-705:   <span class="ruby-keyword kw">def</span> <span class="ruby-identifier">lsb</span>()
-706:     <span class="ruby-keyword kw">self</span>[<span class="ruby-value">0</span>]
-707:   <span class="ruby-keyword kw">end</span>
-</pre>
-          </div>
-        </div>
-      </div>
-
-      <div id="method-M000011" class="method-detail">
-        <a name="M000011"></a>
-
-        <div class="method-heading">
-          <a href="#M000011" class="method-signature">
-          <span class="method-name">bitstring.mask<i>([bitcount], [direction])</i> => <i>Integer</i><br />
-</span>
-          </a>
-        </div>
-      
-        <div class="method-description">
-          <h3>Description</h3>
-<p>
-Return an integer with bits set to <a
-href="BitString.html#M000011">mask</a> the specified portion of the
-bitstring.
-</p>
-<h3>Arguments</h3>
-<dl>
-<dt><em>bitcount</em></dt><dd><em>Integer</em>. Number of bits to set in the <a
-href="BitString.html#M000011">mask</a>.
-
-</dd>
-<dt><em>direction</em></dt><dd><em>Constant</em>. <tt>BitString::HIGH_END</tt> (the default) or
-<tt>BitString::LOW_END</tt>. Specifies the end of the bitstring from which
-the <a href="BitString.html#M000011">mask</a> starts.
-
-</dd>
-</dl>
-<h3>Examples</h3>
-<h3>Exceptions</h3>
-<p>
-<em>None</em>.
-</p>
-          <p><a class="source-toggle" href="#"
             onclick="toggleCode('M000011-source');return false;">[Source]</a></p>
           <div class="method-source-code" id="M000011-source">
 <pre>
-     <span class="ruby-comment cmt"># File lib/bitstring.rb, line 727</span>
-727:   <span class="ruby-keyword kw">def</span> <span class="ruby-identifier">mask</span>(<span class="ruby-identifier">bits</span>=<span class="ruby-keyword kw">self</span>.<span class="ruby-identifier">length</span>, <span class="ruby-identifier">direction</span>=<span class="ruby-constant">HIGH_END</span>)
-728:     <span class="ruby-identifier">_raise</span>(<span class="ruby-constant">OuttasightIndex</span>, <span class="ruby-identifier">bits</span>) <span class="ruby-keyword kw">if</span> (<span class="ruby-identifier">bounded?</span> <span class="ruby-operator">&amp;&amp;</span> (<span class="ruby-identifier">bits</span> <span class="ruby-operator">&gt;</span> <span class="ruby-ivar">@length</span>))
-729:     <span class="ruby-identifier">vMask</span> = <span class="ruby-value">2</span><span class="ruby-operator">**</span><span class="ruby-identifier">bits</span> <span class="ruby-operator">-</span> <span class="ruby-value">1</span>
-730:     <span class="ruby-identifier">vMask</span> <span class="ruby-operator">*=</span> <span class="ruby-value">2</span><span class="ruby-operator">**</span>(<span class="ruby-keyword kw">self</span>.<span class="ruby-identifier">length</span> <span class="ruby-operator">-</span> <span class="ruby-identifier">bits</span>) <span class="ruby-keyword kw">if</span> (<span class="ruby-identifier">direction</span> <span class="ruby-operator">==</span> <span class="ruby-constant">HIGH_END</span>)
-731:     <span class="ruby-identifier">vMask</span>
-732:   <span class="ruby-keyword kw">end</span>
+     <span class="ruby-comment cmt"># File lib/bitstring.rb, line 729</span>
+729:   <span class="ruby-keyword kw">def</span> <span class="ruby-identifier">lsb</span>()
+730:     <span class="ruby-keyword kw">self</span>[<span class="ruby-value">0</span>]
+731:   <span class="ruby-keyword kw">end</span>
 </pre>
           </div>
         </div>
@@ -1272,6 +1275,56 @@ the <a href="BitString.html#M000011">mask</a> starts.
 
         <div class="method-heading">
           <a href="#M000012" class="method-signature">
+          <span class="method-name">bitstring.mask<i>([bitcount], [direction])</i> => <i>Integer</i><br />
+</span>
+          </a>
+        </div>
+      
+        <div class="method-description">
+          <h3>Description</h3>
+<p>
+Return an integer with bits set to <a
+href="BitString.html#M000012">mask</a> the specified portion of the
+bitstring.
+</p>
+<h3>Arguments</h3>
+<dl>
+<dt><em>bitcount</em></dt><dd><em>Integer</em>. Number of bits to set in the <a
+href="BitString.html#M000012">mask</a>.
+
+</dd>
+<dt><em>direction</em></dt><dd><em>Constant</em>. <tt>BitString::HIGH_END</tt> (the default) or
+<tt>BitString::LOW_END</tt>. Specifies the end of the bitstring from which
+the <a href="BitString.html#M000012">mask</a> starts.
+
+</dd>
+</dl>
+<h3>Examples</h3>
+<h3>Exceptions</h3>
+<p>
+<em>None</em>.
+</p>
+          <p><a class="source-toggle" href="#"
+            onclick="toggleCode('M000012-source');return false;">[Source]</a></p>
+          <div class="method-source-code" id="M000012-source">
+<pre>
+     <span class="ruby-comment cmt"># File lib/bitstring.rb, line 751</span>
+751:   <span class="ruby-keyword kw">def</span> <span class="ruby-identifier">mask</span>(<span class="ruby-identifier">bits</span>=<span class="ruby-keyword kw">self</span>.<span class="ruby-identifier">length</span>, <span class="ruby-identifier">direction</span>=<span class="ruby-constant">HIGH_END</span>)
+752:     <span class="ruby-identifier">_raise</span>(<span class="ruby-constant">OuttasightIndex</span>, <span class="ruby-identifier">bits</span>) <span class="ruby-keyword kw">if</span> (<span class="ruby-identifier">bounded?</span> <span class="ruby-operator">&amp;&amp;</span> (<span class="ruby-identifier">bits</span> <span class="ruby-operator">&gt;</span> <span class="ruby-ivar">@length</span>))
+753:     <span class="ruby-identifier">vMask</span> = <span class="ruby-value">2</span><span class="ruby-operator">**</span><span class="ruby-identifier">bits</span> <span class="ruby-operator">-</span> <span class="ruby-value">1</span>
+754:     <span class="ruby-identifier">vMask</span> <span class="ruby-operator">*=</span> <span class="ruby-value">2</span><span class="ruby-operator">**</span>(<span class="ruby-keyword kw">self</span>.<span class="ruby-identifier">length</span> <span class="ruby-operator">-</span> <span class="ruby-identifier">bits</span>) <span class="ruby-keyword kw">if</span> (<span class="ruby-identifier">direction</span> <span class="ruby-operator">==</span> <span class="ruby-constant">HIGH_END</span>)
+755:     <span class="ruby-identifier">vMask</span>
+756:   <span class="ruby-keyword kw">end</span>
+</pre>
+          </div>
+        </div>
+      </div>
+
+      <div id="method-M000013" class="method-detail">
+        <a name="M000013"></a>
+
+        <div class="method-heading">
+          <a href="#M000013" class="method-signature">
           <span class="method-name">bitstring.msb()<br />
 </span>
           </a>
@@ -1295,27 +1348,27 @@ bounded bitstrings.
 </dd>
 </dl>
           <p><a class="source-toggle" href="#"
-            onclick="toggleCode('M000012-source');return false;">[Source]</a></p>
-          <div class="method-source-code" id="M000012-source">
+            onclick="toggleCode('M000013-source');return false;">[Source]</a></p>
+          <div class="method-source-code" id="M000013-source">
 <pre>
-     <span class="ruby-comment cmt"># File lib/bitstring.rb, line 751</span>
-751:   <span class="ruby-keyword kw">def</span> <span class="ruby-identifier">msb</span>()
-752:     <span class="ruby-keyword kw">unless</span> (<span class="ruby-identifier">bounded?</span>)
-753:       <span class="ruby-identifier">_raise</span>(<span class="ruby-constant">UnboundedNonsense</span>,
-754:              <span class="ruby-value str">'most significant bit only applies to bounded bitstrings'</span>)
-755:     <span class="ruby-keyword kw">end</span>
-756:     <span class="ruby-keyword kw">self</span>[<span class="ruby-ivar">@length</span> <span class="ruby-operator">-</span> <span class="ruby-value">1</span>]
-757:   <span class="ruby-keyword kw">end</span>
+     <span class="ruby-comment cmt"># File lib/bitstring.rb, line 775</span>
+775:   <span class="ruby-keyword kw">def</span> <span class="ruby-identifier">msb</span>()
+776:     <span class="ruby-keyword kw">unless</span> (<span class="ruby-identifier">bounded?</span>)
+777:       <span class="ruby-identifier">_raise</span>(<span class="ruby-constant">UnboundedNonsense</span>,
+778:              <span class="ruby-value str">'most significant bit only applies to bounded bitstrings'</span>)
+779:     <span class="ruby-keyword kw">end</span>
+780:     <span class="ruby-keyword kw">self</span>[<span class="ruby-ivar">@length</span> <span class="ruby-operator">-</span> <span class="ruby-value">1</span>]
+781:   <span class="ruby-keyword kw">end</span>
 </pre>
           </div>
         </div>
       </div>
 
-      <div id="method-M000013" class="method-detail">
-        <a name="M000013"></a>
+      <div id="method-M000014" class="method-detail">
+        <a name="M000014"></a>
 
         <div class="method-heading">
-          <a href="#M000013" class="method-signature">
+          <a href="#M000014" class="method-signature">
           <span class="method-name">bitstring.resize<i>(bits)</i> => <i>BitString</i><br />
 </span>
           </a>
@@ -1343,34 +1396,34 @@ bounded.
 </dd>
 </dl>
           <p><a class="source-toggle" href="#"
-            onclick="toggleCode('M000013-source');return false;">[Source]</a></p>
-          <div class="method-source-code" id="M000013-source">
+            onclick="toggleCode('M000014-source');return false;">[Source]</a></p>
+          <div class="method-source-code" id="M000014-source">
 <pre>
-     <span class="ruby-comment cmt"># File lib/bitstring.rb, line 778</span>
-778:   <span class="ruby-keyword kw">def</span> <span class="ruby-identifier">resize</span>(<span class="ruby-identifier">bits</span>)
-779:     <span class="ruby-keyword kw">unless</span> (<span class="ruby-identifier">bits</span>.<span class="ruby-identifier">kind_of?</span>(<span class="ruby-constant">Integer</span>))
-780:       <span class="ruby-identifier">_raise</span>(<span class="ruby-constant">BitsRInts</span>)
-781:     <span class="ruby-keyword kw">end</span>
-782:     <span class="ruby-keyword kw">unless</span> (<span class="ruby-identifier">bits</span> <span class="ruby-operator">&gt;</span> <span class="ruby-value">0</span>)
-783:       <span class="ruby-identifier">_raise</span>(<span class="ruby-constant">NoDeficitBits</span>)
-784:     <span class="ruby-keyword kw">end</span>
-785: 
-786:     <span class="ruby-identifier">value</span> = <span class="ruby-ivar">@value</span>
-787:     <span class="ruby-identifier">length</span> = <span class="ruby-keyword kw">self</span>.<span class="ruby-identifier">length</span>
-788:     <span class="ruby-identifier">bs</span> = <span class="ruby-keyword kw">self</span>.<span class="ruby-identifier">class</span>.<span class="ruby-identifier">new</span>(<span class="ruby-identifier">value</span>, <span class="ruby-identifier">length</span>)
-789:     <span class="ruby-identifier">diffbits</span> = <span class="ruby-identifier">bits</span> <span class="ruby-operator">-</span> <span class="ruby-identifier">length</span>
-790:     <span class="ruby-identifier">diffbits</span> <span class="ruby-operator">&lt;</span> <span class="ruby-value">0</span> <span class="ruby-operator">?</span> <span class="ruby-identifier">bs</span>.<span class="ruby-identifier">shrink!</span>(<span class="ruby-operator">-</span><span class="ruby-identifier">diffbits</span>) <span class="ruby-operator">:</span> <span class="ruby-identifier">bs</span>.<span class="ruby-identifier">grow!</span>(<span class="ruby-identifier">diffbits</span>)
-791:   <span class="ruby-keyword kw">end</span>
+     <span class="ruby-comment cmt"># File lib/bitstring.rb, line 802</span>
+802:   <span class="ruby-keyword kw">def</span> <span class="ruby-identifier">resize</span>(<span class="ruby-identifier">bits</span>)
+803:     <span class="ruby-keyword kw">unless</span> (<span class="ruby-identifier">bits</span>.<span class="ruby-identifier">kind_of?</span>(<span class="ruby-constant">Integer</span>))
+804:       <span class="ruby-identifier">_raise</span>(<span class="ruby-constant">BitsRInts</span>)
+805:     <span class="ruby-keyword kw">end</span>
+806:     <span class="ruby-keyword kw">unless</span> (<span class="ruby-identifier">bits</span> <span class="ruby-operator">&gt;</span> <span class="ruby-value">0</span>)
+807:       <span class="ruby-identifier">_raise</span>(<span class="ruby-constant">NoDeficitBits</span>)
+808:     <span class="ruby-keyword kw">end</span>
+809: 
+810:     <span class="ruby-identifier">value</span> = <span class="ruby-ivar">@value</span>
+811:     <span class="ruby-identifier">length</span> = <span class="ruby-keyword kw">self</span>.<span class="ruby-identifier">length</span>
+812:     <span class="ruby-identifier">bs</span> = <span class="ruby-keyword kw">self</span>.<span class="ruby-identifier">class</span>.<span class="ruby-identifier">new</span>(<span class="ruby-identifier">value</span>, <span class="ruby-identifier">length</span>)
+813:     <span class="ruby-identifier">diffbits</span> = <span class="ruby-identifier">bits</span> <span class="ruby-operator">-</span> <span class="ruby-identifier">length</span>
+814:     <span class="ruby-identifier">diffbits</span> <span class="ruby-operator">&lt;</span> <span class="ruby-value">0</span> <span class="ruby-operator">?</span> <span class="ruby-identifier">bs</span>.<span class="ruby-identifier">shrink!</span>(<span class="ruby-operator">-</span><span class="ruby-identifier">diffbits</span>) <span class="ruby-operator">:</span> <span class="ruby-identifier">bs</span>.<span class="ruby-identifier">grow!</span>(<span class="ruby-identifier">diffbits</span>)
+815:   <span class="ruby-keyword kw">end</span>
 </pre>
           </div>
         </div>
       </div>
 
-      <div id="method-M000014" class="method-detail">
-        <a name="M000014"></a>
+      <div id="method-M000015" class="method-detail">
+        <a name="M000015"></a>
 
         <div class="method-heading">
-          <a href="#M000014" class="method-signature">
+          <a href="#M000015" class="method-signature">
           <span class="method-name">bitstring.resize!<i>(bits)</i> => <i>BitString</i><br />
 </span>
           </a>
@@ -1379,7 +1432,7 @@ bounded.
         <div class="method-description">
           <h3>Description</h3>
 <p>
-As <a href="BitString.html#M000013">resize</a> except it&#8216;s the
+As <a href="BitString.html#M000014">resize</a> except it&#8216;s the
 current bitstring that gets resized.
 </p>
 <h3>Arguments</h3>
@@ -1396,27 +1449,27 @@ current bitstring that gets resized.
 </dd>
 </dl>
           <p><a class="source-toggle" href="#"
-            onclick="toggleCode('M000014-source');return false;">[Source]</a></p>
-          <div class="method-source-code" id="M000014-source">
+            onclick="toggleCode('M000015-source');return false;">[Source]</a></p>
+          <div class="method-source-code" id="M000015-source">
 <pre>
-     <span class="ruby-comment cmt"># File lib/bitstring.rb, line 809</span>
-809:   <span class="ruby-keyword kw">def</span> <span class="ruby-identifier">resize!</span>(<span class="ruby-identifier">bits</span>)
-810:     <span class="ruby-identifier">bs</span> = <span class="ruby-identifier">resize</span>(<span class="ruby-identifier">bits</span>)
-811:     <span class="ruby-ivar">@bounded</span> = <span class="ruby-keyword kw">true</span>
-812:     <span class="ruby-ivar">@length</span> = <span class="ruby-identifier">bs</span>.<span class="ruby-identifier">length</span>
-813:     <span class="ruby-ivar">@value</span> = <span class="ruby-identifier">bs</span>.<span class="ruby-identifier">to_i</span>
-814:     <span class="ruby-keyword kw">self</span>
-815:   <span class="ruby-keyword kw">end</span>
+     <span class="ruby-comment cmt"># File lib/bitstring.rb, line 833</span>
+833:   <span class="ruby-keyword kw">def</span> <span class="ruby-identifier">resize!</span>(<span class="ruby-identifier">bits</span>)
+834:     <span class="ruby-identifier">bs</span> = <span class="ruby-identifier">resize</span>(<span class="ruby-identifier">bits</span>)
+835:     <span class="ruby-ivar">@bounded</span> = <span class="ruby-keyword kw">true</span>
+836:     <span class="ruby-ivar">@length</span> = <span class="ruby-identifier">bs</span>.<span class="ruby-identifier">length</span>
+837:     <span class="ruby-ivar">@value</span> = <span class="ruby-identifier">bs</span>.<span class="ruby-identifier">to_i</span>
+838:     <span class="ruby-keyword kw">self</span>
+839:   <span class="ruby-keyword kw">end</span>
 </pre>
           </div>
         </div>
       </div>
 
-      <div id="method-M000015" class="method-detail">
-        <a name="M000015"></a>
+      <div id="method-M000016" class="method-detail">
+        <a name="M000016"></a>
 
         <div class="method-heading">
-          <a href="#M000015" class="method-signature">
+          <a href="#M000016" class="method-signature">
           <span class="method-name">bistring.rotate<i>(bits)</i> => <i>BitString</i><br />
 </span>
           </a>
@@ -1434,7 +1487,7 @@ A negative value rotates left; a positive one rotates to the right.
 <h3>Arguments</h3>
 <dl>
 <dt><em>bits</em></dt><dd><em>Integer</em>. Number of positions to <a
-href="BitString.html#M000015">rotate</a> left (negative) or right
+href="BitString.html#M000016">rotate</a> left (negative) or right
 (positive). Bits rotated off one end are rotated in on the other.
 
 </dd>
@@ -1442,87 +1495,44 @@ href="BitString.html#M000015">rotate</a> left (negative) or right
 <h3>Examples</h3>
 <h3>Exceptions</h3>
 <dl>
-<dt><tt>RuntimeError</tt></dt><dd>Can&#8216;t <a href="BitString.html#M000015">rotate</a> an unbounded
+<dt><tt>RuntimeError</tt></dt><dd>Can&#8216;t <a href="BitString.html#M000016">rotate</a> an unbounded
 bitstring.
 
 </dd>
 </dl>
           <p><a class="source-toggle" href="#"
-            onclick="toggleCode('M000015-source');return false;">[Source]</a></p>
-          <div class="method-source-code" id="M000015-source">
-<pre>
-     <span class="ruby-comment cmt"># File lib/bitstring.rb, line 836</span>
-836:   <span class="ruby-keyword kw">def</span> <span class="ruby-identifier">rotate</span>(<span class="ruby-identifier">bits_p</span>)
-837:     <span class="ruby-keyword kw">unless</span> (<span class="ruby-identifier">bounded?</span>)
-838:       <span class="ruby-identifier">_raise</span>(<span class="ruby-constant">UnboundedNonsense</span>,
-839:              <span class="ruby-value str">'rotation only applies to bounded bitstrings'</span>)
-840:     <span class="ruby-keyword kw">end</span>
-841: 
-842:     <span class="ruby-identifier">value</span> = <span class="ruby-ivar">@value</span>
-843:     <span class="ruby-identifier">length</span> = <span class="ruby-ivar">@length</span>
-844:     <span class="ruby-identifier">bits</span> = <span class="ruby-identifier">bits_p</span>.<span class="ruby-identifier">to_i</span>.<span class="ruby-identifier">abs</span> <span class="ruby-operator">%</span> <span class="ruby-identifier">length</span>
-845:     <span class="ruby-identifier">vMask</span> = (<span class="ruby-identifier">mult</span> = <span class="ruby-value">2</span><span class="ruby-operator">**</span><span class="ruby-identifier">bits</span>) <span class="ruby-operator">-</span> <span class="ruby-value">1</span>
-846:     <span class="ruby-identifier">ldiff</span> = <span class="ruby-identifier">length</span> <span class="ruby-operator">-</span> <span class="ruby-identifier">bits</span>
-847:     <span class="ruby-keyword kw">if</span> (<span class="ruby-identifier">bits_p</span> <span class="ruby-operator">&gt;</span> <span class="ruby-value">0</span>)
-848:       <span class="ruby-comment cmt">#</span>
-849:       <span class="ruby-comment cmt"># Rotate right (toward the LSB)</span>
-850:       <span class="ruby-comment cmt">#</span>
-851:       <span class="ruby-identifier">residue</span> = <span class="ruby-identifier">value</span> <span class="ruby-operator">&amp;</span> <span class="ruby-identifier">vMask</span>
-852:       <span class="ruby-identifier">value</span> <span class="ruby-operator">/=</span> <span class="ruby-identifier">mult</span>
-853:       <span class="ruby-identifier">value</span> <span class="ruby-operator">|=</span> <span class="ruby-identifier">residue</span> <span class="ruby-operator">*</span> <span class="ruby-value">2</span><span class="ruby-operator">**</span><span class="ruby-identifier">ldiff</span>
-854:     <span class="ruby-keyword kw">elsif</span> (<span class="ruby-identifier">bits_p</span> <span class="ruby-operator">&lt;</span> <span class="ruby-value">0</span>)
-855:       <span class="ruby-comment cmt">#</span>
-856:       <span class="ruby-comment cmt"># Rotate left (toward the MSB)</span>
-857:       <span class="ruby-comment cmt">#</span>
-858:       <span class="ruby-identifier">vMask</span> <span class="ruby-operator">*=</span> <span class="ruby-value">2</span><span class="ruby-operator">**</span><span class="ruby-identifier">ldiff</span>
-859:       <span class="ruby-identifier">residue</span> = <span class="ruby-identifier">value</span> <span class="ruby-operator">&amp;</span> <span class="ruby-identifier">vMask</span>
-860:       <span class="ruby-identifier">value</span> = ((<span class="ruby-identifier">value</span> <span class="ruby-operator">&amp;</span> <span class="ruby-operator">~</span><span class="ruby-identifier">vMask</span>) <span class="ruby-operator">*</span> <span class="ruby-identifier">mult</span>) <span class="ruby-operator">|</span> (<span class="ruby-identifier">residue</span> <span class="ruby-operator">/</span> <span class="ruby-value">2</span><span class="ruby-operator">**</span><span class="ruby-identifier">ldiff</span>)
-861:     <span class="ruby-keyword kw">end</span>
-862:     <span class="ruby-keyword kw">self</span>.<span class="ruby-identifier">class</span>.<span class="ruby-identifier">new</span>(<span class="ruby-identifier">value</span>, <span class="ruby-ivar">@length</span>)
-863:   <span class="ruby-keyword kw">end</span>
-</pre>
-          </div>
-        </div>
-      </div>
-
-      <div id="method-M000016" class="method-detail">
-        <a name="M000016"></a>
-
-        <div class="method-heading">
-          <a href="#M000016" class="method-signature">
-          <span class="method-name">bitstring.rotate!<i>(bits)</i> => <i>BitString</i><br />
-</span>
-          </a>
-        </div>
-      
-        <div class="method-description">
-          <h3>Description</h3>
-<p>
-Same as <a href="BitString.html#M000015">rotate</a> except that the result
-is stored back into the current object.
-</p>
-<h3>Arguments</h3>
-<dl>
-<dt><em>bits</em></dt><dd><em>Integer</em>. Number of positions to <a
-href="BitString.html#M000015">rotate</a> left (negative) or right
-(positive). Bits rotated off one end are rotated in on the other.
-
-</dd>
-</dl>
-<h3>Examples</h3>
-<h3>Exceptions</h3>
-<p>
-<em>None</em>.
-</p>
-          <p><a class="source-toggle" href="#"
             onclick="toggleCode('M000016-source');return false;">[Source]</a></p>
           <div class="method-source-code" id="M000016-source">
 <pre>
-     <span class="ruby-comment cmt"># File lib/bitstring.rb, line 882</span>
-882:   <span class="ruby-keyword kw">def</span> <span class="ruby-identifier">rotate!</span>(<span class="ruby-identifier">bits_p</span>)
-883:     <span class="ruby-ivar">@value</span> = <span class="ruby-identifier">rotate</span>(<span class="ruby-identifier">bits_p</span>).<span class="ruby-identifier">to_i</span>
-884:     <span class="ruby-keyword kw">self</span>
-885:   <span class="ruby-keyword kw">end</span>
+     <span class="ruby-comment cmt"># File lib/bitstring.rb, line 860</span>
+860:   <span class="ruby-keyword kw">def</span> <span class="ruby-identifier">rotate</span>(<span class="ruby-identifier">bits_p</span>)
+861:     <span class="ruby-keyword kw">unless</span> (<span class="ruby-identifier">bounded?</span>)
+862:       <span class="ruby-identifier">_raise</span>(<span class="ruby-constant">UnboundedNonsense</span>,
+863:              <span class="ruby-value str">'rotation only applies to bounded bitstrings'</span>)
+864:     <span class="ruby-keyword kw">end</span>
+865: 
+866:     <span class="ruby-identifier">value</span> = <span class="ruby-ivar">@value</span>
+867:     <span class="ruby-identifier">length</span> = <span class="ruby-ivar">@length</span>
+868:     <span class="ruby-identifier">bits</span> = <span class="ruby-identifier">bits_p</span>.<span class="ruby-identifier">to_i</span>.<span class="ruby-identifier">abs</span> <span class="ruby-operator">%</span> <span class="ruby-identifier">length</span>
+869:     <span class="ruby-identifier">vMask</span> = (<span class="ruby-identifier">mult</span> = <span class="ruby-value">2</span><span class="ruby-operator">**</span><span class="ruby-identifier">bits</span>) <span class="ruby-operator">-</span> <span class="ruby-value">1</span>
+870:     <span class="ruby-identifier">ldiff</span> = <span class="ruby-identifier">length</span> <span class="ruby-operator">-</span> <span class="ruby-identifier">bits</span>
+871:     <span class="ruby-keyword kw">if</span> (<span class="ruby-identifier">bits_p</span> <span class="ruby-operator">&gt;</span> <span class="ruby-value">0</span>)
+872:       <span class="ruby-comment cmt">#</span>
+873:       <span class="ruby-comment cmt"># Rotate right (toward the LSB)</span>
+874:       <span class="ruby-comment cmt">#</span>
+875:       <span class="ruby-identifier">residue</span> = <span class="ruby-identifier">value</span> <span class="ruby-operator">&amp;</span> <span class="ruby-identifier">vMask</span>
+876:       <span class="ruby-identifier">value</span> <span class="ruby-operator">/=</span> <span class="ruby-identifier">mult</span>
+877:       <span class="ruby-identifier">value</span> <span class="ruby-operator">|=</span> <span class="ruby-identifier">residue</span> <span class="ruby-operator">*</span> <span class="ruby-value">2</span><span class="ruby-operator">**</span><span class="ruby-identifier">ldiff</span>
+878:     <span class="ruby-keyword kw">elsif</span> (<span class="ruby-identifier">bits_p</span> <span class="ruby-operator">&lt;</span> <span class="ruby-value">0</span>)
+879:       <span class="ruby-comment cmt">#</span>
+880:       <span class="ruby-comment cmt"># Rotate left (toward the MSB)</span>
+881:       <span class="ruby-comment cmt">#</span>
+882:       <span class="ruby-identifier">vMask</span> <span class="ruby-operator">*=</span> <span class="ruby-value">2</span><span class="ruby-operator">**</span><span class="ruby-identifier">ldiff</span>
+883:       <span class="ruby-identifier">residue</span> = <span class="ruby-identifier">value</span> <span class="ruby-operator">&amp;</span> <span class="ruby-identifier">vMask</span>
+884:       <span class="ruby-identifier">value</span> = ((<span class="ruby-identifier">value</span> <span class="ruby-operator">&amp;</span> <span class="ruby-operator">~</span><span class="ruby-identifier">vMask</span>) <span class="ruby-operator">*</span> <span class="ruby-identifier">mult</span>) <span class="ruby-operator">|</span> (<span class="ruby-identifier">residue</span> <span class="ruby-operator">/</span> <span class="ruby-value">2</span><span class="ruby-operator">**</span><span class="ruby-identifier">ldiff</span>)
+885:     <span class="ruby-keyword kw">end</span>
+886:     <span class="ruby-keyword kw">self</span>.<span class="ruby-identifier">class</span>.<span class="ruby-identifier">new</span>(<span class="ruby-identifier">value</span>, <span class="ruby-ivar">@length</span>)
+887:   <span class="ruby-keyword kw">end</span>
 </pre>
           </div>
         </div>
@@ -1533,6 +1543,49 @@ href="BitString.html#M000015">rotate</a> left (negative) or right
 
         <div class="method-heading">
           <a href="#M000017" class="method-signature">
+          <span class="method-name">bitstring.rotate!<i>(bits)</i> => <i>BitString</i><br />
+</span>
+          </a>
+        </div>
+      
+        <div class="method-description">
+          <h3>Description</h3>
+<p>
+Same as <a href="BitString.html#M000016">rotate</a> except that the result
+is stored back into the current object.
+</p>
+<h3>Arguments</h3>
+<dl>
+<dt><em>bits</em></dt><dd><em>Integer</em>. Number of positions to <a
+href="BitString.html#M000016">rotate</a> left (negative) or right
+(positive). Bits rotated off one end are rotated in on the other.
+
+</dd>
+</dl>
+<h3>Examples</h3>
+<h3>Exceptions</h3>
+<p>
+<em>None</em>.
+</p>
+          <p><a class="source-toggle" href="#"
+            onclick="toggleCode('M000017-source');return false;">[Source]</a></p>
+          <div class="method-source-code" id="M000017-source">
+<pre>
+     <span class="ruby-comment cmt"># File lib/bitstring.rb, line 906</span>
+906:   <span class="ruby-keyword kw">def</span> <span class="ruby-identifier">rotate!</span>(<span class="ruby-identifier">bits_p</span>)
+907:     <span class="ruby-ivar">@value</span> = <span class="ruby-identifier">rotate</span>(<span class="ruby-identifier">bits_p</span>).<span class="ruby-identifier">to_i</span>
+908:     <span class="ruby-keyword kw">self</span>
+909:   <span class="ruby-keyword kw">end</span>
+</pre>
+          </div>
+        </div>
+      </div>
+
+      <div id="method-M000018" class="method-detail">
+        <a name="M000018"></a>
+
+        <div class="method-heading">
+          <a href="#M000018" class="method-signature">
           <span class="method-name">bitstring.shrink<i>(bits, [direction])</i><br />
 </span>
           </a>
@@ -1560,45 +1613,45 @@ one of the defined values.
 </dd>
 </dl>
           <p><a class="source-toggle" href="#"
-            onclick="toggleCode('M000017-source');return false;">[Source]</a></p>
-          <div class="method-source-code" id="M000017-source">
+            onclick="toggleCode('M000018-source');return false;">[Source]</a></p>
+          <div class="method-source-code" id="M000018-source">
 <pre>
-     <span class="ruby-comment cmt"># File lib/bitstring.rb, line 907</span>
-907:   <span class="ruby-keyword kw">def</span> <span class="ruby-identifier">shrink</span>(<span class="ruby-identifier">bits</span>=<span class="ruby-value">1</span>, <span class="ruby-identifier">direction</span>=<span class="ruby-constant">HIGH_END</span>)
-908:     <span class="ruby-keyword kw">unless</span> (<span class="ruby-identifier">bits</span>.<span class="ruby-identifier">kind_of?</span>(<span class="ruby-constant">Integer</span>))
-909:       <span class="ruby-identifier">_raise</span>(<span class="ruby-constant">BitsRInts</span>)
-910:     <span class="ruby-keyword kw">end</span>
-911:     <span class="ruby-keyword kw">unless</span> (<span class="ruby-identifier">bits</span> <span class="ruby-operator">&gt;=</span> <span class="ruby-value">0</span>)
-912:       <span class="ruby-identifier">_raise</span>(<span class="ruby-constant">NoDeficitBits</span>)
-913:     <span class="ruby-keyword kw">end</span>
-914:     <span class="ruby-keyword kw">unless</span> ([<span class="ruby-constant">HIGH_END</span>, <span class="ruby-constant">LOW_END</span>].<span class="ruby-identifier">include?</span>(<span class="ruby-identifier">direction</span>))
-915:       <span class="ruby-identifier">_raise</span>(<span class="ruby-constant">NeedGPS</span>)
-916:     <span class="ruby-keyword kw">end</span>
-917:     <span class="ruby-keyword kw">return</span> <span class="ruby-identifier">dup</span> <span class="ruby-keyword kw">if</span> (<span class="ruby-identifier">bits</span> <span class="ruby-operator">==</span> <span class="ruby-value">0</span>)
-918: 
-919:     <span class="ruby-keyword kw">if</span> (<span class="ruby-identifier">bounded?</span> <span class="ruby-operator">&amp;&amp;</span> (<span class="ruby-identifier">bits</span> <span class="ruby-operator">&gt;=</span> <span class="ruby-ivar">@length</span>))
-920:       <span class="ruby-identifier">_raise</span>(<span class="ruby-constant">RuntimeError</span>, <span class="ruby-value str">'shrink count greater than bitstring size'</span>)
-921:     <span class="ruby-keyword kw">end</span>
-922:     <span class="ruby-identifier">value</span> = <span class="ruby-ivar">@value</span>
-923:     <span class="ruby-identifier">length</span> = <span class="ruby-identifier">bounded?</span> <span class="ruby-value">? </span><span class="ruby-ivar">@length</span> <span class="ruby-operator">-</span> <span class="ruby-identifier">bits</span> <span class="ruby-operator">:</span> <span class="ruby-keyword kw">nil</span>
-924:     <span class="ruby-keyword kw">if</span> (<span class="ruby-identifier">direction</span> <span class="ruby-operator">==</span> <span class="ruby-constant">LOW_END</span>)
-925:       <span class="ruby-identifier">value</span> <span class="ruby-operator">/=</span> <span class="ruby-value">2</span><span class="ruby-operator">**</span><span class="ruby-identifier">bits</span>
-926:     <span class="ruby-keyword kw">else</span>
-927:       <span class="ruby-identifier">_raise</span>(<span class="ruby-constant">UnboundedNonsense</span>) <span class="ruby-keyword kw">unless</span> (<span class="ruby-identifier">bounded?</span>)
-928:       <span class="ruby-identifier">value</span> <span class="ruby-operator">&amp;=</span> <span class="ruby-value">2</span><span class="ruby-operator">**</span><span class="ruby-identifier">length</span> <span class="ruby-operator">-</span> <span class="ruby-value">1</span>
-929:     <span class="ruby-keyword kw">end</span>
-930:     <span class="ruby-identifier">bounded?</span> <span class="ruby-value">? </span><span class="ruby-keyword kw">self</span>.<span class="ruby-identifier">class</span>.<span class="ruby-identifier">new</span>(<span class="ruby-identifier">value</span>, <span class="ruby-identifier">length</span>) <span class="ruby-operator">:</span> <span class="ruby-keyword kw">self</span>.<span class="ruby-identifier">class</span>.<span class="ruby-identifier">new</span>(<span class="ruby-identifier">value</span>)
-931:   <span class="ruby-keyword kw">end</span>
+     <span class="ruby-comment cmt"># File lib/bitstring.rb, line 931</span>
+931:   <span class="ruby-keyword kw">def</span> <span class="ruby-identifier">shrink</span>(<span class="ruby-identifier">bits</span>=<span class="ruby-value">1</span>, <span class="ruby-identifier">direction</span>=<span class="ruby-constant">HIGH_END</span>)
+932:     <span class="ruby-keyword kw">unless</span> (<span class="ruby-identifier">bits</span>.<span class="ruby-identifier">kind_of?</span>(<span class="ruby-constant">Integer</span>))
+933:       <span class="ruby-identifier">_raise</span>(<span class="ruby-constant">BitsRInts</span>)
+934:     <span class="ruby-keyword kw">end</span>
+935:     <span class="ruby-keyword kw">unless</span> (<span class="ruby-identifier">bits</span> <span class="ruby-operator">&gt;=</span> <span class="ruby-value">0</span>)
+936:       <span class="ruby-identifier">_raise</span>(<span class="ruby-constant">NoDeficitBits</span>)
+937:     <span class="ruby-keyword kw">end</span>
+938:     <span class="ruby-keyword kw">unless</span> ([<span class="ruby-constant">HIGH_END</span>, <span class="ruby-constant">LOW_END</span>].<span class="ruby-identifier">include?</span>(<span class="ruby-identifier">direction</span>))
+939:       <span class="ruby-identifier">_raise</span>(<span class="ruby-constant">NeedGPS</span>)
+940:     <span class="ruby-keyword kw">end</span>
+941:     <span class="ruby-keyword kw">return</span> <span class="ruby-identifier">dup</span> <span class="ruby-keyword kw">if</span> (<span class="ruby-identifier">bits</span> <span class="ruby-operator">==</span> <span class="ruby-value">0</span>)
+942: 
+943:     <span class="ruby-keyword kw">if</span> (<span class="ruby-identifier">bounded?</span> <span class="ruby-operator">&amp;&amp;</span> (<span class="ruby-identifier">bits</span> <span class="ruby-operator">&gt;=</span> <span class="ruby-ivar">@length</span>))
+944:       <span class="ruby-identifier">_raise</span>(<span class="ruby-constant">RuntimeError</span>, <span class="ruby-value str">'shrink count greater than bitstring size'</span>)
+945:     <span class="ruby-keyword kw">end</span>
+946:     <span class="ruby-identifier">value</span> = <span class="ruby-ivar">@value</span>
+947:     <span class="ruby-identifier">length</span> = <span class="ruby-identifier">bounded?</span> <span class="ruby-value">? </span><span class="ruby-ivar">@length</span> <span class="ruby-operator">-</span> <span class="ruby-identifier">bits</span> <span class="ruby-operator">:</span> <span class="ruby-keyword kw">nil</span>
+948:     <span class="ruby-keyword kw">if</span> (<span class="ruby-identifier">direction</span> <span class="ruby-operator">==</span> <span class="ruby-constant">LOW_END</span>)
+949:       <span class="ruby-identifier">value</span> <span class="ruby-operator">/=</span> <span class="ruby-value">2</span><span class="ruby-operator">**</span><span class="ruby-identifier">bits</span>
+950:     <span class="ruby-keyword kw">else</span>
+951:       <span class="ruby-identifier">_raise</span>(<span class="ruby-constant">UnboundedNonsense</span>) <span class="ruby-keyword kw">unless</span> (<span class="ruby-identifier">bounded?</span>)
+952:       <span class="ruby-identifier">value</span> <span class="ruby-operator">&amp;=</span> <span class="ruby-value">2</span><span class="ruby-operator">**</span><span class="ruby-identifier">length</span> <span class="ruby-operator">-</span> <span class="ruby-value">1</span>
+953:     <span class="ruby-keyword kw">end</span>
+954:     <span class="ruby-identifier">bounded?</span> <span class="ruby-value">? </span><span class="ruby-keyword kw">self</span>.<span class="ruby-identifier">class</span>.<span class="ruby-identifier">new</span>(<span class="ruby-identifier">value</span>, <span class="ruby-identifier">length</span>) <span class="ruby-operator">:</span> <span class="ruby-keyword kw">self</span>.<span class="ruby-identifier">class</span>.<span class="ruby-identifier">new</span>(<span class="ruby-identifier">value</span>)
+955:   <span class="ruby-keyword kw">end</span>
 </pre>
           </div>
         </div>
       </div>
 
-      <div id="method-M000018" class="method-detail">
-        <a name="M000018"></a>
+      <div id="method-M000019" class="method-detail">
+        <a name="M000019"></a>
 
         <div class="method-heading">
-          <a href="#M000018" class="method-signature">
+          <a href="#M000019" class="method-signature">
           <span class="method-name">bitstring.shrink!<i>(bits, [direction])</i><br />
 </span>
           </a>
@@ -1607,7 +1660,7 @@ one of the defined values.
         <div class="method-description">
           <h3>Description</h3>
 <p>
-As <a href="BitString.html#M000017">shrink</a> except that the current
+As <a href="BitString.html#M000018">shrink</a> except that the current
 bitstring is modified rather than a copy being made and altered.
 </p>
 <h3>Arguments</h3>
@@ -1626,26 +1679,26 @@ one of the defined values.
 </dd>
 </dl>
           <p><a class="source-toggle" href="#"
-            onclick="toggleCode('M000018-source');return false;">[Source]</a></p>
-          <div class="method-source-code" id="M000018-source">
+            onclick="toggleCode('M000019-source');return false;">[Source]</a></p>
+          <div class="method-source-code" id="M000019-source">
 <pre>
-     <span class="ruby-comment cmt"># File lib/bitstring.rb, line 952</span>
-952:   <span class="ruby-keyword kw">def</span> <span class="ruby-identifier">shrink!</span>(<span class="ruby-identifier">bits</span>=<span class="ruby-value">1</span>, <span class="ruby-identifier">direction</span>=<span class="ruby-constant">HIGH_END</span>)
-953:     <span class="ruby-identifier">bs</span> = <span class="ruby-identifier">shrink</span>(<span class="ruby-identifier">bits</span>, <span class="ruby-identifier">direction</span>)
-954:     <span class="ruby-ivar">@length</span> = <span class="ruby-identifier">bs</span>.<span class="ruby-identifier">length</span> <span class="ruby-keyword kw">if</span> (<span class="ruby-identifier">bs</span>.<span class="ruby-identifier">bounded?</span>)
-955:     <span class="ruby-ivar">@value</span> = <span class="ruby-identifier">bs</span>.<span class="ruby-identifier">to_i</span>
-956:     <span class="ruby-keyword kw">self</span>
-957:   <span class="ruby-keyword kw">end</span>
+     <span class="ruby-comment cmt"># File lib/bitstring.rb, line 976</span>
+976:   <span class="ruby-keyword kw">def</span> <span class="ruby-identifier">shrink!</span>(<span class="ruby-identifier">bits</span>=<span class="ruby-value">1</span>, <span class="ruby-identifier">direction</span>=<span class="ruby-constant">HIGH_END</span>)
+977:     <span class="ruby-identifier">bs</span> = <span class="ruby-identifier">shrink</span>(<span class="ruby-identifier">bits</span>, <span class="ruby-identifier">direction</span>)
+978:     <span class="ruby-ivar">@length</span> = <span class="ruby-identifier">bs</span>.<span class="ruby-identifier">length</span> <span class="ruby-keyword kw">if</span> (<span class="ruby-identifier">bs</span>.<span class="ruby-identifier">bounded?</span>)
+979:     <span class="ruby-ivar">@value</span> = <span class="ruby-identifier">bs</span>.<span class="ruby-identifier">to_i</span>
+980:     <span class="ruby-keyword kw">self</span>
+981:   <span class="ruby-keyword kw">end</span>
 </pre>
           </div>
         </div>
       </div>
 
-      <div id="method-M000019" class="method-detail">
-        <a name="M000019"></a>
+      <div id="method-M000020" class="method-detail">
+        <a name="M000020"></a>
 
         <div class="method-heading">
-          <a href="#M000019" class="method-signature">
+          <a href="#M000020" class="method-signature">
           <span class="method-name">bitstring.slice<i>(index)</i> => <i>Integer</i><br />
 bitstring.slice<i>(start, length)</i> => <i>BitString</i><br />
 bitstring.slice<i>(range)</i> => <i>BitString</i><br />
@@ -1666,7 +1719,7 @@ Extract a subset from the bitstring.
 <dt><em>start</em></dt><dd><em>Integer</em>. Start position of subset.
 
 </dd>
-<dt><em><a href="BitString.html#M000009">length</a></em></dt><dd><em>Integer</em>. Length of subset.
+<dt><em><a href="BitString.html#M000010">length</a></em></dt><dd><em>Integer</em>. Length of subset.
 
 </dd>
 <dt><em>range</em></dt><dd><em>Range</em>. Subset specified as a range.
@@ -1676,7 +1729,7 @@ Extract a subset from the bitstring.
 <h3>Examples</h3>
 <h3>Exceptions</h3>
 <dl>
-<dt><tt>ArgumentError</tt></dt><dd>If <a href="BitString.html#M000009">length</a> specified with a range.
+<dt><tt>ArgumentError</tt></dt><dd>If <a href="BitString.html#M000010">length</a> specified with a range.
 
 </dd>
 <dt><tt>IndexError</tt></dt><dd>If bounded bitstring and substring is illegal.
@@ -1684,23 +1737,23 @@ Extract a subset from the bitstring.
 </dd>
 </dl>
           <p><a class="source-toggle" href="#"
-            onclick="toggleCode('M000019-source');return false;">[Source]</a></p>
-          <div class="method-source-code" id="M000019-source">
+            onclick="toggleCode('M000020-source');return false;">[Source]</a></p>
+          <div class="method-source-code" id="M000020-source">
 <pre>
-     <span class="ruby-comment cmt"># File lib/bitstring.rb, line 981</span>
-981:   <span class="ruby-keyword kw">def</span> <span class="ruby-identifier">slice</span>(<span class="ruby-operator">*</span><span class="ruby-identifier">args_p</span>)
-982:     <span class="ruby-keyword kw">self</span>[<span class="ruby-operator">*</span><span class="ruby-identifier">args_p</span>]
-983:   <span class="ruby-keyword kw">end</span>
+      <span class="ruby-comment cmt"># File lib/bitstring.rb, line 1005</span>
+1005:   <span class="ruby-keyword kw">def</span> <span class="ruby-identifier">slice</span>(<span class="ruby-operator">*</span><span class="ruby-identifier">args_p</span>)
+1006:     <span class="ruby-keyword kw">self</span>[<span class="ruby-operator">*</span><span class="ruby-identifier">args_p</span>]
+1007:   <span class="ruby-keyword kw">end</span>
 </pre>
           </div>
         </div>
       </div>
 
-      <div id="method-M000020" class="method-detail">
-        <a name="M000020"></a>
+      <div id="method-M000021" class="method-detail">
+        <a name="M000021"></a>
 
         <div class="method-heading">
-          <a href="#M000020" class="method-signature">
+          <a href="#M000021" class="method-signature">
           <span class="method-name">bitstring.to_i<i>()</i> => <i>Integer</i><br />
 </span>
           </a>
@@ -1721,23 +1774,23 @@ Return the full value of the bitstring represented as an integer.
 <em>None</em>.
 </p>
           <p><a class="source-toggle" href="#"
-            onclick="toggleCode('M000020-source');return false;">[Source]</a></p>
-          <div class="method-source-code" id="M000020-source">
+            onclick="toggleCode('M000021-source');return false;">[Source]</a></p>
+          <div class="method-source-code" id="M000021-source">
 <pre>
-      <span class="ruby-comment cmt"># File lib/bitstring.rb, line 1018</span>
-1018:   <span class="ruby-keyword kw">def</span> <span class="ruby-identifier">to_i</span>()
-1019:     <span class="ruby-ivar">@value</span>.<span class="ruby-identifier">to_i</span>
-1020:   <span class="ruby-keyword kw">end</span>
+      <span class="ruby-comment cmt"># File lib/bitstring.rb, line 1042</span>
+1042:   <span class="ruby-keyword kw">def</span> <span class="ruby-identifier">to_i</span>()
+1043:     <span class="ruby-ivar">@value</span>.<span class="ruby-identifier">to_i</span>
+1044:   <span class="ruby-keyword kw">end</span>
 </pre>
           </div>
         </div>
       </div>
 
-      <div id="method-M000021" class="method-detail">
-        <a name="M000021"></a>
+      <div id="method-M000022" class="method-detail">
+        <a name="M000022"></a>
 
         <div class="method-heading">
-          <a href="#M000021" class="method-signature">
+          <a href="#M000022" class="method-signature">
           <span class="method-name">bitstring.to_s<i>()</i> => <i>String</i><br />
 </span>
           </a>
@@ -1760,23 +1813,23 @@ bounded, the <em>String</em> will be zero-filled on the left (high end).
 <em>None</em>.
 </p>
           <p><a class="source-toggle" href="#"
-            onclick="toggleCode('M000021-source');return false;">[Source]</a></p>
-          <div class="method-source-code" id="M000021-source">
+            onclick="toggleCode('M000022-source');return false;">[Source]</a></p>
+          <div class="method-source-code" id="M000022-source">
 <pre>
-      <span class="ruby-comment cmt"># File lib/bitstring.rb, line 1040</span>
-1040:   <span class="ruby-keyword kw">def</span> <span class="ruby-identifier">to_s</span>()
-1041:     <span class="ruby-identifier">_zfill</span>(<span class="ruby-ivar">@value</span>, <span class="ruby-ivar">@length</span>)
-1042:   <span class="ruby-keyword kw">end</span>
+      <span class="ruby-comment cmt"># File lib/bitstring.rb, line 1064</span>
+1064:   <span class="ruby-keyword kw">def</span> <span class="ruby-identifier">to_s</span>()
+1065:     <span class="ruby-identifier">_zfill</span>(<span class="ruby-ivar">@value</span>, <span class="ruby-ivar">@length</span>)
+1066:   <span class="ruby-keyword kw">end</span>
 </pre>
           </div>
         </div>
       </div>
 
-      <div id="method-M000028" class="method-detail">
-        <a name="M000028"></a>
+      <div id="method-M000029" class="method-detail">
+        <a name="M000029"></a>
 
         <div class="method-heading">
-          <a href="#M000028" class="method-signature">
+          <a href="#M000029" class="method-signature">
           <span class="method-name">bitstring <i>| value</i> => <i>BitString</i><br />
 bitstring.|<i>(value)</i> => <i>BitString</i><br />
 </span>
@@ -1791,8 +1844,9 @@ bitstring containing the result.
 </p>
 <h3>Arguments</h3>
 <dl>
-<dt><em>value</em></dt><dd><em>Integer</em>. Value treated as a bitstream and inclusively ORed with
-the bitstring.
+<dt><em>value</em></dt><dd><em>Array</em>, <em><a href="BitString.html">BitString</a></em>,
+<em>Integer</em>, or <em>String</em>. Value treated as a bitstream and
+inclusively ORed with the bitstring.
 
 </dd>
 </dl>
@@ -1802,26 +1856,27 @@ the bitstring.
 <em>None</em>.
 </p>
           <p><a class="source-toggle" href="#"
-            onclick="toggleCode('M000028-source');return false;">[Source]</a></p>
-          <div class="method-source-code" id="M000028-source">
+            onclick="toggleCode('M000029-source');return false;">[Source]</a></p>
+          <div class="method-source-code" id="M000029-source">
 <pre>
-     <span class="ruby-comment cmt"># File lib/bitstring/operators.rb, line 311</span>
-311:   <span class="ruby-keyword kw">def</span> <span class="ruby-operator">|</span>(<span class="ruby-identifier">val_p</span>)
-312:     <span class="ruby-identifier">value</span> <span class="ruby-operator">&amp;=</span> <span class="ruby-keyword kw">self</span>.<span class="ruby-identifier">mask</span> <span class="ruby-keyword kw">if</span> (<span class="ruby-identifier">bounded?</span>)
-313:     <span class="ruby-identifier">bs</span> = <span class="ruby-identifier">dup</span>
-314:     <span class="ruby-identifier">bs</span>.<span class="ruby-identifier">from_i</span>(<span class="ruby-identifier">value</span> <span class="ruby-operator">|</span> <span class="ruby-identifier">bs</span>.<span class="ruby-identifier">to_i</span>)
-315:     <span class="ruby-identifier">bs</span>
-316:   <span class="ruby-keyword kw">end</span>
+     <span class="ruby-comment cmt"># File lib/bitstring/operators.rb, line 312</span>
+312:   <span class="ruby-keyword kw">def</span> <span class="ruby-operator">|</span>(<span class="ruby-identifier">value</span>)
+313:     <span class="ruby-identifier">value</span> = <span class="ruby-identifier">_arg2int</span>(<span class="ruby-identifier">value</span>)
+314:     <span class="ruby-identifier">value</span> <span class="ruby-operator">&amp;=</span> <span class="ruby-keyword kw">self</span>.<span class="ruby-identifier">mask</span> <span class="ruby-keyword kw">if</span> (<span class="ruby-identifier">bounded?</span>)
+315:     <span class="ruby-identifier">bs</span> = <span class="ruby-identifier">dup</span>
+316:     <span class="ruby-identifier">bs</span>.<span class="ruby-identifier">from_i</span>(<span class="ruby-identifier">value</span> <span class="ruby-operator">|</span> <span class="ruby-identifier">bs</span>.<span class="ruby-identifier">to_i</span>)
+317:     <span class="ruby-identifier">bs</span>
+318:   <span class="ruby-keyword kw">end</span>
 </pre>
           </div>
         </div>
       </div>
 
-      <div id="method-M000029" class="method-detail">
-        <a name="M000029"></a>
+      <div id="method-M000030" class="method-detail">
+        <a name="M000030"></a>
 
         <div class="method-heading">
-          <a href="#M000029" class="method-signature">
+          <a href="#M000030" class="method-signature">
           <span class="method-name"><i>~</i> bitstring => <i>BitString</i><br />
 bitstring.~<i>()</i> => <i>BitString</i><br />
 </span>
@@ -1844,14 +1899,14 @@ result in a <a href="BitString.html#M000001">new</a> one.
 <em>None</em>.
 </p>
           <p><a class="source-toggle" href="#"
-            onclick="toggleCode('M000029-source');return false;">[Source]</a></p>
-          <div class="method-source-code" id="M000029-source">
+            onclick="toggleCode('M000030-source');return false;">[Source]</a></p>
+          <div class="method-source-code" id="M000030-source">
 <pre>
-     <span class="ruby-comment cmt"># File lib/bitstring/operators.rb, line 336</span>
-336:   <span class="ruby-keyword kw">def</span> <span class="ruby-operator">~</span>()
-337:     <span class="ruby-identifier">newval</span> = (<span class="ruby-operator">~</span> <span class="ruby-ivar">@value</span>) <span class="ruby-operator">&amp;</span> <span class="ruby-keyword kw">self</span>.<span class="ruby-identifier">mask</span>
-338:     <span class="ruby-identifier">bounded?</span> <span class="ruby-value">? </span><span class="ruby-keyword kw">self</span>.<span class="ruby-identifier">class</span>.<span class="ruby-identifier">new</span>(<span class="ruby-identifier">newval</span>, <span class="ruby-ivar">@length</span>) <span class="ruby-operator">:</span> <span class="ruby-keyword kw">self</span>.<span class="ruby-identifier">class</span>.<span class="ruby-identifier">new</span>(<span class="ruby-identifier">newval</span>)
-339:   <span class="ruby-keyword kw">end</span>
+     <span class="ruby-comment cmt"># File lib/bitstring/operators.rb, line 338</span>
+338:   <span class="ruby-keyword kw">def</span> <span class="ruby-operator">~</span>()
+339:     <span class="ruby-identifier">newval</span> = (<span class="ruby-operator">~</span> <span class="ruby-ivar">@value</span>) <span class="ruby-operator">&amp;</span> <span class="ruby-keyword kw">self</span>.<span class="ruby-identifier">mask</span>
+340:     <span class="ruby-identifier">bounded?</span> <span class="ruby-value">? </span><span class="ruby-keyword kw">self</span>.<span class="ruby-identifier">class</span>.<span class="ruby-identifier">new</span>(<span class="ruby-identifier">newval</span>, <span class="ruby-ivar">@length</span>) <span class="ruby-operator">:</span> <span class="ruby-keyword kw">self</span>.<span class="ruby-identifier">class</span>.<span class="ruby-identifier">new</span>(<span class="ruby-identifier">newval</span>)
+341:   <span class="ruby-keyword kw">end</span>
 </pre>
           </div>
         </div>
