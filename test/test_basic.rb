@@ -769,8 +769,20 @@ module Tests
     #
     def test_017_mask()
       TestVals.each do |sVal|
-        iVal = sVal.to_i(2)
         bs = BitString.new(sVal)
+        assert_raise(IndexError, "Test error on too many mask bits") do
+          bs.mask(bs.length + 2)
+        end
+        assert_raise(IndexError, "Test error on too many mask bits") do
+          bs.mask(bs.length + 2)
+        end
+        assert_equal(2**bs.length - 1,
+                     bs.mask,
+                     "Test unbounded full mask of '#{sVal}'")
+        bs = BitString.new(sVal, sVal.length)
+        assert_equal(2**bs.length - 1,
+                     bs.mask,
+                     "Test bounded full mask of '#{sVal}'")
       end
     end
 
@@ -780,20 +792,56 @@ module Tests
     def test_018_each()
       TestVals.each do |sVal|
         bs = BitString.new(sVal)
-        bs.each do |pos,val|
+        pos = 0
+        bs.each do |val|
           assert_equal(val,
                        bs[pos],
-                       "Test unbounded each block(#{pos}, #{val})")
+                       "Test unbounded each block(#{val}) (for #{pos})")
+          pos += 1
         end
         #
         # And again for a bounded value.
         #
         bs = BitString.new(sVal, sVal.length)
-        bs.each do |pos,val|
+        pos = 0
+        bs.each do |val|
           assert_equal(val,
                        bs[pos],
-                       "Test bounded each block(#{pos}, #{val})")
+                       "Test bounded each block(#{val}) (for #{pos})")
+          pos += 1
         end
+      end
+    end
+
+    #
+    # Test the each() method.
+    #
+    def test_020_population()
+      TestVals.each do |sVal|
+        bs = BitString.new(sVal)
+        ones = sVal.gsub(/0/, '').length
+        zeroes = sVal.gsub(/^0+/, '').gsub(/1/, '').length
+        assert_raise(ArgumentError, 'Test exception for population("a")') do
+          bs.population('a')
+        end
+        assert_equal(ones,
+                     bs.population(1),
+                     "Test unbounded '#{sVal}'.population(1)")
+        assert_equal(zeroes,
+                     bs.population(0),
+                     "Test unbounded '#{sVal}'.population(0)")
+        #
+        # Now bounded.
+        #
+        bs = BitString.new(sVal, sVal.length)
+        ones = sVal.gsub(/0/, '').length
+        zeroes = sVal.gsub(/1/, '').length
+        assert_equal(ones,
+                     bs.population(1),
+                     "Test bounded '#{sVal}'.population(1)")
+        assert_equal(zeroes,
+                     bs.population(0),
+                     "Test bounded '#{sVal}'.population(0)")
       end
     end
 

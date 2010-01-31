@@ -72,10 +72,18 @@ class BitString
   # [<i>value</i>] <i>BitString</i>, <i>Integer</i>, or <i>String</i>.  Value to AND with the bitstring.
   #
   # === Examples
-  #   bs = BitString.new('111111111')
-  #   nbs = bs & '111100011'
-  #   puts nbs.to_s.inspect
-  #   "111100011"
+  #  bs = BitString.new('111111111')
+  #  nbs = bs & '111100011'
+  #  nbs.to_s
+  #  => "111100011"
+  #
+  #  bs = BitString.new('10101010101', 11)
+  #  nbs = bs & '11110001111'
+  #  nbs.to_s
+  #  => "10100000101"
+  #  nbs = bs & '00001110000'
+  #  nbs.to_s
+  #  => "00001010000"
   #
   # === Exceptions
   # <i>None</i>.
@@ -90,7 +98,7 @@ class BitString
   #
   # === Description
   #
-  # Perform a left-shift on the bitstring, returning a <i>BitString</i>
+  # Perform a left-shift on the bitstring, returning a new <i>BitString</i>
   # containing the shifted value.  If the bitstring is bounded, bits
   # shifted off the high end are lost.
   #
@@ -102,6 +110,18 @@ class BitString
   # [<i>bitcount</i>] <i>Integer</i>.  Number of positions by which to left-shift.
   #
   # === Examples
+  #  bs = BitString.new('1100111')
+  #  nbs = bs << 2
+  #  nbs.to_s
+  #  => "110011100"
+  #
+  #  bs = BitString.new('00010001', 8)
+  #  nbs = bs << 2
+  #  nbs.to_s
+  #  => "01000100"
+  #  nbs = bs << 4
+  #  nbs.to_s
+  #  => "00010000"   # High bits shifted off and lost
   #
   # === Exceptions
   # <i>None</i>.
@@ -130,6 +150,18 @@ class BitString
   # [<i>bitcount</i>] <i>Integer</i>.  Number of positions to right-shift by.
   #
   # === Examples
+  #  bs = BitString.new('1100111')
+  #  nbs = bs >> 2
+  #  nbs.to_s
+  #  => "11001"
+  #
+  #  bs = BitString.new('00010001', 8)
+  #  nbs = bs >> 2
+  #  nbs.to_s
+  #  => "00000100"
+  #  nbs = bs >> 4
+  #  nbs.to_s
+  #  => "00000001"
   #
   # === Exceptions
   # <i>None</i>.
@@ -162,6 +194,21 @@ class BitString
   # [<i>range</i>] <i>Range</i>. Subset specified as a range.
   #
   # === Examples
+  #  bs = BitString.new('110010110')
+  #  bs[0]
+  #  => 0
+  #  bs[1]
+  #  => 1
+  #  bs[0..1].to_s       # Multi-bit indexing returns a bitsring
+  #  => "10"
+  #  bs[0,9].to_s
+  #  => "110010110"
+  #  bs[100..102].to_s   # Can index 'way past the end for unbounded bitstrings 
+  #  => "000"
+  #
+  #  bs = BitString.new('110010110', 9)
+  #  bs[100..102].to_s   #
+  #  => exception: "IndexError: index out of range"
   #
   # === Exceptions
   # [<tt>ArgumentError</tt>] If length specified with a range.
@@ -213,6 +260,28 @@ class BitString
   # [<i>range</i>] <i>Range</i>.  Range of bits (<i>e.g.</i>, 5..10) to affect.
   #
   # === Examples
+  #  bs = BitString.new('110010110')
+  #  bs[0] = 1
+  #  => 1
+  #  bs.to_s
+  #  => "110010111"
+  #  bs[1] = 0
+  #  => 0
+  #  bs.to_s
+  #  => "110010101"
+  #  bs[0..3] = 14       # Multi-bit indexing set a bitsring
+  #  => "14"
+  #  bs.to_s
+  #  => "110011110"
+  #  bs[12..14] = 5
+  #  => 5
+  #  bs.to_s
+  #  => "101000110011110" # Can index past the end for unbounded bitstrings 
+  #
+  #  bs = BitString.new('110010110', 9)
+  #  bs[1,3] = 4095       # 111111111111, but gets truncated to low 3 bits
+  #  bs.to_s
+  #  => "110011110"
   #
   # === Exceptions
   # [<tt>ArgumentError</tt>] Both range and length specified, or value cannot be interpreted as an integer.
@@ -255,14 +324,14 @@ class BitString
     # All the checking is done, let's do this thing.
     #
     vMask = 2**nBits - 1
-    value &= vMask
+    fvalue = (value &= vMask)
     vMask *= 2**start
     value *= 2**start
 
     highpos = self.length
     bValue = @value & ((2**highpos - 1) & ~vMask)
     @value = bValue | value
-    value / 2**start
+    return fvalue
   end                           # def []=
 
   #
@@ -279,6 +348,13 @@ class BitString
   # [<i>value</i>] <i>Array</i>, <i>BitString</i>, <i>Integer</i>, or <i>String</i>.  Value treated as a bitstream and exclusively ORed with the bitstring.
   #
   # === Examples
+  #  bs = BitString.new('110010110', 9)
+  #  nbs = bs ^ '001101001'
+  #  nbs.to_s
+  #  => "111111111"
+  #  nbs = bs ^ bs.mask   # Equivalent to 'nbs =  ~ bs'
+  #  nbs.to_s
+  #  => "001101001"
   #
   # === Exceptions
   # <i>None</i>.
@@ -305,6 +381,10 @@ class BitString
   # [<i>value</i>] <i>Array</i>, <i>BitString</i>, <i>Integer</i>, or <i>String</i>.  Value treated as a bitstream and inclusively ORed with the bitstring.
   #
   # === Examples
+  #  bs = BitString.new('110010110')
+  #  nbs = bs | '11000000000000000'
+  #  nbs.to_s                        # Bits cab be ORed in anywhere in an
+  #  => "11000000110010110"          # unbouded string
   #
   # === Exceptions
   # <i>None</i>.
@@ -331,7 +411,26 @@ class BitString
   # <i>None</i>.
   #
   # === Examples
+  #  bs = BitString.new('110010110')
+  #  nbs = ~ bs
+  #  nbs.to_s
+  #  => "1101001"                 # Leading zeroes stripped when unbounded
   #
+  #  bs = BitString.new('110010110', 9)
+  #  nbs = ~ bs
+  #  nbs.to_s
+  #  => "001101001"
+  #
+  #  bs = BitString.new('111111111')
+  #  nbs = ~ bs
+  #  nbs.to_s
+  #  => "0"
+  #
+  #  bs = BitString.new('111111111', 9)
+  #  nbs = ~ bs
+  #  nbs.to_s
+  #  => "000000000"
+  # 
   # === Exceptions
   # <i>None</i>.
   #
@@ -343,7 +442,8 @@ class BitString
   #
   # === Description
   #
-  # Perform an equality check against another bitstring.
+  # Perform an equality check against another bitstring.  The value and
+  # the boundedness must both match to be considered equal.
   #
   # call-seq:
   # bitstring == <i>compstring</i> => <i>Boolean</i>
@@ -353,6 +453,19 @@ class BitString
   # [<i>compstring</i>] <i>BitString</i>. Bitstring to compare against.
   #
   # === Examples
+  #  bs1 = BitString.new('111111111')
+  #  bs2 = BitString.new('111111111', 9)
+  #  bs1 == bs2
+  #  => false
+  #
+  #  bs1 = BitString.new('111111111')
+  #  bs2 = BitString.new('111111111')
+  #  bs1 == bs2
+  #  => true
+  #
+  #  bs1 = BitString.new('111111111')
+  #  bs1 == '111111111'
+  #  => false
   #
   # === Exceptions
   # <i>None</i>.

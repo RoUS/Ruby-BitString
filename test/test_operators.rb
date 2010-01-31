@@ -16,6 +16,70 @@ module Tests
       #
       # Test ANDing with Array, String, BitString, and Integer values.
       #
+      TestVals.each do |sVal|
+        #
+        # AND with two unbounded bitstrings
+        #
+        bs1 = BitString.new(sVal)
+        bs2 = BitString.new(sVal)
+        #
+        # First test our assumption
+        #
+        assert_equal(bs2.to_i,
+                     bs1.to_i,
+                     "Verify bitstring.to_i values of two strings made " +
+                     "from the same value are equal")
+        #
+        # Unbounded & unbounded
+        #
+        assert_equal(bs1.to_i,
+                     (bs1 & bs2).to_i,
+                     "Test unbounded '#{sVal}'1 & unbounded '#{sVal}'2 => " +
+                     "'#{sVal}'")
+        assert_equal(bs2.to_i,
+                     (bs2 & bs1).to_i,
+                     "Test unbounded '#{sVal}'2 & unbounded '#{sVal}'1 => " +
+                     "'#{sVal}'")
+        #
+        # Unbounded & bounded
+        #
+        bs1 = BitString.new(sVal)
+        bs2 = BitString.new(sVal, sVal.length)
+        assert_equal(bs1.to_i,
+                     (bs1 & bs2).to_i,
+                     "Test unbounded '#{sVal}'1 & bounded '#{sVal}'2 => " +
+                     "'#{sVal}'")
+        assert_equal(bs2.to_i,
+                     (bs2 & bs1).to_i,
+                     "Test bounded '#{sVal}'2 & unbounded '#{sVal}'1 => " +
+                     "'#{sVal}'")
+        #
+        # Bounded & unbounded
+        #
+        bs1 = BitString.new(sVal, sVal.length)
+        bs2 = BitString.new(sVal)
+        assert_equal(bs1.to_i,
+                     (bs1 & bs2).to_i,
+                     "Test bounded '#{sVal}'1 & unbounded '#{sVal}'2 => " +
+                     "'#{sVal}'")
+        assert_equal(bs2.to_i,
+                     (bs2 & bs1).to_i,
+                     "Test unbounded '#{sVal}'2 & bounded '#{sVal}'1 => " +
+                     "'#{sVal}'")
+        #
+        # Bounded & bounded
+        #
+        bs1 = BitString.new(sVal, sVal.length)
+        bs2 = BitString.new(sVal, sVal.length)
+        assert_equal(bs1.to_i,
+                     (bs1 & bs2).to_i,
+                     "Test bounded '#{sVal}'1 & bounded '#{sVal}'2 => " +
+                     "'#{sVal}'")
+        assert_equal(bs2.to_i,
+                     (bs2 & bs1).to_i,
+                     "Test bounded '#{sVal}'2 & bounded '#{sVal}'1 => " +
+                     "'#{sVal}'")
+      end
     end                         # def test_001_AND()
 
     def test_002_LT()
