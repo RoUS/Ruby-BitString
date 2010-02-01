@@ -753,18 +753,6 @@ module Tests
     end
 
     #
-    # @TODO
-    #
-    # slice() and slice!()
-    #
-    def test_016_slice()
-      TestVals.each do |sVal|
-        iVal = sVal.to_i(2)
-        bs = BitString.new(sVal)
-      end
-    end
-
-    #
     # Test the masking.
     #
     def test_017_mask()
@@ -814,7 +802,7 @@ module Tests
     end
 
     #
-    # Test the each() method.
+    # Test the bit-counting method.
     #
     def test_020_population()
       TestVals.each do |sVal|

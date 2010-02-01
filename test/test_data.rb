@@ -14,6 +14,9 @@ module Tests
                 '010101010101010101010101010101'
                ]
 
+    IfNoneCalled = 'IfNone invoked'
+    IfNone = lambda { return IfNoneCalled }
+
   end                         # class Test_BitStrings
 
 end                           # module Tests

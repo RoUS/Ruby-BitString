@@ -83,18 +83,22 @@ module Tests
     end                         # def test_001_AND()
 
     def test_002_LT()
+      # Not supported for BitString
     end                         # def test_002_LT()
 
     def test_003_ShiftLeft()
     end                         # def test_003_ShiftLeft()
 
     def test_004_LEQ()
+      # Not supported for BitString
     end                         # def test_004_LEQ()
 
     def test_005_GT()
+      # Not supported for BitString
     end                         # def test_005_GT()
 
     def test_006_GEQ()
+      # Not supported for BitString
     end                         # def test_006_GEQ()
 
     def test_007_ShiftRight()
