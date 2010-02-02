@@ -41,80 +41,85 @@ module Tests
         #
         # Test making an unbounded string from the integer.
         #
-        assert_nothing_raised do
+        assert_nothing_raised("Test unbounded no exception new(#{iVal})") do
           bs = BitString.new(iVal)
         end
 
         #
         # From the string.
         #
-        assert_nothing_raised do
+        assert_nothing_raised("Test unbounded no exception new('#{sVal}')") do
           bs = BitString.new(sVal)
         end
 
         #
         # From the array of integers.
         #
-        assert_nothing_raised do
+        assert_nothing_raised("Test unbounded no exception new('#{iVal_a.inspect}')") do
           bs = BitString.new(iVal_a)
         end
 
         #
         # Try bounded now.
         #
-        assert_nothing_raised do
+        assert_nothing_raised("Test bounded no exception new(#{iVal})") do
           bs = BitString.new(iVal, lVal)
         end
-        assert_nothing_raised do
+        assert_nothing_raised("Test bounded no exception new('#{sVal}')") do
           bs = BitString.new(sVal, lVal)
         end
-        assert_nothing_raised do
+        assert_nothing_raised("Test bounded no exception new(#{iVal_a.inspect})") do
           bs = BitString.new(iVal_a, lVal)
         end
 
         #
         # Again, with lengths shorter than the values.
         #
-        assert_nothing_raised do
+        assert_nothing_raised("Test bounded no exception new(#{iVal} short)") do
           bs = BitString.new(iVal, lVal / 2)
         end
-        assert_nothing_raised do
+        assert_nothing_raised("Test bounded no exception new('#{sVal}' short)") do
           bs = BitString.new(sVal, lVal / 2)
         end
-        assert_nothing_raised do
+        assert_nothing_raised("Test bounded no exception new(#{iVal_a.inspect} short)") do
           bs = BitString.new(iVal_a, lVal / 2)
         end
 
         #
         # Now the block (bounded) form.
         #
-        assert_nothing_raised do
+        assert_nothing_raised("Test bounded new() {'#{sVal}'}") do
           bs = BitString.new(lVal) { |bit| sVal_a_r[bit] }
         end
-        assert_nothing_raised do
+        assert_nothing_raised("Test bounded new() {#{iVal_a.inspect}}") do
           bs = BitString.new(lVal) { |bit| iVal_a_r[bit] }
         end
 
         #
         # Check that the constructor arguments are vetted.
         #
-        assert_raise(ArgumentError) do
-          bs = BitString.new('a')
+        input = 'a'
+        assert_raise(ArgumentError, "Test unbounded new(#{input.inspect})") do
+          bs = BitString.new(input)
         end
-        assert_raise(ArgumentError) do
-          bs = BitString.new(iVal_a.collect { |v| v * 2 })
+        input = iVal_a.collect { |v| v + 2 }
+        assert_raise(ArgumentError, "Test unbounded new(#{input.inspect})") do
+          bs = BitString.new(input)
         end
-        tVal = iVal.to_s
-        assert_raise(ArgumentError) do
-          bs = BitString.new(tVal)
+        input = iVal.to_s
+        unless (iVal < 2)
+          assert_raise(ArgumentError, "Test unbounded new(#{input.inspect})") do
+            bs = BitString.new(input)
+          end
+          assert_raise(ArgumentError, "Test bounded new(#{input.inspect})") do
+            bs = BitString.new(input, input.length)
+          end
         end
-        assert_raise(ArgumentError) do
-          bs = BitString.new(tVal, tVal.length)
+        input = 'a'
+        assert_raise(ArgumentError, "Test bounded new(#{input.inspect})") do
+          bs = BitString.new(input, 1)
         end
-        assert_raise(ArgumentError) do
-          bs = BitString.new('a', 1)
-        end
-        assert_raise(ArgumentError) do
+        assert_raise(ArgumentError, "Test bounded new(0, 'a')") do
           bs = BitString.new(0, 'a')
         end
       end
@@ -155,7 +160,7 @@ module Tests
     def test_003_to_s()
       TestVals.each do |sVal|
         iVal = sVal.to_i(2)
-        sVal_e = sVal.sub(/^0+/, '')
+        sVal_e = sVal.sub(/^0+(.)/, '\1')
         bs = BitString.new(sVal)
         assert_equal(sVal_e,
                      bs.to_s,
@@ -177,7 +182,7 @@ module Tests
         # bitstring, or the number of digits from the most significant
         # 1.
         #
-        uLength  = sVal.sub(/^0+/, '').length
+        uLength  = sVal.sub(/^0+(.)/, '\1').length
         bLength = sVal.length
         bs = BitString.new(sVal)
         assert_equal(uLength,
@@ -654,6 +659,10 @@ module Tests
     # Try resizing bitstrings.
     #
     def test_014_resize()
+      assert_raise(IndexError, "Test resize(0) raises IndexError") do
+        bs = BitString.new(-1, 12)
+        bs.resize(0)
+      end
       TestVals.each do |sVal|
         #
         # First off, test resizing unbounded bitstrings.  The length()
@@ -663,11 +672,12 @@ module Tests
         #
         bs = BitString.new(sVal)
         oLength = bs.length
-        uLength  = sVal.sub(/^0+/, '').length
+        uLength  = sVal.sub(/^0+(.)/, '\1').length
         #
-        # Resize down.
+        # Resize down.  Make sure we have at least 1 bit, since resizing
+        # to zero length raises an exception.
         #
-        nBits = [9, uLength / 2].min
+        nBits = [9, [uLength / 2, 1].max].min
         tbs = bs.resize(nBits)
         assert_equal(oLength,
                      bs.length,
@@ -808,7 +818,7 @@ module Tests
       TestVals.each do |sVal|
         bs = BitString.new(sVal)
         ones = sVal.gsub(/0/, '').length
-        zeroes = sVal.gsub(/^0+/, '').gsub(/1/, '').length
+        zeroes = sVal.gsub(/^0+(.)/, '\1').gsub(/1/, '').length
         assert_raise(ArgumentError, 'Test exception for population("a")') do
           bs.population('a')
         end

@@ -8,23 +8,9 @@ require File.dirname(__FILE__) + '/test_data.rb'
 
 module Tests
 
-#all?
-#any?
-#collect
-#detect
-#each_with_index
-#entries
-#find
-#find_all
-#include?
 #inject
-#length
-#map
 #member?
 #reject
-#select
-#slice
-#slice!
 #to_set
 #zip
 
@@ -57,7 +43,7 @@ module Tests
         assert(! bs.all? { |v| false },
                "Test bounded '#{sVal}'.all? false == false")
         tick = 0
-        assert(! bs.all? { |v| v == sVal[-1,1].to_i(2) },
+        assert(! bs.all? { |v| ((tick += 1) % 2) == 0 },
                "Test bounded '#{sVal}'.all? sometimes == false")
       end
     end
@@ -271,24 +257,88 @@ module Tests
       end
     end
 
+    #
+    # No grep here..
+    #
     def test_xxx_grep()
       return unless (BitString.new.respond_to?(:grep))
-      assert(true)
+      assert(false, '###FAIL! .grep not supported but .respond_to? is true!')
     end
 
+    #
+    # Only 0 and 1 will ever succeed..
+    #
     def test_xxx_include?()
       return unless (BitString.new.respond_to?(:include?))
-      assert(true)
+      TestVals.each do |sVal|
+        #
+        # Unbounded.
+        #
+        bs = BitString.new(sVal)
+        assert(! bs.include?(2),
+               "Test unbounded '#{sVal}'.include?(2) fails")
+        [0, 1].each do |val|
+          if (bs.population(val) != 0)
+            assert(bs.include?(val),
+                   "Test unbounded '#{sVal}'.include?(#{val}) succeeds")
+          else
+            assert(! bs.include?(val),
+                   "Test unbounded '#{sVal}'.include?(#{val}) fails")
+          end
+        end
+        #
+        # Bounded.
+        #
+        bs = BitString.new(sVal, sVal.length)
+        assert(! bs.include?(2),
+               "Test bounded '#{sVal}'.include?(2) fails")
+        [0, 1].each do |val|
+          if (bs.population(val) != 0)
+            assert(bs.include?(val),
+                   "Test bounded '#{sVal}'.include?(#{val}) succeeds")
+          else
+            assert(! bs.include?(val),
+                   "Test bounded '#{sVal}'.include?(#{val}) fails")
+          end
+        end
+      end
     end
 
+    #
+    # Test .inject
+    #
     def test_xxx_inject()
       return unless (BitString.new.respond_to?(:inject))
-      assert(true)
+      TestVals.each do |sVal|
+        bs = BitString.new(sVal)
+        result = bs.inject { |memo,val| memo += val }
+        assert_equal(bs.population(1),
+                     result,
+                     "Test unbounded '#{sVal}'.inject { memo + 1s}")
+        result = bs.inject(-20) { |memo,val| memo += val }
+        assert_equal(bs.population(1) - 20,
+                     result,
+                     "Test unbounded '#{sVal}'.inject(-20) { memo + 1s}")
+        #
+        # This one is failing because of the issue with the leading
+        # zeroes being stripped and the initial memo value being set
+        # from the LSB.  I think.
+        #
+        result = bs.inject { |memo,val| memo += (val == 0 ? 1 : 0) }
+        assert_equal(bs.population(0),
+                     result,
+                     "Test unbounded '#{sVal}'.inject { memo + 0s}")
+        result = bs.inject(-20) { |memo,val| memo += (val == 0 ? 1 : 0) }
+        assert_equal(bs.population(0) - 20,
+                     result,
+                     "Test unbounded '#{sVal}'.inject(-20) { memo + 0s}")
+      end
     end
 
     def test_xxx_map()
-      return unless (BitString.new.respond_to?(:map))
-      assert(true)
+      #
+      # Same as .collect so don't bother to test.
+      #
     end
 
     def test_xxx_max()
