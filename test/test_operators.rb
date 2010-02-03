@@ -83,34 +83,72 @@ module Tests
     end                         # def test_001_AND()
 
     def test_002_LT()
-      # Not supported for BitString
+      return unless (BitString.new.respond_to?(:<))
+      assert(false, '###FAIL! .< not supported but .respond_to? is true!')
     end                         # def test_002_LT()
 
     def test_003_ShiftLeft()
+      return unless (BitString.new.respond_to?(:<<))
+      TestVals.each do |sVal|
+        #
+        # Start with unbounded strings.
+        #
+        rVal = sVal.to_i(2).to_s(2)
+        bs = BitString.new(sVal)
+        (sVal.length * 2).times do |i|
+          expected = (rVal + '0' * i).to_i(2).to_s(2)
+          assert_equal(expected,
+                       (bs << i).to_s,
+                       "Test unbounded '#{sVal}' << #{i} == #{expected}")
+        end
+        #
+        # Now the bounded ones.
+        #
+        l = sVal.length
+        bs = BitString.new(sVal, l)
+        rVal = bs.to_s
+        (sVal.length * 2).times do |i|
+          expected = (rVal + '0' * i)[-l,l]
+          assert_equal(expected,
+                       (bs << i).to_s,
+                       "Test bounded '#{sVal}' << #{i} == #{expected}")
+        end
+      end
     end                         # def test_003_ShiftLeft()
 
     def test_004_LEQ()
-      # Not supported for BitString
+      return unless (BitString.new.respond_to?(:<=))
+      assert(false, '###FAIL! .<= not supported but .respond_to? is true!')
     end                         # def test_004_LEQ()
 
     def test_005_GT()
-      # Not supported for BitString
+      return unless (BitString.new.respond_to?(:>))
+      assert(false, '###FAIL! .> not supported but .respond_to? is true!')
     end                         # def test_005_GT()
 
     def test_006_GEQ()
-      # Not supported for BitString
+      return unless (BitString.new.respond_to?(:>=))
+      assert(false, '###FAIL! .>= not supported but .respond_to? is true!')
     end                         # def test_006_GEQ()
 
     def test_007_ShiftRight()
+      return unless (BitString.new.respond_to?(:>>))
+      assert(true)
     end                         # def test_007_ShiftRight()
 
     def test_008_XOR()
+      return unless (BitString.new.respond_to?(:^))
+      assert(true)
     end                         # def test_008_XOR()
 
     def test_009_OR()
+      return unless (BitString.new.respond_to?(:|))
+      assert(true)
     end                         # def test_009_OR()
 
     def test_010_NOT()
+      return unless (BitString.new.respond_to?(:~))
+      assert(true)
     end                         # def test_010_NOT()
 
   end                           # class Test_BitStrings

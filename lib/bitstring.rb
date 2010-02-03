@@ -236,8 +236,9 @@ class BitString
 
   #
   # ..but not all of them.  Some just don't make sense for bitstrings.
+  # (.zip makes sense, but I'm going to defer it until I have a test for it.)
   #
-  undef :grep, :partition, :sort, :sort_by
+  undef :grep, :sort, :sort_by, :zip
 
   #
   # <i>Boolean</i>.  Whether or not the bitstring is bounded and limited

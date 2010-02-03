@@ -8,19 +8,13 @@ require File.dirname(__FILE__) + '/test_data.rb'
 
 module Tests
 
-#inject
-#member?
-#reject
-#to_set
-#zip
-
   class Test_BitStrings < Test::Unit::TestCase
 
     #
     # The all? method returns true IFF every iteration of the block returns
     # a true value.
     #
-    def test_xxx_all?()
+    def test_010_all?()
       return unless (BitString.new.respond_to?(:all?))
       TestVals.each do |sVal|
         #
@@ -32,7 +26,7 @@ module Tests
         assert(! bs.all? { |v| false },
                "Test unbounded '#{sVal}'.all? false == false")
         tick = 0
-        assert(! bs.all? { |v| ((tick += 1) % 2) == 0 },
+        assert(! bs.all? { |v| ((tick += 1) % 2).zero? },
                "Test unbounded '#{sVal}'.all? sometimes == false")
         #
         # Repeat for bounded strings.
@@ -43,7 +37,7 @@ module Tests
         assert(! bs.all? { |v| false },
                "Test bounded '#{sVal}'.all? false == false")
         tick = 0
-        assert(! bs.all? { |v| ((tick += 1) % 2) == 0 },
+        assert(! bs.all? { |v| ((tick += 1) % 2).zero? },
                "Test bounded '#{sVal}'.all? sometimes == false")
       end
     end
@@ -52,7 +46,7 @@ module Tests
     # Test that the any? method works. (Returns true if any iteration of
     # the block does.)
     #
-    def test_xxx_any?()
+    def test_020_any?()
       return unless (BitString.new.respond_to?(:any?))
       TestVals.each do |sVal|
         #
@@ -80,7 +74,7 @@ module Tests
       end
     end
 
-    def test_xxx_collect()
+    def test_030_collect()
       return unless (BitString.new.respond_to?(:collect))
       TestVals.each do |sVal|
         #
@@ -108,7 +102,7 @@ module Tests
     # by the ifnone argument and returns its result; otherwise it returns
     # nil.
     #
-    def test_xxx_detect()
+    def test_040_detect()
       return unless (BitString.new.respond_to?(:detect))
       TestVals.each do |sVal|
         #
@@ -143,7 +137,7 @@ module Tests
     #
     # Like .each, only passes two arguments.
     #
-    def test_xxx_each_with_index()
+    def test_050_each_with_index()
       return unless (BitString.new.respond_to?(:each_with_index))
       TestVals.each do |sVal|
         #
@@ -172,7 +166,7 @@ module Tests
     #
     # Convert to an array.  (Equivalent to .to_a ?)
     #
-    def test_xxx_entries()
+    def test_060_entries()
       return unless (BitString.new.respond_to?(:entries))
       TestVals.each do |sVal|
         #
@@ -194,7 +188,7 @@ module Tests
       end
     end
 
-    def test_xxx_find()
+    def test_070_find()
       #
       # Same as .detect(), don't bother to test.
       #
@@ -204,7 +198,7 @@ module Tests
     # Like .find/.detect except it returns all matching values, not just
     # the first.
     #
-    def test_xxx_find_all()
+    def test_080_find_all()
       return unless (BitString.new.respond_to?(:find_all))
       TestVals.each do |sVal|
         #
@@ -217,7 +211,7 @@ module Tests
         # .population should have been tested in test_basic
         #
         assert_equal(bs.population(0),
-                     bs.find_all { |v| v == 0 }.length,
+                     bs.find_all { |v| v.zero? }.length,
                      "Test unbounded '#{sVal}.find_all{0}.length " +
                      "== population(0)")
         assert_equal(bs.population(1),
@@ -226,11 +220,11 @@ module Tests
                      "== population(1)")
         sVal_t = sVal.sub(/^0+(.)/, '\1').reverse.split(//)
         tick = 0
-        sVal_t = sVal_t.find_all { |v| ((tick += 1) % 2) == 0 }
+        sVal_t = sVal_t.find_all { |v| ((tick += 1) % 2).zero? }
         sVal_t.collect! { |v| v.to_i(2) }
         tick = 0
         assert_equal(sVal_t,
-                     bs.find_all { |v| ((tick += 1) % 2) == 0 },
+                     bs.find_all { |v| ((tick += 1) % 2).zero? },
                      "Test unbounded '#{sVal}'.find_all(alt) works")
         #
         # Bounded.
@@ -239,7 +233,7 @@ module Tests
         assert(bs.find_all { |v| false }.empty?,
                "Test bounded '#{sVal}'.find_all{false} == []")
         assert_equal(bs.population(0),
-                     bs.find_all { |v| v == 0 }.length,
+                     bs.find_all { |v| v.zero? }.length,
                      "Test bounded '#{sVal}.find_all{0}.length " +
                      "== population(0)")
         assert_equal(bs.population(1),
@@ -248,11 +242,11 @@ module Tests
                      "== population(1)")
         sVal_t = sVal.reverse.split(//)
         tick = 0
-        sVal_t = sVal_t.find_all { |v| ((tick += 1) % 2) == 0 }
+        sVal_t = sVal_t.find_all { |v| ((tick += 1) % 2).zero? }
         sVal_t.collect! { |v| v.to_i(2) }
         tick = 0
         assert_equal(sVal_t,
-                     bs.find_all { |v| ((tick += 1) % 2) == 0 },
+                     bs.find_all { |v| ((tick += 1) % 2).zero? },
                      "Test bounded '#{sVal}'.find_all(alt) works")
       end
     end
@@ -260,7 +254,7 @@ module Tests
     #
     # No grep here..
     #
-    def test_xxx_grep()
+    def test_090_grep()
       return unless (BitString.new.respond_to?(:grep))
       assert(false, '###FAIL! .grep not supported but .respond_to? is true!')
     end
@@ -268,7 +262,7 @@ module Tests
     #
     # Only 0 and 1 will ever succeed..
     #
-    def test_xxx_include?()
+    def test_100_include?()
       return unless (BitString.new.respond_to?(:include?))
       TestVals.each do |sVal|
         #
@@ -307,7 +301,7 @@ module Tests
     #
     # Test .inject
     #
-    def test_xxx_inject()
+    def test_110_inject()
       return unless (BitString.new.respond_to?(:inject))
       TestVals.each do |sVal|
         #
@@ -327,7 +321,7 @@ module Tests
         # zeroes being stripped and the initial memo value being set
         # from the LSB.  I think.
         #
-        result = bs.inject { |memo,val| memo + (val == 0 ? 1 : 0) }
+        result = bs.inject { |memo,val| memo + (val.zero? ? 1 : 0) }
         expected = bs.population(0)
         if (bs.population(1) == bs.length)
           #
@@ -335,7 +329,7 @@ module Tests
           # the value of bs[0].  Adjust the expectation.
           #
           expected = bs[0]
-        elsif (bs[0] == 0)
+        elsif (bs[0].zero?)
           #
           # memo will start out as zero, taken from the first bit, which
           # won't be counted.  .population did, though, so take it off.
@@ -351,7 +345,7 @@ module Tests
         assert_equal(expected,
                      result,
                      "Test unbounded '#{sVal}'.inject { memo + 0s}")
-        result = bs.inject(-20) { |memo,val| memo + (val == 0 ? 1 : 0) }
+        result = bs.inject(-20) { |memo,val| memo + (val.zero? ? 1 : 0) }
         assert_equal(bs.population(0) - 20,
                      result,
                      "Test unbounded '#{sVal}'.inject(-20) { memo + 0s}")
@@ -369,7 +363,7 @@ module Tests
         assert_equal(expected,
                      result,
                      "Test bounded '#{sVal}'.inject(-20) { memo + 1s}")
-        result = bs.inject { |memo,val| memo + (val == 0 ? 1 : 0) }
+        result = bs.inject { |memo,val| memo + (val.zero? ? 1 : 0) }
         expected = bs.population(0)
         if (bs.population(1) == bs.length)
           #
@@ -377,7 +371,7 @@ module Tests
           # the value of bs[0].  Adjust the expectation.
           #
           expected = bs[0]
-        elsif (bs[0] == 0)
+        elsif (bs[0].zero?)
           #
           # memo will start out as zero, taken from the first bit, which
           # won't be counted.  .population did, though, so take it off.
@@ -393,27 +387,27 @@ module Tests
         assert_equal(expected,
                      result,
                      "Test bounded '#{sVal}'.inject { memo + 0s}")
-        result = bs.inject(-20) { |memo,val| memo + (val == 0 ? 1 : 0) }
+        result = bs.inject(-20) { |memo,val| memo + (val.zero? ? 1 : 0) }
         assert_equal(bs.population(0) - 20,
                      result,
                      "Test bounded '#{sVal}'.inject(-20) { memo + 0s}")
       end
     end
 
-    def test_xxx_map()
+    def test_120_map()
       #
       # Same as .collect so don't bother to test.
       #
     end
 
-    def test_xxx_max()
+    def test_130_max()
       return unless (BitString.new.respond_to?(:max))
       TestVals.each do |sVal|
         #
         # Unbounded.
         #
         bs = BitString.new(sVal)
-        expected = bs.to_i == 0 ? 0 : 1
+        expected = bs.to_i.zero? ? 0 : 1
         assert_equal(expected,
                      bs.max,
                      "Test unbounded '#{sVal}'.max == #{expected}")
@@ -421,19 +415,20 @@ module Tests
         # Bounded.
         #
         bs = BitString.new(sVal, sVal.length)
-        expected = bs.to_i == 0 ? 0 : 1
+        expected = bs.to_i.zero? ? 0 : 1
         assert_equal(expected,
                      bs.max,
                      "Test bounded '#{sVal}'.max == #{expected}")
       end
     end
 
-    def test_xxx_member?()
-      return unless (BitString.new.respond_to?(:member?))
-      assert(true)
+    def test_140_member?()
+      #
+      # Same as .include? so don't bother to test.
+      #
     end
 
-    def test_xxx_min()
+    def test_150_min()
       return unless (BitString.new.respond_to?(:min))
       TestVals.each do |sVal|
         #
@@ -455,20 +450,122 @@ module Tests
       end
     end
 
-    def test_xxx_partition()
+    def test_160_partition()
       return unless (BitString.new.respond_to?(:partition))
-      assert(true)
+      TestVals.each do |sVal|
+        #
+        # Unbounded.
+        #
+        bs = BitString.new(sVal)
+        n0 = bs.population(0)
+        n1 = bs.population(1)
+        expected = [ Array.new(n0, 0), Array.new(n1, 1) ]
+        result = bs.partition { |val| val.zero? }
+        assert_equal(expected,
+                     result,
+                     "Test unbounded '#{sVal}'.partition{0,1}")
+        expected.reverse!
+        result = bs.partition { |val| ! val.zero? }
+        assert_equal(expected,
+                     result,
+                     "Test unbounded '#{sVal}'.partition{1,0}")
+        #
+        # Bounded.
+        #
+        bs = BitString.new(sVal, sVal.length)
+        n0 = bs.population(0)
+        n1 = bs.population(1)
+        expected = [ Array.new(n0, 0), Array.new(n1, 1) ]
+        result = bs.partition { |val| val.zero? }
+        assert_equal(expected,
+                     result,
+                     "Test bounded '#{sVal}'.partition{0,1}")
+        expected.reverse!
+        result = bs.partition { |val| ! val.zero? }
+        assert_equal(expected,
+                     result,
+                     "Test bounded '#{sVal}'.partition{1,0}")
+      end
     end
 
-    def test_xxx_reject()
+    def test_170_reject()
       return unless (BitString.new.respond_to?(:reject))
-      assert(true)
+      TestVals.each do |sVal|
+        #
+        # Unbounded.
+        #
+        bs = BitString.new(sVal)
+        n0 = bs.population(0)
+        n1 = bs.population(1)
+        expected = Array.new(n0, 0)
+        result = bs.reject { |val| ! val.zero? }
+        assert_equal(expected,
+                     result,
+                     "Test unbounded '#{sVal}'.reject {! 0}")
+        expected = Array.new(n1, 1)
+        result = bs.reject { |val| val.zero? }
+        assert_equal(expected,
+                     result,
+                     "Test unbounded '#{sVal}'.reject {0}")
+        expected = []
+        bs.to_a.each_with_index do |val,pos|
+          expected.push(val) unless (pos.%(2).zero?)
+        end
+        tick = -1
+        result = bs.reject { |val| tick += 1; tick.%(2).zero? }
+        assert_equal(expected,
+                     result,
+                     "Test unbounded '#{sVal}'.reject(%2)")
+        expected = []
+        bs.to_a.each_with_index do |val,pos|
+          expected.push(val) unless (pos.%(3).zero?)
+        end
+        tick = -1
+        result = bs.reject { |val| tick += 1; tick.%(3).zero? }
+        assert_equal(expected,
+                     result,
+                     "Test unbounded '#{sVal}'.reject(%3)")
+        #
+        # Bounded.
+        #
+        bs = BitString.new(sVal, sVal.length)
+        n0 = bs.population(0)
+        n1 = bs.population(1)
+        expected = Array.new(n0, 0)
+        result = bs.reject { |val| ! val.zero? }
+        assert_equal(expected,
+                     result,
+                     "Test bounded '#{sVal}'.reject {! 0}")
+        expected = Array.new(n1, 1)
+        result = bs.reject { |val| val.zero? }
+        assert_equal(expected,
+                     result,
+                     "Test bounded '#{sVal}'.reject {0}")
+        expected = []
+        bs.to_a.each_with_index do |val,pos|
+          expected.push(val) unless (pos.%(2).zero?)
+        end
+        tick = -1
+        result = bs.reject { |val| tick += 1; tick.%(2).zero? }
+        assert_equal(expected,
+                     result,
+                     "Test bounded '#{sVal}'.reject(%2)")
+        expected = []
+        bs.to_a.each_with_index do |val,pos|
+          expected.push(val) unless (pos.%(3).zero?)
+        end
+        tick = -1
+        result = bs.reject { |val| tick += 1; tick.%(3).zero? }
+        assert_equal(expected,
+                     result,
+                     "Test bounded '#{sVal}'.reject(%3)")
+      end
     end
 
     #
     # Test the select() method.
     #
-    def test_xxx_select()
+    def test_180_select()
       TestVals.each do |sVal|
         bs = BitString.new(sVal)
         aVal = bs.select { |bit| true }
@@ -492,7 +589,7 @@ module Tests
     #
     # slice()
     #
-    def test_xxx_slice()
+    def test_190_slice()
       return unless (BitString.new.respond_to?(:slice))
       TestVals.each do |sVal|
         bs = BitString.new(sVal)
@@ -522,7 +619,7 @@ module Tests
     #
     # slice!()
     #
-    def test_xxx_slice!()
+    def test_200_slice!()
       return unless (BitString.new.respond_to?(:slice!))
       TestVals.each do |sVal|
         sVal_r = sVal.reverse
@@ -546,19 +643,27 @@ module Tests
       end
     end
 
-    def test_xxx_sort()
+    def test_210_sort()
       return unless (BitString.new.respond_to?(:sort))
-      assert(true)
+      assert(false, '###FAIL! .sort not supported but .respond_to? is true!')
     end
 
-    def test_xxx_sort_by()
+    #
+    # .sort_by *might* make sense for bitstrings, but leave the
+    # determination for another time.
+    #
+    def test_220_sort_by()
       return unless (BitString.new.respond_to?(:sort_by))
-      assert(true)
+      assert(false, '###FAIL! .sort_by not supported but .respond_to? is true!')
     end
 
-    def test_xxx_zip()
+    #
+    # .zip makes sense for bitstrings, but writing the tests is likely
+    # to be a bit complicated.  Punt for now.
+    #
+    def test_230_zip()
       return unless (BitString.new.respond_to?(:zip))
-      assert(true)
+      assert(false, '###FAIL! .zip not supported but .respond_to? is true!')
     end
 
   end                           # class Test_BitStrings
