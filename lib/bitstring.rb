@@ -237,7 +237,7 @@ class BitString
   #
   # ..but not all of them.  Some just don't make sense for bitstrings.
   #
-  undef :grep, :max, :min, :partition, :sort, :sort_by
+  undef :grep, :partition, :sort, :sort_by
 
   #
   # <i>Boolean</i>.  Whether or not the bitstring is bounded and limited

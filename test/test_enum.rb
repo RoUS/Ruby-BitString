@@ -310,12 +310,15 @@ module Tests
     def test_xxx_inject()
       return unless (BitString.new.respond_to?(:inject))
       TestVals.each do |sVal|
+        #
+        # Unbounded..
+        #
         bs = BitString.new(sVal)
-        result = bs.inject { |memo,val| memo += val }
+        result = bs.inject { |memo,val| memo + val }
         assert_equal(bs.population(1),
                      result,
                      "Test unbounded '#{sVal}'.inject { memo + 1s}")
-        result = bs.inject(-20) { |memo,val| memo += val }
+        result = bs.inject(-20) { |memo,val| memo + val }
         assert_equal(bs.population(1) - 20,
                      result,
                      "Test unbounded '#{sVal}'.inject(-20) { memo + 1s}")
@@ -324,14 +327,76 @@ module Tests
         # zeroes being stripped and the initial memo value being set
         # from the LSB.  I think.
         #
-        result = bs.inject { |memo,val| memo += (val == 0 ? 1 : 0) }
-        assert_equal(bs.population(0),
+        result = bs.inject { |memo,val| memo + (val == 0 ? 1 : 0) }
+        expected = bs.population(0)
+        if (bs.population(1) == bs.length)
+          #
+          # All 1s means no 0s -- but memo picked up
+          # the value of bs[0].  Adjust the expectation.
+          #
+          expected = bs[0]
+        elsif (bs[0] == 0)
+          #
+          # memo will start out as zero, taken from the first bit, which
+          # won't be counted.  .population did, though, so take it off.
+          #
+          expected -= 1
+        elsif (bs[0] == 1)
+          #
+          # memo will start out as 1 from the lsb, but that's not a zero --
+          # so alter the population result to allow for its addition.
+          #
+          expected += 1
+        end
+        assert_equal(expected,
                      result,
                      "Test unbounded '#{sVal}'.inject { memo + 0s}")
-        result = bs.inject(-20) { |memo,val| memo += (val == 0 ? 1 : 0) }
+        result = bs.inject(-20) { |memo,val| memo + (val == 0 ? 1 : 0) }
         assert_equal(bs.population(0) - 20,
                      result,
                      "Test unbounded '#{sVal}'.inject(-20) { memo + 0s}")
+        #
+        # Bounded..
+        #
+        bs = BitString.new(sVal, sVal.length)
+        result = bs.inject { |memo,val| memo + val }
+        expected = bs.population(1)
+        assert_equal(expected,
+                     result,
+                     "Test bounded '#{sVal}'.inject { memo + 1s}")
+        result = bs.inject(-20) { |memo,val| memo + val }
+        expected = bs.population(1) - 20
+        assert_equal(expected,
+                     result,
+                     "Test bounded '#{sVal}'.inject(-20) { memo + 1s}")
+        result = bs.inject { |memo,val| memo + (val == 0 ? 1 : 0) }
+        expected = bs.population(0)
+        if (bs.population(1) == bs.length)
+          #
+          # All 1s means no 0s -- but memo picked up
+          # the value of bs[0].  Adjust the expectation.
+          #
+          expected = bs[0]
+        elsif (bs[0] == 0)
+          #
+          # memo will start out as zero, taken from the first bit, which
+          # won't be counted.  .population did, though, so take it off.
+          #
+          expected -= 1
+        elsif (bs[0] == 1)
+          #
+          # memo will start out as 1 from the lsb, but that's not a zero --
+          # so alter the population result to allow for its addition.
+          #
+          expected += 1
+        end
+        assert_equal(expected,
+                     result,
+                     "Test bounded '#{sVal}'.inject { memo + 0s}")
+        result = bs.inject(-20) { |memo,val| memo + (val == 0 ? 1 : 0) }
+        assert_equal(bs.population(0) - 20,
+                     result,
+                     "Test bounded '#{sVal}'.inject(-20) { memo + 0s}")
       end
     end
 
@@ -343,7 +408,24 @@ module Tests
 
     def test_xxx_max()
       return unless (BitString.new.respond_to?(:max))
-      assert(true)
+      TestVals.each do |sVal|
+        #
+        # Unbounded.
+        #
+        bs = BitString.new(sVal)
+        expected = bs.to_i == 0 ? 0 : 1
+        assert_equal(expected,
+                     bs.max,
+                     "Test unbounded '#{sVal}'.max == #{expected}")
+        #
+        # Bounded.
+        #
+        bs = BitString.new(sVal, sVal.length)
+        expected = bs.to_i == 0 ? 0 : 1
+        assert_equal(expected,
+                     bs.max,
+                     "Test bounded '#{sVal}'.max == #{expected}")
+      end
     end
 
     def test_xxx_member?()
@@ -353,7 +435,24 @@ module Tests
 
     def test_xxx_min()
       return unless (BitString.new.respond_to?(:min))
-      assert(true)
+      TestVals.each do |sVal|
+        #
+        # Unbounded.
+        #
+        bs = BitString.new(sVal)
+        expected = (bs.population(1) == bs.length) ? 1 : 0
+        assert_equal(expected,
+                     bs.min,
+                     "Test unbounded '#{sVal}'.min == #{expected}")
+        #
+        # Bounded.
+        #
+        bs = BitString.new(sVal, sVal.length)
+        expected = (bs.population(1) == bs.length) ? 1 : 0
+        assert_equal(expected,
+                     bs.min,
+                     "Test bounded '#{sVal}'.min == #{expected}")
+      end
     end
 
     def test_xxx_partition()
