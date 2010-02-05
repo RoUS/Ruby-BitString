@@ -27,31 +27,6 @@
 #++
 
 #--
-# @TODO items (or at least look at)
-#
-# Methods (unique to bitstrings):
-#    &                # Bitwise AND
-#    <                # Less-than
-#    <<               # Shift left
-#    <=               # Less-than or equal
-#    >                # Greater-than
-#    >=               # Greater-than or equal
-#    >>               # Shift right
-#    []               # Indexed access
-#    []=              # Indexed setting
-#    ^                # Bitwise XOR
-#    |                # Bitwise inclusive OR
-#    ~                # Bitwise NOT
-#
-# Methods (based on Array):
-#    *                # Meaningless for bitstrings.
-#    +                # Meaningless for bitstrings.
-#    -                # Meaningless for bitstrings.
-#    <=>              # Meaningless for bitstrings.
-#
-#++
-
-#--
 # Re-open the class to add the operator methods
 #++
 
