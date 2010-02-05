@@ -59,7 +59,7 @@ class BitString
   #
   # Versionomy object for the class, recording the current version.
   #
-  Version = Versionomy.parse('v1.0.0')
+  Version = Versionomy.parse('1.0.0')
 
   #
   # Version number as a simple readable string.
