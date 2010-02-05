@@ -442,38 +442,65 @@ class BitString
   #
   # === Description
   #
-  # Perform an equality check against another bitstring.  The value and
-  # the boundedness must both match to be considered equal.
+  # Perform an equality check against another bitstring or representation
+  # of one.  The value and the boundedness must both match to be considered
+  # equal.
   #
   # call-seq:
   # bitstring == <i>compstring</i> => <i>Boolean</i>
   # bitstring.==<i>(compstring)</i> => <i>Boolean</i>
   #
   # === Arguments
-  # [<i>compstring</i>] <i>BitString</i>. Bitstring to compare against.
+  # [<i>compstring</i>] <i>Array</i>, <i>BitString</i>, <i>Integer</i>, or <i>String</i>. Bitstring (or something representing one) against which to compare.
   #
   # === Examples
   #  bs1 = BitString.new('111111111')
   #  bs2 = BitString.new('111111111', 9)
   #  bs1 == bs2
-  #  => false
+  #  => false     # Boundedness doesn't match
   #
   #  bs1 = BitString.new('111111111')
   #  bs2 = BitString.new('111111111')
   #  bs1 == bs2
-  #  => true
+  #  => true      # Values and boundedness match
   #
   #  bs1 = BitString.new('111111111')
   #  bs1 == '111111111'
-  #  => false
+  #  => true      # When converted to an unbounded bitstring, it matches
+  #
+  #  bs1 = BitString.new('111111111')
+  #  bs1 == '0000000111111111'
+  #  => true      # When converted to an unbounded bitstring, it matches
+  #
+  #  bs1 = BitString.new('111111111')
+  #  bs1 == 511
+  #  => true      # When converted to an unbounded bitstring, it matches
+  #
+  #  bs1 = BitString.new('111111111', 9)
+  #  bs1 == '1000111111111'
+  #  => false     # When converted to a bounded bitstring (because bs1 is),
+  #               # lengths and values don't match
   #
   # === Exceptions
   # <i>None</i>.
   #
   def ==(value)
-    (self.class == value.class) &&
-      (self.bounded? == value.bounded?) &&
-      (@value == value.to_i)
+    #
+    # Bitstring/bitstring comparison
+    #
+    unless (value.class == self.class)
+      value = _arg2int(value)
+      if (self.bounded?)
+        bits = [self.length, value.to_s(2).length].max
+        value = self.class.new(value, bits)
+      else
+        value = self.class.new(value)
+      end
+    end
+    ((self.class == value.class) &&
+     (self.bounded? == value.bounded?) &&
+     (self.length == value.length) &&
+     (@value == value.to_i))
   end                           # def ==
 
 end                             # class BitString

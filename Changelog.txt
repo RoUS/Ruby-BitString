@@ -1,10 +1,10 @@
 -*- mode: change-log; mode: auto-fill; -*-
 
-0.1.0 2010-01-30
+1.0.0	2010-02-04 Initial release as a Ruby gem
+
+0.1.0 
 	o Added population() and select().
 	o Added the example fragments.
-
-0.1.0 2010-01-29
 	o Added mask() and each().
 	o Added the [start,length]= handling. (FREQ #27742)
 	o Fixed a problem with the reporting of the BadDigit internal

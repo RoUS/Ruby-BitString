@@ -1,7 +1,8 @@
 BitString - 'Arrays' of bits for Ruby
 =====================================
 
-* http://rubyforge.org/projects/bitstring/
+* http://rubyforge.org/projects/bitstring/ - project page
+* http://bitstring.rubyforge.org/rdoc/     - RDoc documentation
 
 DESCRIPTION:
 ------------

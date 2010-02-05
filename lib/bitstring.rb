@@ -50,88 +50,6 @@ require 'versionomy'
 
 require 'bitstring/operators'
 
-#--
-# @TODO items (or at least look at)
-#
-# Methods (unique to bitstrings):
-#    rotate           # Rotate a bounded bitstring
-#    rotate!          # Rotate a bounded bitstring in place
-#    ones             # Count of bits set to 1
-#    zeroes           # Count of bits set to 0
-#    to_i             # Convert to an integer value
-#    to_s             # Represent as a string of '1' and '0'
-#
-# Methods (based on Array):
-#    all?             #
-#    any?             #
-#    assoc            #
-#    at               #
-#    clear            #
-#    collect          #
-#    collect!         #
-#    compact          #
-#    compact!         #
-#    concat           #
-#    delete           # Meaningless for bitstrings
-#    delete_at        # Meaningless for bitstrings
-#    delete_if        # Meaningless for bitstrings
-#    detect           #
-#    each             #
-#    each_index       #
-#    each_with_index  #
-#    empty?           # Meaningless for bitstrings
-#    entries          #
-#    fetch            #
-#    fill             #
-#    find             #
-#    find_all         #
-#    first            #
-#    flatten          #
-#    flatten!         #
-#    grep             #
-#    include?         #
-#    index            #
-#    indexes          #
-#    indices          #
-#    inject           #
-#    insert           #
-#    join             #
-#    last             #
-#    length           #
-#    map              #
-#    map!             #
-#    max              # Meaningless for bitstrings
-#    member?          #
-#    min              # Meaningless for bitstrings
-#    nitems           #
-#    pack             #
-#    partition        #
-#    pop              #
-#    push             #
-#    rassoc           #
-#    reject           #
-#    reject!          #
-#    replace          #
-#    reverse          #
-#    reverse!         #
-#    reverse_each     #
-#    rindex           #
-#    select           #
-#    shift            #
-#    size             #
-#    sort             #
-#    sort!            #
-#    sort_by          #
-#    to_ary           #
-#    transpose        #
-#    uniq             #
-#    uniq!            #
-#    unshift          #
-#    values_at        #
-#    zip              #
-#
-#++
-
 #
 # It's sort of like a fake a subclass of Integer solely to
 # differentiate bitstrings.
@@ -141,7 +59,7 @@ class BitString
   #
   # Versionomy object for the class, recording the current version.
   #
-  Version = Versionomy.parse('0.1.0a2')
+  Version = Versionomy.parse('v1.0.0')
 
   #
   # Version number as a simple readable string.
