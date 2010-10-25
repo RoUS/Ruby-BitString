@@ -1,3 +1,4 @@
+# -*- coding: utf-8 -*-
 #
 # = bitstring.rb - Bounded and unbounded bit strings
 #
@@ -567,6 +568,33 @@ class BitString
     self.length.times { |bit| block.call(self[bit]) }
     self
   end                           # def each
+
+  #
+  # === Description
+  #
+  # Return true if there are no bits set in the bitstring.
+  #
+  # :call-seq:
+  # bitstring.<i>empty?</i>
+  #
+  # === Arguments
+  # <i>None</i>.
+  #
+  # === Examples
+  #  bs = BitString.new('100101')
+  #  bs.empty?
+  #  => false
+  #
+  #  bs = BitString.new('000000')
+  #  bs.empty?
+  #  => true
+  #
+  # === Exceptions
+  # <i>None</i>.
+  #
+  def empty?()
+    @value.to_i.zero?
+  end                           # def empty?
 
   #
   # === Description
