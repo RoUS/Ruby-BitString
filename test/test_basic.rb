@@ -843,6 +843,25 @@ module Tests
       end
     end
 
+    #
+    # Test 'is it empty?' method.
+    #
+    def test_021_empty()
+      TestVals.each do |sVal|
+        bs = BitString.new(sVal)
+        assert_equal(sVal.to_i.eql?(0),
+                     bs.empty?,
+                     "Test unbounded '#{sVal}'.empty?")
+        #
+        # Now bounded.
+        #
+        bs = BitString.new(sVal, sVal.length)
+        assert_equal(sVal.to_i.eql?(0),
+                     bs.empty?,
+                     "Test bounded '#{sVal}'.empty?")
+      end
+    end
+
   end
 
 end                             # module Tests
