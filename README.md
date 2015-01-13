@@ -1,6 +1,6 @@
 # BitString - 'Arrays' of bits
 
-* http://github.com/#{github_username}/Ruby-BitString
+* http://github.com/RoUS/Ruby-BitString
 
 ## DESCRIPTION:
 
